@@ -1,33 +1,32 @@
 # API DOCS
 
 ## List of available endpoints
-
-- POST /users/register
-- POST /users/login
-- GET /users/:id
-- PUT /users/:id
-- POST /workers/register
-- POST /workers/login
-- GET /workers/:id
-- GET /workers/categories/:categoryId
-- PUT /workers/:id
-- GET /projects
-- GET /projects/:id
-- POST /projects
-- PUT /projects/:id
-- PATCH /projects/:id
-- DELETE /projects/:id
-- GET /categories
-- GET /categories/:id
-- GET /payment/:id
-- POST /payment
-- PUT /payment/:id
-- GET /ratings
-- POST /projects/workers
-- PATCH /projects/worker/:id
-
+ 
+- [ ]  POST /users/login
+- [ ]  POST /users/register
+- [ ]  GET /users/:id
+- [ ]  PUT /users/:id
+- [ ]  POST /workers/register
+- [ ]  POST /workers/login
+- [ ]  GET /workers/categories/:categoryId
+- [ ]  GET /workers/:id
+- [ ]  PUT /workers/:id
+- [ ]  GET /projects
+- [ ]  GET /projects/:id
+- [ ]  POST /projects
+- [ ]  PUT /projects/:id
+- [ ]  PATCH /projects/:id
+- [ ]  DELETE /projects/:id
+- [ ]  GET /categories
+- [ ]  GET /categories/:id
+- [ ]  GET /payment/:id
+- [ ]  POST /payment
+- [ ]  PUT /payment/:id
+- [ ]  GET /ratings
+- [ ]  POST /projects/workers
+- [ ]  PATCH /projects/worker/:id
 ## 1. POST /users/register (register user)
-
+ 
 ## 2. POST /users/login (login user)
 
 ## 3. GET /users/:id (show user profile)

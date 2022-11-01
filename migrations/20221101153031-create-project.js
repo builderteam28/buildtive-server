@@ -10,25 +10,44 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull : false
       },
       workHours: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull : false
+
       },
       totalWorker: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull : false
       },
       cost: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull : false
       },
       status: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull : false
       },
       UserId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull : false
+
       },
       CategoryId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references : {
+          model: "Categories"
+        }
+      },
+      long: {
+        type: Sequelize.FLOAT(12),
+        allowNull : false
+      },
+      lat: {
+        type: Sequelize.FLOAT(12),
+        allowNull : false
       },
       createdAt: {
         allowNull: false,

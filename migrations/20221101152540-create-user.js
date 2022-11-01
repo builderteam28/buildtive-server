@@ -11,18 +11,28 @@ module.exports = {
       },
       email: {
         type: Sequelize.STRING,
+        allowNull : false
+
       },
       password: {
         type: Sequelize.STRING,
+        allowNull : false
+
       },
       fullName: {
         type: Sequelize.STRING,
+        allowNull : false
+
       },
       phoneNumber: {
         type: Sequelize.STRING,
+        allowNull : false
+
       },
       address: {
         type: Sequelize.STRING,
+        allowNull : false
+
       },
       deviceId: {
         type: Sequelize.STRING,
