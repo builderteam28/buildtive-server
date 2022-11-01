@@ -27,5 +27,8 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Project',
   });
+  Project.beforeCreate((project, opt) => {
+    project.status = "Active"
+  })
   return Project;
 };

@@ -17,10 +17,18 @@ module.exports = {
         defaultValue: "Unpaid"
       },
       ProjectId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references : {
+          model: "Projects",
+          key: "id"
+        }
       },
       WorkerId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references : {
+          model: "Workers",
+          key: "id"
+        }
       },
       createdAt: {
         allowNull: false,

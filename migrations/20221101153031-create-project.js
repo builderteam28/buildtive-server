@@ -28,17 +28,20 @@ module.exports = {
       },
       status: {
         type: Sequelize.STRING,
-        allowNull : false
       },
       UserId: {
         type: Sequelize.INTEGER,
-        allowNull : false
+        references: {
+          model: "Users",
+          key: "id"
+        }
 
       },
       CategoryId: {
         type: Sequelize.INTEGER,
         references : {
-          model: "Categories"
+          model: "Categories",
+          key: "id"
         }
       },
       long: {

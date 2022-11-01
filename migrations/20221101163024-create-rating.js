@@ -13,13 +13,25 @@ module.exports = {
         allowNull : false
       },
       UserId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references : {
+          model: "Users",
+          key: "id"
+        }
       },
       WorkerId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references : {
+          model : "Workers",
+          key: "id"
+        }
       },
       ProjectId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references : {
+          model: "Projects",
+          key: "id"
+        }
       },
       createdAt: {
         allowNull: false,

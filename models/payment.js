@@ -22,5 +22,8 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Payment',
   });
+  Payment.beforeCreate((pay, opt) => {
+    pay.status = "Unpaid"
+  })
   return Payment;
 };
