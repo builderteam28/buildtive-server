@@ -1,3 +1,4 @@
+const { Worker } = require("../models")
 class WorkerController {
   static async register(req, res, next) {
     try {

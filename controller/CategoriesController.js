@@ -1,3 +1,4 @@
+const { Category } = require("../models")
 class CategoryController {
   static async fetchAll(req, res, next) {
     try {

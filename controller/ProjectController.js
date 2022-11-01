@@ -1,3 +1,4 @@
+const { Project } = require("../models")
 class ProjectController {
   static async fetchAll(req, res, next) {
     try {

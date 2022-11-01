@@ -1,3 +1,4 @@
+const { Payment } = require("../models")
 class PaymentController {
   static async addPayment(req, res, next) {
     try {
