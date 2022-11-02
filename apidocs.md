@@ -2,29 +2,29 @@
 
 ## List of available endpoints
  
-- [ ]  POST /users/login
-- [ ]  POST /users/register
-- [ ]  GET /users/:id
-- [ ]  PUT /users/:id
-- [ ]  POST /workers/register
-- [ ]  POST /workers/login
-- [ ]  GET /workers/categories/:categoryId
-- [ ]  GET /workers/:id
-- [ ]  PUT /workers/:id
-- [ ]  GET /projects
-- [ ]  GET /projects/:id
-- [ ]  POST /projects
-- [ ]  PUT /projects/:id
-- [ ]  PATCH /projects/:id
-- [ ]  DELETE /projects/:id
-- [ ]  GET /categories
-- [ ]  GET /categories/:id
-- [ ]  GET /payment/:id
-- [ ]  POST /payment
-- [ ]  PUT /payment/:id
-- [ ]  GET /ratings
-- [ ]  POST /projects/workers
-- [ ]  PATCH /projects/worker/:id
+- [X]  POST /users/login
+- [X]  POST /users/register
+- [X]  GET /users/:id
+- [X]  PUT /users/:id
+- [X]  POST /workers/register
+- [X]  POST /workers/login
+- [X]  GET /workers/categories/:categoryId
+- [X]  GET /workers/:id
+- [X]  PUT /workers/:id
+- [X]  GET /projects
+- [X]  GET /projects/:id
+- [X]  POST /projects
+- [X]  PUT /projects/:id
+- [X]  PATCH /projects/:id
+- [X]  DELETE /projects/:id
+- [X]  GET /categories
+- [X]  GET /categories/:id
+- [X]  GET /payment/:id
+- [X]  POST /payment
+- [X]  PUT /payment/:id
+- [X]  GET /ratings
+- [X]  POST /projects/workers
+- [X]  PATCH /projects/worker/:id
 ## 1. POST /users/register (register user)
  
 ## 2. POST /users/login (login user)
