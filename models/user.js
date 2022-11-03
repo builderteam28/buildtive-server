@@ -10,6 +10,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      User.hasMany(models.Project);
+      User.belongsToMany(models.Worker, { through: models.Chat });
+      User.belongsToMany(models.Worker, { through: models.Rating });
     }
   }
   User.init(
@@ -27,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
   User.beforeCreate((user, options) => {
-    user.password = hash(user.password)
-  })
+    user.password = hash(user.password);
+  });
   return User;
 };
