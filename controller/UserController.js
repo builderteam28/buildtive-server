@@ -23,12 +23,14 @@ class UserController {
   static async login(req, res, next) {
     try {
       const { email, password } = req.body;
+      if (!email) throw { name: "EmailRequired" };
+      if (!password) throw { name: "PasswordRequired" };
       const user = await User.findOne({
         where: {
-          email
+          email,
         },
       });
-      if (!user) throw { name: "Invalid email/password" };
+      if (!user) throw { name: "Unauthorized" };
       const validatePassword = compare(password, user.password);
       if (!validatePassword) throw { name: "Invalid email/password" };
       const payload = {
@@ -38,7 +40,7 @@ class UserController {
       const access_token = sign(payload);
       res.status(200).json({ access_token: access_token, id: user.id });
     } catch (error) {
-      console.log(error)
+      // console.log(error)
       next(error);
     }
   }
@@ -59,7 +61,7 @@ class UserController {
         { fullName, address, phoneNumber },
         { where: { id } }
       );
-      res.status(200).json({message : "Profile updated"});
+      res.status(201).json({ message: "Profile updated" });
     } catch (error) {
       next(error);
     }

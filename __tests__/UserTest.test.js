@@ -109,7 +109,7 @@ describe("POST /users/login", () => {
       const result = await request(app)
         .post("/users/login")
         .send(payloadLoginMiss);
-      expect(result.status).toBe(401);
+      expect(result.status).toBe(400);
       expect(result.body).toHaveProperty("message", "Invalid email/password");
     });
   });
@@ -118,12 +118,12 @@ describe("POST /users/login", () => {
     it("it should miss", async () => {
       const payloadLoginMiss = {
         email: "setset@gmail.com",
-        password: "12345678",
+        password: "testestes",
       };
       const result = await request(app)
         .post("/users/login")
         .send(payloadLoginMiss);
-      expect(result.status).toBe(401);
+      expect(result.status).toBe(400);
       expect(result.body).toHaveProperty("message", "Invalid email/password");
     });
   });
