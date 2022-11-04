@@ -4,8 +4,11 @@ const errorHandler = (err, req, res, next) => {
     if(err.name == "SequelizeValidationError" || err.name == "SequelizeUniqueConstraintError") {
         code = 400
         error = err.errors[0].message
+    } else if (err.name == "Invalid email/password") {
+        code = 401
+        error = err.name
     }
-    console.log(err.errors[0].message)
+    console.log(err.name)
 
     res.status(code).json({message: error})
 }

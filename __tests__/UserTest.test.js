@@ -69,7 +69,7 @@ describe.skip("POST /users/register", () => {
 
 });
 
-describe.skip("POST /users/login", () => {
+describe("POST /users/login", () => {
   beforeAll(async () => {
     await User.create({
       fullName: "RegisterTest",
@@ -89,8 +89,8 @@ describe.skip("POST /users/login", () => {
   describe.skip("POST /users/login - login passed", () => {
     it("it should pass", async () => {
       const payloadLoginPass = {
-        email: "testest@gmail.com",
-        password: "12345678",
+        email: "RegisterTest@gmail.com",
+        password: "testestes",
       };
       const result = await request(app)
         .post("/users/login")
@@ -110,11 +110,11 @@ describe.skip("POST /users/login", () => {
         .post("/users/login")
         .send(payloadLoginMiss);
       expect(result.status).toBe(401);
-      expect(result.body).toHaveProperty("message", "Invalid Email/Password");
+      expect(result.body).toHaveProperty("message", "Invalid email/password");
     });
   });
 
-  describe.skip("POST /users/login - email miss", () => {
+  describe("POST /users/login - email miss", () => {
     it("it should miss", async () => {
       const payloadLoginMiss = {
         email: "setset@gmail.com",
@@ -124,7 +124,7 @@ describe.skip("POST /users/login", () => {
         .post("/users/login")
         .send(payloadLoginMiss);
       expect(result.status).toBe(401);
-      expect(result.body).toHaveProperty("message", "Invalid Email/Password");
+      expect(result.body).toHaveProperty("message", "Invalid email/password");
     });
   });
 });

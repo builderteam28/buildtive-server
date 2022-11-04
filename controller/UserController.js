@@ -25,7 +25,7 @@ class UserController {
       const { email, password } = req.body;
       const user = await User.findOne({
         where: {
-          email,
+          email
         },
       });
       if (!user) throw { name: "Invalid email/password" };
@@ -38,6 +38,7 @@ class UserController {
       const access_token = sign(payload);
       res.status(200).json({ access_token: access_token, id: user.id });
     } catch (error) {
+      console.log(error)
       next(error);
     }
   }
