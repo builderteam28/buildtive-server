@@ -1,14 +1,14 @@
 {
   "development": {
     "username": "postgres",
-    "password": "postgres",
-    "database": "the_builder_development",
+    "password": "marpaung",
+    "database": "the_builder_test",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
     "username": "postgres",
-    "password": "postgres",
+    "password": "marpaung",
     "database": "the_builder_test",
     "host": "127.0.0.1",
     "dialect": "postgres"

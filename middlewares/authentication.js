@@ -1,7 +1,7 @@
 const { verify } = require("../helpers/jwt")
-const { User } = require("../models")
+const { User, Worker } = require("../models")
 
-const authentication = async (req, res, next) => {
+const authenticationUser = async (req, res, next) => {
     try {
         const { access_token } = req.headers
         if(!access_token) throw {name : "Invalid Token"}
@@ -18,5 +18,22 @@ const authentication = async (req, res, next) => {
         next(error)
     }
 }
+const authenticationWorker = async (req, res, next) => {
+    try {
+        const { access_token } = req.headers
+        if(!access_token) throw {name : "Invalid Token"}
+        const payload = verify(access_token)
+        const worker = await Worker.findByPk(payload.id)
+        if(!worker) throw {name : "Invalid Token"}
+        req.worker = {
+            id: worker.id,
+            email : worker.email
+        }
+        next()
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+}
 
-module.exports = authentication
+module.exports = {authenticationUser,authenticationWorker}
