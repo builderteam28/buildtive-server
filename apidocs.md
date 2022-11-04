@@ -34,14 +34,166 @@
 ## 4. PUT /users/:id (edit user profile)
 
 ## 5. POST /workers/register (register worker)
+#### Description
+
+- Create a new worker data
+
+#### Request
+
+- Body
+  ```json
+  {
+    "email": String,
+    "password": String,
+    "fullName": String,
+    "phoneNumber": String,
+    "address": String,
+    "birthDate": Date,
+    "idNumber": STRING
+  }
+  ```
+
+#### Response
+
+_201 - Created_
+
+- Body
+  ```json
+  {
+    "message": String
+  }
+  ```
+
+_400 - Bad Request_
+
+- Body
+  ```json
+  {
+    "message": String
+  }
+  ```
 
 ## 6. POST /workers/login (login worker)
 
+#### Request
+
+- Body
+  ```json
+  {
+    "email": String,
+    "password": String
+  }
+  ```
+
+#### Response
+
+_200 - OK_
+
+- Body
+  ```json
+  {
+    "access_token": String,
+    "id": integer,
+    "email": String,
+  }
+  ```
+
+_400 - Bad Request_
+
+- Body
+  ```json
+  {
+    "message": String
+  }
+  ```
+
+_401 - Unauthorized_
+
+- Body
+  ```json
+  {
+    "message": "Invalid email/password"
+  }
+  ```
+
 ## 7. GET /workers/:id (show worker profile)
+
+#### Description
+
+- Get a worker data based on given id
+
+#### Request
+
+- Headers
+  ```json
+  {
+    "access_token": String
+  }
+  ```
+
+#### Response
+
+_200 - OK_
+
+- Body
+  ```json
+  {
+    "email": String,
+    "fullName": String,
+    "phoneNumber": String,
+    "address": String,
+    "birthDate": Date,
+    "idNumber": STRING,
+    "createdAt": Date
+  }
+  ```
+
+_404 - Not Found_
+
+- Body
+  ```json
+  {
+    "message": STRING
+  }
+  ```
 
 ## 8. GET /workers/categories/:categoryId (push notification)
 
 ## 9. PUT /workers/:id (edit worker profile)
+
+#### Description
+
+- Put a worker data based on given id
+
+#### Request
+
+- Headers
+  ```json
+  {
+    "access_token": String
+  }
+  ```
+
+#### Response
+
+_200 - OK_
+
+- Body
+  ```json
+  {
+    "message": STRING
+  }
+  ```
+
+_404 - Not Found_
+
+- Body
+
+  ```json
+  {
+    "message": STRING
+  }
+  ```
 
 ## 10. GET /projects (project list at home)
 
@@ -55,7 +207,53 @@
 
 ## 15. GET /categories (filtering projects at home, create project)
 
+#### Description
+
+- Get all the categories data
+
+#### Request
+
+#### Response
+
+_200 - OK_
+
+- Body
+  ```json
+  [
+    {
+        "id": Integer,
+        "name": String,
+        "ProjectId": Integer,
+        "trailerUrl": Integer,
+        "createdAt": Date,
+        "updatedAt": Date,
+    },
+  ]
+  ```
+
 ## 16. GET /categories/:id
+
+#### Description
+
+- Get a category data based on given id
+
+#### Request
+
+#### Response
+
+_200 - OK_
+
+- Body
+  ```json
+  {
+    "id": Integer,
+    "name": String,
+    "ProjectId": Integer,
+    "trailerUrl": Integer,
+    "createdAt": Date,
+    "updatedAt": Date,
+  }
+  ```
 
 ## 18. POST /payments (create payment)
 
