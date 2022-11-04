@@ -26,13 +26,102 @@
 - [X]  POST /projects/workers
 - [X]  PATCH /projects/worker/:id
 ## 1. POST /users/register (register user)
- 
+  ### Request Body
+```json
+  {
+    "email"       : String,
+    "password"    : String,
+    "fullName"    : String,
+    "address"     : String,
+    "phoneNumber" : Integer
+  }
+```
+  ### Response
+  _201 - Created New User_
+  ```json
+  {
+    "message" : "Created new User"
+  }
+  ```
+  _401 - Bad Request_
+  ```json
+  {
+    "message" : String
+  }
+  ```
 ## 2. POST /users/login (login user)
-
+  ### Request Body
+  ```json
+  {
+    "email"   : String,
+    "password": String
+  }
+  ```
+  ### Response
+  _200 - OK_
+  ```json
+  {
+    "access_token" : String
+  }
+  ```
+  _400 - Bad Request_
+  ```json
+  {
+    "message" : String
+  }
+  ```
+  _401 - Unauthorized_
+  ```json
+  {
+    message : "Invalid email/password"
+  }
+  ```
 ## 3. GET /users/:id (show user profile)
-
+  ### Request
+  ```json
+  {
+    "id" : req.user.id
+  }
+  ```
+  ### Response
+  _200 - OK_
+  ```json
+  {
+    "email": String,
+    "fullName": String,
+    "phoneNumber": String,
+    "address": String,
+  }
+  ```
 ## 4. PUT /users/:id (edit user profile)
-
+  ### Request
+  _Get an ID_
+  ```json
+  {
+    "id" : req.user.id
+  }
+  ```
+  _Request Body_
+  ```json
+  {
+    "fullName"    : String,
+    "phoneNumber" : String,
+    "address"     : String
+  }
+  ```
+  ### Response
+  _200 - OK_
+  ```json
+  {
+    "message" : "Profile updated"
+  }
+  ```
+  _401 - Bad Request_
+  ```json
+  {
+    "message" : String
+  }
+  ```
 ## 5. POST /workers/register (register worker)
 #### Description
 
