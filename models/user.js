@@ -14,7 +14,20 @@ module.exports = (sequelize, DataTypes) => {
   }
   User.init(
     {
-      email: DataTypes.STRING,
+      email: {
+        type: DataTypes.STRING,
+        validate: {
+          isEmail: {
+            msg: "Invalid Email Format",
+          },
+          notEmpty: {
+            msg: "Email Required",
+          },
+          notNull : {
+            msg : "Email Required"
+          }
+        },
+      },
       password: DataTypes.STRING,
       fullName: DataTypes.STRING,
       phoneNumber: DataTypes.STRING,
@@ -27,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
   User.beforeCreate((user, options) => {
-    user.password = hash(user.password)
-  })
+    user.password = hash(user.password);
+  });
   return User;
 };
