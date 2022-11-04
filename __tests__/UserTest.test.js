@@ -4,15 +4,8 @@ const { User, sequelize } = require("../models");
 const bcrypt = require("bcryptjs");
 const { queryInterface } = sequelize;
 
-describe("POST /users/register", () => {
+describe.skip("POST /users/register", () => {
   afterAll(async() => {
-    await sequelize.queryInterface.bulkDelete("Users", null, {
-      truncate: true,
-      restartIdentity: true,
-      cascade: true,
-    });
-  });
-  afterEach(async() => {
     await sequelize.queryInterface.bulkDelete("Users", null, {
       truncate: true,
       restartIdentity: true,
@@ -39,7 +32,7 @@ describe("POST /users/register", () => {
     });
   });
 
-  describe("POST /users/register - Email key is null or undefined", () => {
+  describe.skip("POST /users/register - Email key is null or undefined", () => {
     it("should respond with status code 400 and returning email required", async () => {
       const payloadRegisterMissing = {
         fullName: "RegisterTest",
@@ -55,6 +48,25 @@ describe("POST /users/register", () => {
       await expect(result.body).toHaveProperty("message", "Email Required");
     });
   });
+  
+  describe.skip("POST /users/register - Email must be unique", () => {
+    it("should respond with status code 400 and returning message Email is already registered", async () => {
+      const payloadRegisterSuccess = {
+        fullName: "RegisterTest",
+        email: "RegisterTest@gmail.com",
+        password: "testestes",
+        phoneNumber: "0812345678910",
+        address: "Bandung",
+      };
+      const result = await request(app)
+        .post("/users/register")
+        .send(payloadRegisterSuccess);
+      await expect(result.status).toBe(400);
+      // expect(result.body).toHaveProperty("id", expect.any(Number));
+      await expect(result.body).toHaveProperty("message", "Email already registered");
+    });
+  });
+
 });
 
 describe.skip("POST /users/login", () => {
