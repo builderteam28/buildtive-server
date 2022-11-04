@@ -4,7 +4,7 @@ const { User, sequelize } = require("../models");
 const bcrypt = require("bcryptjs");
 const { queryInterface } = sequelize;
 
-describe.skip("POST /users/register", () => {
+describe("POST /users/register", () => {
   afterAll(() => {
     sequelize.queryInterface.bulkDelete("Users", null, {
       truncate: true,
