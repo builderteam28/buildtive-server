@@ -23,7 +23,7 @@ describe.skip("POST /users/register", () => {
   describe("POST /users/register - Email and Password pass", () => {
     it("should respond with status code 201 and returning id and email", async () => {
       const payloadRegisterSuccess = {
-        username: "RegisterTest",
+        fullName: "RegisterTest",
         email: "RegisterTest@gmail.com",
         password: "testestes",
         phoneNumber: "0812345678910",
@@ -42,7 +42,7 @@ describe.skip("POST /users/register", () => {
   describe("POST /users/register - Email key is null or undefined", () => {
     it("should respond with status code 400 and returning email required", async () => {
       const payloadRegisterMissing = {
-        username: "RegisterTest",
+        fullName: "RegisterTest",
         // email: "RegisterTest@gmail.com",
         password: "012345678910",
         phoneNumber: "0812345678910",
@@ -60,7 +60,7 @@ describe.skip("POST /users/register", () => {
 describe.skip("POST /users/login", () => {
   beforeAll(async () => {
     await User.create({
-      username: "RegisterTest",
+      fullName: "RegisterTest",
       email: "RegisterTest@gmail.com",
       password: "testestes",
       phoneNumber: "0812345678910",
