@@ -1,11 +1,11 @@
 const WorkerController = require("../../controller/WorkerController");
-const authentication = require("../../middlewares/authentication");
+const {authenticationWorker} = require("../../middlewares/authentication");
 
 const WorkerRouter = require("express").Router();
 
 WorkerRouter.post("/login", WorkerController.login)
 WorkerRouter.post("/register", WorkerController.register)
-WorkerRouter.use(authentication)
+WorkerRouter.use(authenticationWorker)
 WorkerRouter.get("/:id", WorkerController.profile)
 WorkerRouter.put("/:id", WorkerController.editProfile)
 

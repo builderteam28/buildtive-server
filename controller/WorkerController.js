@@ -27,6 +27,7 @@ class WorkerController {
         message: `Worker account with ${newWorker.email} successfully created`,
       });
     } catch (error) {
+      console.log(error)
       next(error);
     }
   }
@@ -67,23 +68,27 @@ class WorkerController {
 
       res.status(200).json({
         access_token: token,
-        user: payload,
+        id: payload.id,
+        email:payload.email
       });
     } catch (error) {
       next(error);
+      console.log(error)
     }
   }
   static async profile(req, res, next) {
     try {
       const { id } = req.params;
-      const foundWorker = await Worker.findByPk(id, { include: [] });
+      const foundWorker = await Worker.findByPk(id, {attributes:{exclude:["password", "id","updatedAt"]},include:[]});
+      // console.log(foundWorker)
 
       if (!foundWorker) {
         throw { name: "NotFound" };
       }
 
-      res.status(200).json(movie);
+      res.status(200).json(foundWorker);
     } catch (error) {
+      console.log(error)
       next(error);
     }
   }
