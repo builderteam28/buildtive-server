@@ -33,6 +33,31 @@ class ProjectController {
   }
   static async postProject(req, res, next) {
     try {
+      const {
+        name,
+        workHours,
+        totalWorker,
+        cost,
+        UserId,
+        CategoryId,
+        long,
+        lat,
+      } = req.body;
+
+      const createdProject = await Project.create({
+        name,
+        workHours,
+        totalWorker,
+        cost,
+        UserId,
+        CategoryId,
+        long,
+        lat,
+      });
+
+      res
+        .status(201)
+        .json({ message: `success add project ${createdProject.name}` });
     } catch (error) {
       next(error);
     }

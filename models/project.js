@@ -18,13 +18,79 @@ module.exports = (sequelize, DataTypes) => {
   }
   Project.init(
     {
-      name: DataTypes.STRING,
-      workHours: DataTypes.INTEGER,
-      totalWorker: DataTypes.INTEGER,
-      cost: DataTypes.INTEGER,
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: `Project name can't be empty`,
+          },
+          notEmpty: {
+            msg: `Project name can't be empty`,
+          },
+        },
+      },
+      workHours: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: `Work Hours can't be empty`,
+          },
+          notEmpty: {
+            msg: `Work Hours can't be empty`,
+          },
+        },
+      },
+      totalWorker: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: `Total Worker can't be empty`,
+          },
+          notEmpty: {
+            msg: `Total Worker can't be empty`,
+          },
+        },
+      },
+      cost: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: `Cost project can't be empty`,
+          },
+          notEmpty: {
+            msg: `Cost project can't be empty`,
+          },
+        },
+      },
       status: DataTypes.STRING,
-      long: DataTypes.FLOAT(12),
-      lat: DataTypes.FLOAT(12),
+      long: {
+        type: DataTypes.FLOAT(12),
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: `Project location can't be empty`,
+          },
+          notEmpty: {
+            msg: `Project location can't be empty`,
+          },
+        },
+      },
+      lat: {
+        type: DataTypes.FLOAT(12),
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: `Project location can't be empty`,
+          },
+          notEmpty: {
+            msg: `Project location can't be empty`,
+          },
+        },
+      },
       UserId: DataTypes.INTEGER,
       CategoryId: DataTypes.INTEGER,
     },
@@ -34,7 +100,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
   Project.beforeCreate((project, opt) => {
-    project.status = "Active";
+    project.status = "inactive";
   });
   return Project;
 };

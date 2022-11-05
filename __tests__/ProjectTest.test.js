@@ -22,7 +22,6 @@ beforeAll(async () => {
   });
 
   validToken = login.body.access_token;
-  console.log(validToken);
 
   const projects = require("../data/db.json").projects.map((el) => {
     return {
@@ -46,6 +45,7 @@ afterAll(async () => {
     cascade: true,
   });
 });
+
 describe("GET /users/projects", () => {
   describe("get all projects", () => {
     it("Should get all projects", async () => {
@@ -121,6 +121,248 @@ describe("Get /users/projects/:id", () => {
         access_token: inValidToken,
       };
       const result = await request(app).get("/users/projects/1").set(headers);
+      await expect(result.status).toBe(401);
+      await expect(result.body).toHaveProperty("message", "Please login first");
+    });
+  });
+});
+
+describe("POST /users/projects", () => {
+  describe("User add a new project", () => {
+    it("should success add new project", async () => {
+      const headers = {
+        access_token: validToken,
+      };
+      const payload = {
+        name: "tes",
+        workHours: 9,
+        totalWorker: 10,
+        cost: 2000000,
+        UserId: 1,
+        CategoryId: 1,
+        long: 2901,
+        lat: 9303,
+      };
+
+      const result = await request(app)
+        .post("/users/projects")
+        .set(headers)
+        .send(payload);
+
+      expect(result.status).toBe(201);
+      expect(result.body).toHaveProperty(
+        "message",
+        `success add project ${payload.name}`
+      );
+    });
+  });
+
+  describe("User fail to add project because name is empty", () => {
+    it("should receive status 400 because project name is empty", async () => {
+      const headers = {
+        access_token: validToken,
+      };
+      const payload = {
+        workHours: 9,
+        totalWorker: 10,
+        cost: 2000000,
+        UserId: 1,
+        CategoryId: 1,
+        long: 2901,
+        lat: 9303,
+      };
+
+      const result = await request(app)
+        .post("/users/projects")
+        .set(headers)
+        .send(payload);
+
+      expect(result.status).toBe(400);
+      expect(result.body).toHaveProperty(
+        "message",
+        `Project name can't be empty`
+      );
+    });
+  });
+
+  describe("User fail to add project because workHours is empty", () => {
+    it("should receive status 400 because workHours is empty", async () => {
+      const headers = {
+        access_token: validToken,
+      };
+      const payload = {
+        name: "workhours",
+        totalWorker: 10,
+        cost: 2000000,
+        UserId: 1,
+        CategoryId: 1,
+        long: 2901,
+        lat: 9303,
+      };
+
+      const result = await request(app)
+        .post("/users/projects")
+        .set(headers)
+        .send(payload);
+
+      expect(result.status).toBe(400);
+      expect(result.body).toHaveProperty(
+        "message",
+        `Work Hours can't be empty`
+      );
+    });
+  });
+
+  describe("User fail to add project because total worker is empty", () => {
+    it("should receive status 400 because total worker is empty", async () => {
+      const headers = {
+        access_token: validToken,
+      };
+      const payload = {
+        name: "totalWorker",
+        workHours: 10,
+        cost: 2000000,
+        UserId: 1,
+        CategoryId: 1,
+        long: 2901,
+        lat: 9303,
+      };
+
+      const result = await request(app)
+        .post("/users/projects")
+        .set(headers)
+        .send(payload);
+
+      expect(result.status).toBe(400);
+      expect(result.body).toHaveProperty(
+        "message",
+        `Total Worker can't be empty`
+      );
+    });
+  });
+
+  describe("User fail to add project because Cost is empty", () => {
+    it("should receive status 400 because Cost is empty", async () => {
+      const headers = {
+        access_token: validToken,
+      };
+      const payload = {
+        name: "cost",
+        workHours: 10,
+        totalWorker: 2000000,
+        UserId: 1,
+        CategoryId: 1,
+        long: 2901,
+        lat: 9303,
+      };
+
+      const result = await request(app)
+        .post("/users/projects")
+        .set(headers)
+        .send(payload);
+
+      expect(result.status).toBe(400);
+      expect(result.body).toHaveProperty(
+        "message",
+        `Cost project can't be empty`
+      );
+    });
+  });
+
+  describe("User fail to add project because Cost is empty", () => {
+    it("should receive status 400 because Cost is empty", async () => {
+      const headers = {
+        access_token: validToken,
+      };
+      const payload = {
+        name: "cost",
+        workHours: 10,
+        totalWorker: 2000000,
+        UserId: 1,
+        CategoryId: 1,
+        long: 2901,
+        lat: 9303,
+      };
+
+      const result = await request(app)
+        .post("/users/projects")
+        .set(headers)
+        .send(payload);
+
+      expect(result.status).toBe(400);
+      expect(result.body).toHaveProperty(
+        "message",
+        `Cost project can't be empty`
+      );
+    });
+  });
+
+  describe("User fail to add project because Long / latis empty", () => {
+    it("should receive status 400 because Long / lat is empty", async () => {
+      const headers = {
+        access_token: validToken,
+      };
+      const payload = {
+        name: "long lat",
+        cost: 10,
+        workHours: 10,
+        totalWorker: 2000000,
+        UserId: 1,
+        CategoryId: 1,
+        long: 2901,
+      };
+
+      const result = await request(app)
+        .post("/users/projects")
+        .set(headers)
+        .send(payload);
+
+      expect(result.status).toBe(400);
+      expect(result.body).toHaveProperty(
+        "message",
+        `Project location can't be empty`
+      );
+    });
+  });
+
+  describe("Should get error when there is no access_token sent", () => {
+    it("should get error 401 and message login first", async () => {
+      const payload = {
+        name: "tes",
+        workHours: 9,
+        totalWorker: 10,
+        cost: 2000000,
+        UserId: 1,
+        CategoryId: 1,
+        long: 2901,
+        lat: 9303,
+      };
+
+      const result = await request(app).post("/users/projects").send(payload);
+      await expect(result.status).toBe(401);
+      await expect(result.body).toHaveProperty("message", "Please login first");
+    });
+  });
+
+  describe("Should get error when access_token false", () => {
+    it("should get error 401 and message login first", async () => {
+      const headers = {
+        access_token: inValidToken,
+      };
+      const payload = {
+        name: "tes",
+        workHours: 9,
+        totalWorker: 10,
+        cost: 2000000,
+        UserId: 1,
+        CategoryId: 1,
+        long: 2901,
+        lat: 9303,
+      };
+      const result = await request(app)
+        .get("/users/projects")
+        .set(headers)
+        .send(payload);
       await expect(result.status).toBe(401);
       await expect(result.body).toHaveProperty("message", "Please login first");
     });
