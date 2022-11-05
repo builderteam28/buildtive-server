@@ -128,7 +128,7 @@ describe("Get /users/projects/:id", () => {
 });
 
 describe("POST /users/projects", () => {
-  describe("User add a new project", () => {
+  describe.skip("User add a new project", () => {
     it("should success add new project", async () => {
       const headers = {
         access_token: validToken,
@@ -157,7 +157,7 @@ describe("POST /users/projects", () => {
     });
   });
 
-  describe("User fail to add project because name is empty", () => {
+  describe.skip("User fail to add project because name is empty", () => {
     it("should receive status 400 because project name is empty", async () => {
       const headers = {
         access_token: validToken,
@@ -185,7 +185,7 @@ describe("POST /users/projects", () => {
     });
   });
 
-  describe("User fail to add project because workHours is empty", () => {
+  describe.skip("User fail to add project because workHours is empty", () => {
     it("should receive status 400 because workHours is empty", async () => {
       const headers = {
         access_token: validToken,
@@ -213,7 +213,7 @@ describe("POST /users/projects", () => {
     });
   });
 
-  describe("User fail to add project because total worker is empty", () => {
+  describe.skip("User fail to add project because total worker is empty", () => {
     it("should receive status 400 because total worker is empty", async () => {
       const headers = {
         access_token: validToken,
@@ -241,7 +241,7 @@ describe("POST /users/projects", () => {
     });
   });
 
-  describe("User fail to add project because Cost is empty", () => {
+  describe.skip("User fail to add project because Cost is empty", () => {
     it("should receive status 400 because Cost is empty", async () => {
       const headers = {
         access_token: validToken,
@@ -269,7 +269,7 @@ describe("POST /users/projects", () => {
     });
   });
 
-  describe("User fail to add project because Cost is empty", () => {
+  describe.skip("User fail to add project because Cost is empty", () => {
     it("should receive status 400 because Cost is empty", async () => {
       const headers = {
         access_token: validToken,
@@ -297,7 +297,7 @@ describe("POST /users/projects", () => {
     });
   });
 
-  describe("User fail to add project because Long / latis empty", () => {
+  describe.skip("User fail to add project because Long / lat is empty", () => {
     it("should receive status 400 because Long / lat is empty", async () => {
       const headers = {
         access_token: validToken,
@@ -325,7 +325,7 @@ describe("POST /users/projects", () => {
     });
   });
 
-  describe("Should get error when there is no access_token sent", () => {
+  describe.skip("Should get error when there is no access_token sent", () => {
     it("should get error 401 and message login first", async () => {
       const payload = {
         name: "tes",
@@ -344,7 +344,7 @@ describe("POST /users/projects", () => {
     });
   });
 
-  describe("Should get error when access_token false", () => {
+  describe.skip("Should get error when access_token false", () => {
     it("should get error 401 and message login first", async () => {
       const headers = {
         access_token: inValidToken,
@@ -365,6 +365,33 @@ describe("POST /users/projects", () => {
         .send(payload);
       await expect(result.status).toBe(401);
       await expect(result.body).toHaveProperty("message", "Please login first");
+    });
+  });
+
+  describe("Should success delete project", () => {
+    it("should get respond status 200 and returning message Deleted Project", async () => {
+      const headers = {
+        access_token: validToken,
+      };
+      const id = 1;
+      const result = await request(app)
+        .delete(`/users/projects/${id}`)
+        .set(headers);
+      expect(result.status).toBe(200);
+      expect(result.body).toHaveProperty("message", "Deleted Project");
+    });
+  });
+  describe("Should get error when read access_token", () => {
+    it("should get respond status 401 and returning Please login first", async () => {
+      const headers = {
+        access_token: inValidToken,
+      };
+      const id = 1;
+      const result = await request(app)
+        .delete(`/users/projects/${id}`)
+        .set(headers);
+      expect(result.status).toBe(401);
+      expect(result.body).toHaveProperty("message", "Please login first");
     });
   });
 });

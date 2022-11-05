@@ -1,4 +1,5 @@
 const errorHandler = (err, req, res, next) => {
+  console.log(err)
   switch (err.name) {
     case "Unauthorized":
       res.status(401).json({ message: "Invalid email/password" });
@@ -26,6 +27,9 @@ const errorHandler = (err, req, res, next) => {
       break;
     case "ProjectNotFound":
       res.status(404).json({ message: "Project not found" });
+      break;
+    case "ProjectIsActive":
+      res.status(403).json({ message: "Project is Active!" });
       break;
     default:
       res.status(500).json({ message: "Internal Server Error" });

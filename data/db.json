@@ -5,7 +5,7 @@
       "workHours": 7,
       "totalWorker": 5,
       "cost": 1000000,
-      "status": "active",
+      "status": "inactive",
       "UserId": 1,
       "long": 2901,
       "lat": 291,

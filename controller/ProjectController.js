@@ -64,13 +64,22 @@ class ProjectController {
   }
   static async editProject(req, res, next) {
     try {
+      const { id } = req.params
+      
     } catch (error) {
       next(error);
     }
   }
   static async deleteProject(req, res, next) {
     try {
+      const { id } = req.params
+      const find = await Project.findByPk(id)
+      if(!find) throw { name : "ProjectNotFound"}
+      if(find.status == "active") throw { name : "ProjectIsActive"}
+      await Project.destroy({where : {id}})
+      res.status(200).json({message : "Deleted Project"})
     } catch (error) {
+      console.log(error)
       next(error);
     }
   }
