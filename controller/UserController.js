@@ -14,7 +14,6 @@ class UserController {
         address,
         DeviceId,
       });
-      // console.log(result);
       res.status(201).json({ message: "Created new User" });
     } catch (error) {
       next(error);

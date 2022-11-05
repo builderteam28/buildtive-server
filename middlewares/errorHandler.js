@@ -1,9 +1,10 @@
 const errorHandler = (err, req, res, next) => {
-  console.log(err.name);
   switch (err.name) {
     case "Unauthorized":
-    case "JsonWebTokenError":
       res.status(401).json({ message: "Invalid email/password" });
+    case "JsonWebTokenError":
+    case "Invalid Token":
+      res.status(401).json({ message: "Please login first" });
       break;
     case "SequelizeValidationError":
       res.status(400).json({ message: err.errors[0].message });
@@ -22,6 +23,9 @@ const errorHandler = (err, req, res, next) => {
       break;
     case "NotFound":
       res.status(404).json({ message: "Worker not found" });
+      break;
+    case "ProjectNotFound":
+      res.status(404).json({ message: "Project not found" });
       break;
     default:
       res.status(500).json({ message: "Internal Server Error" });
