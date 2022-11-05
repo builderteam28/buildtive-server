@@ -43,6 +43,13 @@ module.exports = {
         type: Sequelize.FLOAT(12),
         allowNull: false,
       },
+      CategoryId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Categories",
+          key: "id",
+        },
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
