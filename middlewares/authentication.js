@@ -22,7 +22,7 @@ const authenticationWorker = async (req, res, next) => {
     const { access_token } = req.headers;
     if (!access_token) throw { name: "Invalid Token" };
     const payload = verify(access_token);
-    const worker = await Worker.findByPk(payload.id);
+    const worker = await Worker.findByPk(payload.id)
     if (!worker) throw { name: "Invalid Token" };
     req.worker = {
       id: worker.id,
@@ -30,7 +30,6 @@ const authenticationWorker = async (req, res, next) => {
     };
     next();
   } catch (error) {
-    console.log(error);
     next(error);
   }
 };

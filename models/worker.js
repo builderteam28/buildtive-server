@@ -19,7 +19,24 @@ module.exports = (sequelize, DataTypes) => {
   }
   Worker.init(
     {
-      email: DataTypes.STRING,
+      email:{
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: {
+          msg : "Email already registered"
+        },
+        validate: {
+          isEmail: {
+            msg: "Invalid Email Format",
+          },
+          notEmpty: {
+            msg: "Email Required",
+          },
+          notNull : {
+            msg : "Email Required"
+          }
+        },
+      },
       password: DataTypes.STRING,
       fullName: DataTypes.STRING,
       phoneNumber: DataTypes.STRING,
