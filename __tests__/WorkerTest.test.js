@@ -153,3 +153,22 @@ describe("GET /workers/:id By Profile Id", () => {
     });
   })
 });
+
+describe("PUT /workers/:id Edit Profile", () => {
+  describe("Edit profile success", () => {
+    it("should get 200, and update worker profile", async () => {
+      const bodyEdit = {
+        fullName:"asep",
+        address:"bandung",
+        phoneNumber:"197238971"
+      }
+      const headers = {
+        access_token : validToken
+      }
+      const id = 1
+      const result = await request(app).put(`/workers/${id}`).set(headers).send(bodyEdit)
+      expect(result.status).toBe(200)
+      expect(result.body).toHaveProperty("message", expect.any(String))
+    })
+  })
+})
