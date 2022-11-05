@@ -4,7 +4,7 @@ const { Worker, sequelize } = require("../models");
 const bcrypt = require("bcryptjs");
 const { queryInterface } = sequelize;
 
-describe.skip("POST /workers/register", () => {
+describe("POST /workers/register", () => {
   afterAll(() => {
     sequelize.queryInterface.bulkDelete("Workers", null, {
       truncate: true,
@@ -33,14 +33,14 @@ describe.skip("POST /workers/register", () => {
       const result = await request(app)
         .post("/workers/register")
         .send(payloadRegisterSuccess);
-      expect(result.status).toBe(201);
-      expect(result.body).toBeInstanceOf(Object);
-      expect(result.body).toHaveProperty("id", expect.any(Number));
-      expect(result.body).toHaveProperty("workers", expect.any(String));
+      await expect(result.status).toBe(201);
+      await expect(result.body).toBeInstanceOf(Object);
+      await expect(result.body).toHaveProperty("id", expect.any(Number));
+      await expect(result.body).toHaveProperty("workers", expect.any(String));
     });
   });
 
-  describe("POST /workers/register - Email key is missing", () => {
+  describe.skip("POST /workers/register - Email key is missing", () => {
     it("should respond with status code 400 and returning error message", async () => {
       const payloadWorkersMiss = {
         username: "workers test",
@@ -57,7 +57,7 @@ describe.skip("POST /workers/register", () => {
     });
   });
 
-  describe("POST /workers/register - Email key is null", () => {
+  describe.skip("POST /workers/register - Email key is null", () => {
     it("should respond with status code 400 and returning error message", async () => {
       const payloadWorkersMiss = {
         username: "workers test",
