@@ -13,13 +13,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      ProjectId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: "Projects",
-          key: "id",
-        },
-      },
+
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

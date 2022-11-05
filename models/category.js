@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Category.belongsToMany(models.Worker, { through: models.WorkerCategory });
-      Category.belongsTo(models.Project);
+      Category.hasMany(models.Project);
     }
   }
   Category.init(
