@@ -128,7 +128,7 @@ describe("Get /users/projects/:id", () => {
 });
 
 describe("POST /users/projects", () => {
-  describe.skip("User add a new project", () => {
+  describe("User add a new project", () => {
     it("should success add new project", async () => {
       const headers = {
         access_token: validToken,
@@ -157,7 +157,7 @@ describe("POST /users/projects", () => {
     });
   });
 
-  describe.skip("User fail to add project because name is empty", () => {
+  describe("User fail to add project because name is empty", () => {
     it("should receive status 400 because project name is empty", async () => {
       const headers = {
         access_token: validToken,
@@ -185,7 +185,7 @@ describe("POST /users/projects", () => {
     });
   });
 
-  describe.skip("User fail to add project because workHours is empty", () => {
+  describe("User fail to add project because workHours is empty", () => {
     it("should receive status 400 because workHours is empty", async () => {
       const headers = {
         access_token: validToken,
@@ -213,7 +213,7 @@ describe("POST /users/projects", () => {
     });
   });
 
-  describe.skip("User fail to add project because total worker is empty", () => {
+  describe("User fail to add project because total worker is empty", () => {
     it("should receive status 400 because total worker is empty", async () => {
       const headers = {
         access_token: validToken,
@@ -241,7 +241,7 @@ describe("POST /users/projects", () => {
     });
   });
 
-  describe.skip("User fail to add project because Cost is empty", () => {
+  describe("User fail to add project because Cost is empty", () => {
     it("should receive status 400 because Cost is empty", async () => {
       const headers = {
         access_token: validToken,
@@ -269,7 +269,7 @@ describe("POST /users/projects", () => {
     });
   });
 
-  describe.skip("User fail to add project because Cost is empty", () => {
+  describe("User fail to add project because Cost is empty", () => {
     it("should receive status 400 because Cost is empty", async () => {
       const headers = {
         access_token: validToken,
@@ -297,7 +297,7 @@ describe("POST /users/projects", () => {
     });
   });
 
-  describe.skip("User fail to add project because Long / lat is empty", () => {
+  describe("User fail to add project because Long / lat is empty", () => {
     it("should receive status 400 because Long / lat is empty", async () => {
       const headers = {
         access_token: validToken,
@@ -325,7 +325,7 @@ describe("POST /users/projects", () => {
     });
   });
 
-  describe.skip("Should get error when there is no access_token sent", () => {
+  describe("Should get error when there is no access_token sent", () => {
     it("should get error 401 and message login first", async () => {
       const payload = {
         name: "tes",
@@ -344,7 +344,7 @@ describe("POST /users/projects", () => {
     });
   });
 
-  describe.skip("Should get error when access_token false", () => {
+  describe("Should get error when access_token false", () => {
     it("should get error 401 and message login first", async () => {
       const headers = {
         access_token: inValidToken,
@@ -392,6 +392,48 @@ describe("POST /users/projects", () => {
         .set(headers);
       expect(result.status).toBe(401);
       expect(result.body).toHaveProperty("message", "Please login first");
+    });
+  });
+  describe("Should get error when update Project", () => {
+    it("should get respond status 401 and returning Please login first", async () => {
+      const dataUpdate = {
+        name: "asep update",
+        workHours: 5,
+        totalWorker: 4,
+        cost: 20000,
+        status: "active",
+      };
+      const headers = {
+        access_token: inValidToken,
+      };
+      const id = 1;
+      const result = await request(app)
+        .put(`/users/projects/${id}`)
+        .set(headers)
+        .send(dataUpdate);
+      expect(result.status).toBe(401);
+      expect(result.body).toHaveProperty("message", "Please login first");
+    });
+  });
+  describe("Should get error cause send the wrong id", () => {
+    it("should get respond status 404 and Project Not Found", async () => {
+      const dataUpdate = {
+        name: "asep update",
+        workHours: 5,
+        totalWorker: 4,
+        cost: 20000,
+        status: "active",
+      };
+      const headers = {
+        access_token: validToken,
+      };
+      const id = 4;
+      const result = await request(app)
+        .put(`/users/projects/${id}`)
+        .set(headers)
+        .send(dataUpdate);
+      expect(result.status).toBe(404);
+      expect(result.body).toHaveProperty("message", "Project not found");
     });
   });
 });

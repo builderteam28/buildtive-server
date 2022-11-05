@@ -21,7 +21,7 @@ describe.skip("POST /workers/register", () => {
     });
   });
 
-  describe("POST /workers/register - Email and Password Pass", () => {
+  describe.skip("POST /workers/register - Email and Password Pass", () => {
     it("should respond with status code 201 and returning id and email", async () => {
       const payloadRegisterSuccess = {
         fullName: "workers test",
