@@ -37,12 +37,78 @@ module.exports = (sequelize, DataTypes) => {
           }
         },
       },
-      password: DataTypes.STRING,
-      fullName: DataTypes.STRING,
-      phoneNumber: DataTypes.STRING,
-      address: DataTypes.STRING,
-      birthDate: DataTypes.DATE,
-      idNumber: DataTypes.STRING,
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: "Password is required",
+          },
+          notNull : {
+            msg : "Password is required"
+          }
+        },
+      },
+      fullName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: "fullName is required",
+          },
+          notNull : {
+            msg : "fullName is required"
+          }
+        },
+      },
+      phoneNumber:{
+        type:DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: "phoneNumber is required",
+          },
+          notNull : {
+            msg : "phoneNumber is required"
+          }
+        },
+      },
+      address:{
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: "address is required",
+          },
+          notNull : {
+            msg : "address is required"
+          }
+        },
+      },
+      birthDate:{
+        type: DataTypes.DATE,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: "birthDate is required",
+          },
+          notNull : {
+            msg : "birthDate is required"
+          }
+        },
+      },
+      idNumber:{
+        type:DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: "idNumber is required",
+          },
+          notNull : {
+            msg : "idNumber is required"
+          }
+        },
+      } 
     },
     {
       sequelize,

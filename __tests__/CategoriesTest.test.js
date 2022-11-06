@@ -4,7 +4,7 @@ const { sequelize } = require("../models");
 const bcrypt = require("bcryptjs");
 const { queryInterface } = sequelize;
 
-describe("GET CATEGORIES BY ID /users/categories/:id - Include Worker", () => {
+describe.skip("GET CATEGORIES BY ID /users/categories/:id - Include Worker", () => {
   it("should be send data category include worker by id", async () => {
     const id = 1
     const result = await request(app).get(`/users/categories/${id}`);
