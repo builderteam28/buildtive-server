@@ -138,7 +138,7 @@ describe("POST /users/login", () => {
 });
 
 describe("GET users/:id", () => {
-  describe("GET users/:id success", async () => {
+  describe("GET users/:id success", () => {
     it("should get status 200 and returning user", async () => {
       const headers = {
         access_token: "Valid",
@@ -149,7 +149,7 @@ describe("GET users/:id", () => {
       expect(result.body).toHaveProperty("User", expect.any(Object));
     });
   });
-  describe("GET users/:id fail unauthorized", async () => {
+  describe("GET users/:id fail unauthorized", () => {
     it("should get status 401 and returning Unauthorized", async () => {
       const headers = {
         access_token: "invalid",
@@ -177,8 +177,8 @@ describe("PUT /users/:id", () => {
         .put("/users/:id")
         .set(headers)
         .send(bodyUpdate);
-      expect(result.status).toBe(200)
-      expect(result.body).toHaveProperty("messsage", "success update profile")
+      expect(result.status).toBe(200);
+      expect(result.body).toHaveProperty("messsage", "success update profile");
     });
   });
   describe("PUT /users/:id fail", () => {
@@ -195,8 +195,8 @@ describe("PUT /users/:id", () => {
         .put("/users/:id")
         .set(headers)
         .send(bodyUpdate);
-      expect(result.status).toBe(401)
-      expect(result.body).toHaveProperty("messsage", "Please login first")
+      expect(result.status).toBe(401);
+      expect(result.body).toHaveProperty("messsage", "Please login first");
     });
   });
 });

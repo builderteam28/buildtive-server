@@ -1,46 +1,39 @@
-'use strict';
+"use strict";
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Payments', {
+    await queryInterface.createTable("Payments", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       amount: {
         type: Sequelize.INTEGER,
-        allowNull : false
+        allowNull: false,
       },
       status: {
         type: Sequelize.STRING,
-        defaultValue: "Unpaid"
+        defaultValue: "Unpaid",
       },
       ProjectId: {
         type: Sequelize.INTEGER,
-        references : {
+        references: {
           model: "Projects",
-          key: "id"
-        }
-      },
-      WorkerId: {
-        type: Sequelize.INTEGER,
-        references : {
-          model: "Workers",
-          key: "id"
-        }
+          key: "id",
+        },
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Payments');
-  }
+    await queryInterface.dropTable("Payments");
+  },
 };
