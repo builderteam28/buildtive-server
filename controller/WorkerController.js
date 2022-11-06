@@ -22,80 +22,53 @@ class WorkerController {
         address,
         idNumber,
       });
-
       res.status(201).json({
         message: `Worker account with ${newWorker.email} successfully created`,
       });
     } catch (error) {
-      console.log(error)
       next(error);
     }
   }
   static async login(req, res, next) {
     try {
       const { email, password } = req.body;
-
-      if (!email) {
-        throw { name: "EmailRequired" };
-      }
-
-      if (!password) {
-        throw { name: "PasswordRequired" };
-      }
-
+      if (!email) throw { name: "EmailRequired" };
+      if (!password) throw { name: "PasswordRequired" };
       const foundWorker = await Worker.findOne({
         where: {
           email,
         },
       });
-
-      if (!foundWorker) {
-        throw { name: "Unauthorized" };
-      }
-
+      if (!foundWorker) throw { name: "Unauthorized" };
       const isMatchPassword = compare(password, foundWorker.password);
-
-      if (!isMatchPassword) {
-        throw { name: "Unauthorized" };
-      }
-
+      if (!isMatchPassword) throw { name: "Unauthorized" };
       const payload = {
         id: foundWorker.id,
         email: foundWorker.email,
       };
-
       const token = sign(payload);
-
       res.status(200).json({
         access_token: token,
         id: payload.id,
-        email:payload.email
+        email: payload.email,
       });
     } catch (error) {
       next(error);
-      console.log(error)
     }
   }
   static async profile(req, res, next) {
     try {
-      const { id } = req.params;
-      const foundWorker = await Worker.findByPk(id, {attributes:{exclude:["password", "id","updatedAt"]},include:[]});
-      // console.log(foundWorker)
-
-      if (!foundWorker) {
-        throw { name: "NotFound" };
-      }
-
-      res.status(200).json(foundWorker);
+      const { id } = req.worker
+      const result = await Worker.findByPk(id)
+      res.status(200).json(result)
     } catch (error) {
-      console.log(error)
       next(error);
     }
   }
   static async editProfile(req, res, next) {
     try {
-      const { id } = req.params;
-      const { fullName, phoneNumber, address, birthDate } = req.body;
+      const { id } = req.worker;
+      const { fullName, phoneNumber, address } = req.body;
 
       const updatedWorkerProfile = await Worker.findByPk(id);
 
@@ -108,15 +81,15 @@ class WorkerController {
           fullName,
           phoneNumber,
           address,
-          birthDate,
         },
         {
           where: { id },
         }
       );
 
-      res.status(201).json({ message: "Success to update profile" });
+      res.status(200).json({ message: "Success to update profile" });
     } catch (error) {
+      console.log(error)
       next(error);
     }
   }
