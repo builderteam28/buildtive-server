@@ -9,17 +9,17 @@ UserRouter.post("/login", UserController.login);
 UserRouter.get("/categories", CategoryController.fetchAll);
 UserRouter.get("/categories/:id", CategoryController.getOne);
 UserRouter.use(authenticationUser);
-UserRouter.put("/:id", UserController.editProfile);
-UserRouter.get("/:id", UserController.profile);
+UserRouter.get("/projects", ProjectController.fetchAll);
 UserRouter.post("/projects", ProjectController.postProject);
 UserRouter.patch("/projects/:workerId", ProjectController.acceptWorker);
 UserRouter.delete(
-  "/projects/:projectWorkerId",
+  "/projects/manageWorker/:projectWorkerId",
   ProjectController.declineWorker
 );
-UserRouter.get("/projects", ProjectController.fetchAll);
 UserRouter.get("/projects/:id", ProjectController.getOne);
 UserRouter.delete("/projects/:id", ProjectController.deleteProject);
 UserRouter.put("/projects/:id", ProjectController.editProject);
+UserRouter.put("/:id", UserController.editProfile);
+UserRouter.get("/:id", UserController.profile);
 
 module.exports = UserRouter;

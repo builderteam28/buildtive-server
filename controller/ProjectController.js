@@ -41,24 +41,28 @@ class ProjectController {
     try {
       const {
         name,
-        workHours,
+        tenor,
         totalWorker,
         cost,
         UserId,
         CategoryId,
         long,
         lat,
+        address,
+        description,
       } = req.body;
 
       const createdProject = await Project.create({
         name,
-        workHours,
+        tenor,
         totalWorker,
         cost,
         UserId,
         CategoryId,
         long,
         lat,
+        address,
+        description,
       });
 
       res
@@ -73,9 +77,9 @@ class ProjectController {
       const { id } = req.params;
       const find = await Project.findByPk(id);
       if (!find) throw { name: "ProjectNotFound" };
-      const { name, workHours, totalWorker, cost, status } = req.body;
+      const { name, tenor, totalWorker, cost, status } = req.body;
       const result = await Project.update(
-        { name, workHours, totalWorker, cost, status },
+        { name, tenor, totalWorker, cost, status },
         { where: { id } }
       );
       res.status(200).json({ message: "Project already updated" });
@@ -105,7 +109,7 @@ class ProjectController {
         },
         { where: { WorkerId } }
       );
-      res.status(200).json({message : "Applied worker into Project"})
+      res.status(200).json({ message: "Applied worker into Project" });
     } catch (error) {
       next(error);
     }
@@ -113,8 +117,8 @@ class ProjectController {
   static async declineWorker(req, res, next) {
     try {
       const { projectWorkerId: WorkerId } = req.params;
-      const result = await ProjectWorker.destroy({where : {WorkerId}})
-      res.status(200).json({message : "Decline worker success"})
+      const result = await ProjectWorker.destroy({ where: { WorkerId } });
+      res.status(200).json({ message: "Decline worker success" });
     } catch (error) {
       next(error);
     }

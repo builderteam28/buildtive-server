@@ -2,25 +2,29 @@
   "projects": [
     {
       "name": "gas",
-      "workHours": 7,
       "totalWorker": 5,
       "cost": 1000000,
       "status": "inactive",
       "UserId": 1,
       "long": 2901,
       "lat": 291,
-      "categoryId": 1
+      "categoryId": 1,
+      "description": "lorem ipsum",
+      "address": "lorem ipsum",
+      "tenor": 3
     },
     {
       "name": "gas 2",
-      "workHours": 7,
       "totalWorker": 5,
       "cost": 1000000,
       "status": "active",
       "UserId": 1,
       "long": 2901,
       "lat": 291,
-      "categoryId": 2
+      "categoryId": 2,
+      "description": "lorem ipsum",
+      "address": "lorem ipsum",
+      "tenor": 3
     }
   ],
   "categories": [

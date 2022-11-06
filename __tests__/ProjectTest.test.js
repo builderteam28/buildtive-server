@@ -133,16 +133,7 @@ describe("POST /users/projects", () => {
       const headers = {
         access_token: validToken,
       };
-      const payload = {
-        name: "tes",
-        workHours: 9,
-        totalWorker: 10,
-        cost: 2000000,
-        UserId: 1,
-        CategoryId: 1,
-        long: 2901,
-        lat: 9303,
-      };
+      const payload = require("../data/db.json").projects[0];
 
       const result = await request(app)
         .post("/users/projects")
@@ -163,13 +154,15 @@ describe("POST /users/projects", () => {
         access_token: validToken,
       };
       const payload = {
-        workHours: 9,
         totalWorker: 10,
         cost: 2000000,
         UserId: 1,
         CategoryId: 1,
         long: 2901,
         lat: 9303,
+        description: "lorem ipsum",
+        address: "lorem ipsum",
+        tenor: 3,
       };
 
       const result = await request(app)
@@ -198,6 +191,8 @@ describe("POST /users/projects", () => {
         CategoryId: 1,
         long: 2901,
         lat: 9303,
+        description: "lorem ipsum",
+        address: "lorem ipsum",
       };
 
       const result = await request(app)
@@ -208,7 +203,7 @@ describe("POST /users/projects", () => {
       expect(result.status).toBe(400);
       expect(result.body).toHaveProperty(
         "message",
-        `Work Hours can't be empty`
+        `Project tenor can't be empty`
       );
     });
   });
@@ -220,12 +215,14 @@ describe("POST /users/projects", () => {
       };
       const payload = {
         name: "totalWorker",
-        workHours: 10,
+        tenor: 10,
         cost: 2000000,
         UserId: 1,
         CategoryId: 1,
         long: 2901,
         lat: 9303,
+        description: "lorem ipsum",
+        address: "lorem ipsum",
       };
 
       const result = await request(app)
@@ -248,12 +245,14 @@ describe("POST /users/projects", () => {
       };
       const payload = {
         name: "cost",
-        workHours: 10,
+        tenor: 10,
         totalWorker: 2000000,
         UserId: 1,
         CategoryId: 1,
         long: 2901,
         lat: 9303,
+        description: "lorem ipsum",
+        address: "lorem ipsum",
       };
 
       const result = await request(app)
@@ -276,12 +275,14 @@ describe("POST /users/projects", () => {
       };
       const payload = {
         name: "cost",
-        workHours: 10,
+        tenor: 10,
         totalWorker: 2000000,
         UserId: 1,
         CategoryId: 1,
         long: 2901,
         lat: 9303,
+        description: "lorem ipsum",
+        address: "lorem ipsum",
       };
 
       const result = await request(app)
@@ -305,11 +306,13 @@ describe("POST /users/projects", () => {
       const payload = {
         name: "long lat",
         cost: 10,
-        workHours: 10,
+        tenor: 10,
         totalWorker: 2000000,
         UserId: 1,
         CategoryId: 1,
         long: 2901,
+        description: "lorem ipsum",
+        address: "lorem ipsum",
       };
 
       const result = await request(app)
@@ -329,7 +332,7 @@ describe("POST /users/projects", () => {
     it("should get error 401 and message login first", async () => {
       const payload = {
         name: "tes",
-        workHours: 9,
+        tenor: 9,
         totalWorker: 10,
         cost: 2000000,
         UserId: 1,
@@ -351,7 +354,7 @@ describe("POST /users/projects", () => {
       };
       const payload = {
         name: "tes",
-        workHours: 9,
+        tenor: 9,
         totalWorker: 10,
         cost: 2000000,
         UserId: 1,
@@ -398,7 +401,7 @@ describe("POST /users/projects", () => {
     it("should get respond status 401 and returning Please login first", async () => {
       const dataUpdate = {
         name: "asep update",
-        workHours: 5,
+        tenor: 5,
         totalWorker: 4,
         cost: 20000,
         status: "active",
@@ -419,7 +422,7 @@ describe("POST /users/projects", () => {
     it("should get respond status 404 and Project Not Found", async () => {
       const dataUpdate = {
         name: "asep update",
-        workHours: 5,
+        tenor: 5,
         totalWorker: 4,
         cost: 20000,
         status: "active",

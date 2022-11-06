@@ -99,13 +99,13 @@ class WorkerController {
       next(error);
     }
   }
-  static async applProject(req, res, next) {
+  static async applyProject(req, res, next) {
     try {
       const { projectId: ProjectId } = req.params;
-      const { id: WorkerId } = req.worker
+      const { id: WorkerId } = req.worker;
       const result = await ProjectWorker.create({
         ProjectId,
-        WorkerId
+        WorkerId,
       });
       res.status(201).json({ message: "Project applied" });
     } catch (error) {
@@ -115,8 +115,8 @@ class WorkerController {
   static async cancelApply(req, res, next) {
     try {
       const { projectWorkerId: id } = req.params;
-      const result = await ProjectWorker.destroy({where : {id}})
-      res.status(200).json({message : "deleted worker from project"})
+      const result = await ProjectWorker.destroy({ where: { id } });
+      res.status(200).json({ message: "deleted worker from project" });
     } catch (error) {
       next(error);
     }
