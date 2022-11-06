@@ -1,4 +1,10 @@
-const { Project, Worker, Payment, Category } = require("../models");
+const {
+  Project,
+  Worker,
+  Payment,
+  Category,
+  ProjectWorker,
+} = require("../models");
 class ProjectController {
   static async fetchAll(req, res, next) {
     try {
@@ -72,7 +78,7 @@ class ProjectController {
         { name, workHours, totalWorker, cost, status },
         { where: { id } }
       );
-      res.status(200).json({message : "Project already updated"})
+      res.status(200).json({ message: "Project already updated" });
     } catch (error) {
       next(error);
     }
@@ -87,6 +93,29 @@ class ProjectController {
       res.status(200).json({ message: "Deleted Project" });
     } catch (error) {
       console.log(error);
+      next(error);
+    }
+  }
+  static async acceptWorker(req, res, next) {
+    try {
+      const { workerId: WorkerId } = req.params;
+      const result = await ProjectWorker.update(
+        {
+          status: "Active",
+        },
+        { where: { WorkerId } }
+      );
+      res.status(200).json({message : "Applied worker into Project"})
+    } catch (error) {
+      next(error);
+    }
+  }
+  static async declineWorker(req, res, next) {
+    try {
+      const { projectWorkerId: WorkerId } = req.params;
+      const result = await ProjectWorker.destroy({where : {WorkerId}})
+      res.status(200).json({message : "Decline worker success"})
+    } catch (error) {
       next(error);
     }
   }
