@@ -76,7 +76,7 @@ class WorkerController {
   static async profile(req, res, next) {
     try {
       const { id } = req.params;
-      const foundWorker = await Worker.findByPk(id, {attributes:{exclude:["password","createdAt","updatedAt"]},include:[]});
+      const foundWorker = await Worker.findByPk(id, {attributes:{exclude:["password","createdAt","updatedAt","birthDate"]},include:[]});
       // console.log(foundWorker)
 
       if (!foundWorker) {

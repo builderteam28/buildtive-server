@@ -223,60 +223,65 @@ describe("POST /workers/login", () => {
   });
 });
 
-// describe("GET /workers/", () => {
-//   let valid_token;
-//   beforeAll(async () => {
-//     await Worker.create({
-//       fullName: "workers test",
-//       email: "workertest@gmail.com",
-//       password: "12345678",
-//       phoneNumber: "0812345678",
-//       birthDate: "1996-10-28 09:09:39.749 +00:00",
-//       address: "Bandung",
-//       idNumber: "1421188123123",
-//       createdAt: new Date(),
-//       updatedAt: new Date(),
-//     });
-//     const payload = {
-//       id: worker.id,
-//       email: worker.email,
-//     };
-//     valid_token = sign(payload);
-//     console.log(payload);
-//   });
+describe("GET /workers", () => {
+  let valid_token;
+  beforeAll(async () => {
+    let worker = await Worker.create({
+      fullName: "workers test",
+      email: "workertest@gmail.com",
+      password: "12345678",
+      phoneNumber: "0812345678",
+      birthDate: "1996-10-28",
+      address: "Bandung",
+      idNumber: "1421188123123",
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+    let result = await Worker.findAll({where:{
+      id:1
+    }});
+    // console.log(result, "dari worker");
+    const payload = {
+      id: result[0].dataValues.id,
+      email: result[0].dataValues.email,
+    };
+    valid_token = sign(payload);
+  });
 
-//   afterAll(() => {
-//     return Worker.destroy({
-//       truncate: true,
-//       cascade: true,
-//       restartIdentity: true,
-//     }).catch((err) => {
-//       console.log(err);
-//     });
-//   });
+  afterAll(() => {
+    return Worker.destroy({
+      truncate: true,
+      cascade: true,
+      restartIdentity: true,
+    }).catch((err) => {
+      console.log(err);
+    });
+  });
 
-//   describe("GET /workers/:id success test", () => {
-//     it("Should be return an object with detail profile of worker with any id", async () => {
-//       const res = await request(app)
-//         .get("/workers/1")
-//         .set("access_token", valid_token);
-//       expect(res.status).toBe(200);
-//       expect(res.body).toBeInstanceOf(Object);
-//       expect(res.body).toHaveProperty("id", expect.any(Number));
-//       expect(res.body).toHaveProperty("id", 1);
-//       expect(res.body).toHaveProperty("fullname", expect.any(String));
-//       expect(res.body).toHaveProperty("fullName", "workers test");
-//       expect(res.body).toHaveProperty("phoneNumber", expect.any(String));
-//       expect(res.body).toHaveProperty("phoneNumber", "0812345678");
-//       expect(res.body).toHaveProperty("birthDate", expect.any(Date));
-//       expect(res.body).toHaveProperty(
-//         "birthDate",
-//         "1996-10-28 09:09:39.749 +00:00"
-//       );
-//       expect(res.body).toHaveProperty("address", expect.any(String));
-//       expect(res.body).toHaveProperty("adress", "Bandung");
-//       expect(res.body).toHaveProperty("idNumber", expect.any(String));
-//       expect(res.body).toHaveProperty("idNumber", "1421188123123");
-//     });
-//   });
-// });
+  describe("GET /workers/:id success test", () => {
+    it("Should be return an object with detail profile of worker with any id", async () => {
+      const res = await request(app)
+        .get("/workers/1")
+        .set("access_token", valid_token);
+      expect(res.status).toBe(200);
+      expect(res.body).toBeInstanceOf(Object);
+      expect(res.body).toHaveProperty("id", expect.any(Number));
+      expect(res.body).toHaveProperty("id", 1);
+      expect(res.body).toHaveProperty("fullName", expect.any(String));
+      expect(res.body).toHaveProperty("fullName", "workers test");
+      expect(res.body).toHaveProperty("email", expect.any(String));
+      expect(res.body).toHaveProperty("email", "workertest@gmail.com");
+      expect(res.body).toHaveProperty("phoneNumber", expect.any(String));
+      expect(res.body).toHaveProperty("phoneNumber", "0812345678");
+      // expect(res.body).toHaveProperty("birthDate", expect.any(Date));
+      // expect(res.body).toHaveProperty(
+      //   "birthDate",
+      //   "1996-10-28T09:09:39.749Z"
+      // );
+      expect(res.body).toHaveProperty("address", expect.any(String));
+      expect(res.body).toHaveProperty("address", "Bandung");
+      expect(res.body).toHaveProperty("idNumber", expect.any(String));
+      expect(res.body).toHaveProperty("idNumber", "1421188123123");
+    });
+  });
+});
