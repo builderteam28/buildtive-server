@@ -10,7 +10,6 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Payment.belongsTo(models.Project);
-      Payment.belongsTo(models.Worker);
     }
   }
   Payment.init(
@@ -18,15 +17,11 @@ module.exports = (sequelize, DataTypes) => {
       amount: DataTypes.INTEGER,
       status: DataTypes.STRING,
       ProjectId: DataTypes.INTEGER,
-      WorkerId: DataTypes.INTEGER,
     },
     {
       sequelize,
       modelName: "Payment",
     }
   );
-  Payment.beforeCreate((pay, opt) => {
-    pay.status = "Unpaid";
-  });
   return Payment;
 };
