@@ -30,15 +30,39 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
-      workHours: {
+      description: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: `Project description can't be empty`,
+          },
+          notEmpty: {
+            msg: `Project description can't be empty`,
+          },
+        },
+      },
+      address: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: `Project address can't be empty`,
+          },
+          notEmpty: {
+            msg: `Project address can't be empty`,
+          },
+        },
+      },
+      tenor: {
         type: DataTypes.INTEGER,
         allowNull: false,
         validate: {
           notNull: {
-            msg: `Work Hours can't be empty`,
+            msg: `Project tenor can't be empty`,
           },
           notEmpty: {
-            msg: `Work Hours can't be empty`,
+            msg: `Project tenor can't be empty`,
           },
         },
       },

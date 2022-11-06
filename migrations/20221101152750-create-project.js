@@ -13,7 +13,15 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      workHours: {
+      description: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      address: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      tenor: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
