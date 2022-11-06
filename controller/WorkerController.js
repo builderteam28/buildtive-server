@@ -1,4 +1,4 @@
-const { Worker, Category, Project } = require("../models");
+const { Worker, Category, Project, ProjectWorker } = require("../models");
 const { compare } = require("../helpers/bcrypt");
 const { sign } = require("../helpers/jwt");
 class WorkerController {
@@ -58,9 +58,9 @@ class WorkerController {
   }
   static async profile(req, res, next) {
     try {
-      const { id } = req.worker
-      const result = await Worker.findByPk(id)
-      res.status(200).json(result)
+      const { id } = req.worker;
+      const result = await Worker.findByPk(id);
+      res.status(200).json(result);
     } catch (error) {
       next(error);
     }
@@ -89,12 +89,34 @@ class WorkerController {
 
       res.status(200).json({ message: "Success to update profile" });
     } catch (error) {
-      console.log(error)
+      console.log(error);
       next(error);
     }
   }
   static async pushNotification(req, res, next) {
     try {
+    } catch (error) {
+      next(error);
+    }
+  }
+  static async applProject(req, res, next) {
+    try {
+      const { projectId: ProjectId } = req.params;
+      const { id: WorkerId } = req.worker
+      const result = await ProjectWorker.create({
+        ProjectId,
+        WorkerId
+      });
+      res.status(201).json({ message: "Project applied" });
+    } catch (error) {
+      next(error);
+    }
+  }
+  static async cancelApply(req, res, next) {
+    try {
+      const { projectWorkerId: id } = req.params;
+      const result = await ProjectWorker.destroy({where : {id}})
+      res.status(200).json({message : "deleted worker from project"})
     } catch (error) {
       next(error);
     }

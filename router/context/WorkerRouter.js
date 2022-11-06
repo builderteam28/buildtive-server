@@ -6,7 +6,7 @@ const WorkerRouter = require("express").Router();
 WorkerRouter.post("/login", WorkerController.login);
 WorkerRouter.post("/register", WorkerController.register);
 WorkerRouter.use(authenticationWorker);
-WorkerRouter.get("/:projectId", WorkerController.applyProject);
+WorkerRouter.post("/:projectId", WorkerController.applyProject);
 WorkerRouter.delete("/projectWorkerId", WorkerController.cancelApply);
 WorkerRouter.get("/:id", WorkerController.profile);
 WorkerRouter.put("/:id", WorkerController.editProfile);

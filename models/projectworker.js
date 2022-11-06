@@ -24,5 +24,8 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "ProjectWorker",
     }
   );
+  ProjectWorker.beforeCreate((app, opt) => {
+    app.status = "appliance"
+  })
   return ProjectWorker;
 };
