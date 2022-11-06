@@ -49,6 +49,7 @@ class UserController {
       const result = await User.findByPk(id);
       res.status(200).json(result);
     } catch (error) {
+      // console.log(error, "<======Error get profile=============")
       next(error);
     }
   }
@@ -60,7 +61,7 @@ class UserController {
         { fullName, address, phoneNumber },
         { where: { id } }
       );
-      res.status(201).json({ message: "Profile updated" });
+      res.status(200).json({ message: "Profile updated" });
     } catch (error) {
       next(error);
     }

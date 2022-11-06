@@ -103,6 +103,10 @@ class WorkerController {
     try {
       const { projectId: ProjectId } = req.params;
       const { id: WorkerId } = req.worker;
+      const find = await ProjectWorker.findOne({
+        where: { status: "Active", WorkerId },
+      });
+      if(find) throw { name : "AlreadyActive"}
       const result = await ProjectWorker.create({
         ProjectId,
         WorkerId,

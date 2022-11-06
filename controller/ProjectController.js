@@ -103,6 +103,10 @@ class ProjectController {
   static async acceptWorker(req, res, next) {
     try {
       const { workerId: WorkerId } = req.params;
+      const find = await ProjectWorker.findOne({
+        where: { status: "Active", WorkerId },
+      });
+      if (find) throw { name: "AlreadyActive" };
       const result = await ProjectWorker.update(
         {
           status: "Active",
