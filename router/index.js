@@ -8,9 +8,7 @@ const WorkerRouter = require("./context/WorkerRouter");
 
 router.use("/users", UserRouter);
 router.use("/workers", WorkerRouter);
-router.use("/projects", ProjectRouter);
 router.use("/payments", PaymentRouter);
 router.use("/categories", CategoriesRouter);
-router.use("/ratings", RatingRouter);
 
 module.exports = router;
