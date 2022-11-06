@@ -1,5 +1,5 @@
 "use strict";
-const {hash} = require('../helpers/bcrypt')
+const { hash } = require("../helpers/bcrypt");
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Worker extends Model {
@@ -19,13 +19,67 @@ module.exports = (sequelize, DataTypes) => {
   }
   Worker.init(
     {
-      email: DataTypes.STRING,
-      password: DataTypes.STRING,
-      fullName: DataTypes.STRING,
-      phoneNumber: DataTypes.STRING,
-      address: DataTypes.STRING,
-      birthDate: DataTypes.DATE,
-      idNumber: DataTypes.STRING,
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: {
+          args: true,
+          msg: "Email already in use!",
+        },
+        validate: {
+          notEmpty: { msg: "Email is required" },
+          notNull: { msg: "Email is required" },
+          isEmail: { msg: "Wrong email format" },
+        },
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: { msg: "Password is required" },
+          notNull: { msg: "Password is required" },
+        },
+      },
+      fullName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: { msg: "Name is required" },
+          notNull: { msg: "Name is required" },
+        },
+      },
+      phoneNumber:{
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: { msg: "phoneNumber is required" },
+          notNull: { msg: "phoneNumber is required" },
+        },
+      },
+      address:{
+        type:DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: { msg: "address is required" },
+          notNull: { msg: "address is required" },
+        },
+      },
+      birthDate:{
+        type:DataTypes.DATE,
+        allowNull: false,
+        validate: {
+          notEmpty: { msg: "birthDate is required" },
+          notNull: { msg: "birthDate is required" },
+        },
+      }, 
+      idNumber:{
+        type:DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: { msg: "idNumber is required" },
+          notNull: { msg: "idNumber is required" },
+        },
+      },
     },
     {
       sequelize,

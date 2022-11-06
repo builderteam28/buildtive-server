@@ -4,7 +4,7 @@ const { User, sequelize } = require("../models");
 const bcrypt = require("bcryptjs");
 const { queryInterface } = sequelize;
 
-describe("POST /users/register", () => {
+describe.skip("POST /users/register", () => {
   afterAll(() => {
     sequelize.queryInterface.bulkDelete("Users", null, {
       truncate: true,
@@ -20,7 +20,7 @@ describe("POST /users/register", () => {
     });
   });
 
-  describe("POST /users/register - Email and Password pass", () => {
+  describe.skip("POST /users/register - Email and Password pass", () => {
     it("should respond with status code 201 and returning id and email", async () => {
       const payloadRegisterSuccess = {
         fullName: "RegisterTest",
@@ -39,7 +39,7 @@ describe("POST /users/register", () => {
     });
   });
 
-  describe("POST /users/register - Email key is null or undefined", () => {
+  describe.skip("POST /users/register - Email key is null or undefined", () => {
     it("should respond with status code 400 and returning email required", async () => {
       const payloadRegisterMissing = {
         fullName: "RegisterTest",
@@ -74,7 +74,7 @@ describe.skip("POST /users/login", () => {
       cascade: true,
     });
   });
-  describe("POST /users/login - login passed", () => {
+  describe.skip("POST /users/login - login passed", () => {
     it("it should pass", async () => {
       const payloadLoginPass = {
         email: "testest@gmail.com",
@@ -88,7 +88,7 @@ describe.skip("POST /users/login", () => {
     });
   });
 
-  describe("POST /users/login - login miss", () => {
+  describe.skip("POST /users/login - login miss", () => {
     it("it should miss", async () => {
       const payloadLoginMiss = {
         email: "testest@gmail.com",

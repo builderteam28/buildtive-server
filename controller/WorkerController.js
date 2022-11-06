@@ -23,11 +23,9 @@ class WorkerController {
         idNumber,
       });
 
-      res.status(201).json({
-        message: `Worker account with ${newWorker.email} successfully created`,
+      res.status(201).json({message: `Worker with id: ${newWorker.id} and email: ${newWorker.email} succesfully created`
       });
     } catch (error) {
-      console.log(error)
       next(error);
     }
   }
@@ -73,13 +71,12 @@ class WorkerController {
       });
     } catch (error) {
       next(error);
-      console.log(error)
     }
   }
   static async profile(req, res, next) {
     try {
       const { id } = req.params;
-      const foundWorker = await Worker.findByPk(id, {attributes:{exclude:["password", "id","updatedAt"]},include:[]});
+      const foundWorker = await Worker.findByPk(id, {attributes:{exclude:["password","createdAt","updatedAt"]},include:[]});
       // console.log(foundWorker)
 
       if (!foundWorker) {
@@ -88,7 +85,6 @@ class WorkerController {
 
       res.status(200).json(foundWorker);
     } catch (error) {
-      console.log(error)
       next(error);
     }
   }
