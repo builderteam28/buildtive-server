@@ -12,6 +12,11 @@ UserRouter.use(authenticationUser);
 UserRouter.put("/:id", UserController.editProfile);
 UserRouter.get("/:id", UserController.profile);
 UserRouter.post("/projects", ProjectController.postProject);
+UserRouter.patch("/projects/:workerId", ProjectController.acceptWorker);
+UserRouter.delete(
+  "/projects/:projectWorkerId",
+  ProjectController.declineWorker
+);
 UserRouter.get("/projects", ProjectController.fetchAll);
 UserRouter.get("/projects/:id", ProjectController.getOne);
 UserRouter.delete("/projects/:id", ProjectController.deleteProject);
