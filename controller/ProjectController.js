@@ -171,6 +171,19 @@ class ProjectController {
       next(error);
     }
   }
+  static async fetchProjectWorker( req, res, next) {
+    try {
+      const { id:WorkerId } = req.worker
+      const result = await ProjectWorker.findAll({
+        where : {
+          WorkerId
+        }
+      })
+      res.status(200).json(result)
+    } catch (error) {
+      next(error)
+    }
+  }
 }
 
 module.exports = ProjectController;
