@@ -1,6 +1,13 @@
-const { Worker, Category, Project, ProjectWorker } = require("../models");
+const {
+  Worker,
+  Category,
+  Project,
+  ProjectWorker,
+  WorkerCategory,
+} = require("../models");
 const { compare } = require("../helpers/bcrypt");
 const { sign } = require("../helpers/jwt");
+const workercategory = require("../models/workercategory");
 class WorkerController {
   static async register(req, res, next) {
     try {
@@ -12,6 +19,7 @@ class WorkerController {
         address,
         birthDate,
         idNumber,
+        CategoryId,
       } = req.body;
       const newWorker = await Worker.create({
         email,
@@ -21,6 +29,10 @@ class WorkerController {
         birthDate,
         address,
         idNumber,
+      });
+      const newWorkerCategory = await WorkerCategory.create({
+        WorkerId: newWorker.id,
+        CategoryId,
       });
       res.status(201).json({
         message: `Worker account with ${newWorker.email} successfully created`,
