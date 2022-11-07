@@ -7,7 +7,6 @@ const {
 } = require("../models");
 const { compare } = require("../helpers/bcrypt");
 const { sign } = require("../helpers/jwt");
-const workercategory = require("../models/workercategory");
 class WorkerController {
   static async register(req, res, next) {
     try {
@@ -43,7 +42,7 @@ class WorkerController {
   }
   static async login(req, res, next) {
     try {
-      const { email, password } = req.body;
+      const { email, password, DeviceId } = req.body;
       if (!email) throw { name: "EmailRequired" };
       if (!password) throw { name: "PasswordRequired" };
       const foundWorker = await Worker.findOne({
@@ -59,6 +58,13 @@ class WorkerController {
         email: foundWorker.email,
       };
       const token = sign(payload);
+      const updateDeviceId = await Worker.update({
+        DeviceId
+      }, {
+        where:{
+          email:foundWorker.email
+        }
+      });
       res.status(200).json({
         access_token: token,
         id: payload.id,
