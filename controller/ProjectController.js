@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const {
   Project,
   Worker,
@@ -114,11 +115,13 @@ class ProjectController {
         },
         { where: { WorkerId } }
       );
-      await ProjectWorker.destroy({
+      await ProjectWorker.update({
         where: {
-          ProjectId,
+          ProjectId: {
+            [Op.not]: ProjectId,
+          },
           WorkerId,
-          status: "Active",
+          status: "Occupied",
         },
       });
       res.status(200).json({ message: "Applied worker into Project" });

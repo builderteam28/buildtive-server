@@ -1,5 +1,5 @@
 const errorHandler = (err, req, res, next) => {
-  console.log(err.name);
+  console.log(err);
   switch (err.name) {
     case "Unauthorized":
       res.status(401).json({ message: "Invalid email/password" });

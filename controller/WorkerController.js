@@ -72,7 +72,7 @@ class WorkerController {
       res.status(200).json({
         access_token: token,
         id: payload.id,
-        email: payload.email,
+        fullName: payload.fullName,
       });
     } catch (error) {
       next(error);
