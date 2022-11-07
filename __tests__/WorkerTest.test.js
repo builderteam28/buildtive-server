@@ -157,7 +157,7 @@ describe("GET /workers/:id By Profile Id", () => {
       expect(result.body).toHaveProperty("fullName", expect.any(String));
       expect(result.body).toHaveProperty("email", expect.any(String));
     });
-  })
+  });
 
   describe("fail get by id", () => {
     it("should returning status 401 with message Worker Not Found", async () => {
@@ -169,41 +169,47 @@ describe("GET /workers/:id By Profile Id", () => {
       expect(result.status).toBe(401);
       expect(result.body).toHaveProperty("message", expect.any(String));
     });
-  })
+  });
 });
 
 describe("PUT /workers/:id Edit Profile", () => {
   describe("Edit profile success", () => {
     it("should get 200, and update worker profile", async () => {
       const bodyEdit = {
-        fullName:"asep",
-        address:"bandung",
-        phoneNumber:"197238971"
-      }
+        fullName: "asep",
+        address: "bandung",
+        phoneNumber: "197238971",
+      };
       const headers = {
-        access_token : validToken
-      }
-      const id = 1
-      const result = await request(app).put(`/workers/${id}`).set(headers).send(bodyEdit)
-      expect(result.status).toBe(200)
-      expect(result.body).toHaveProperty("message", expect.any(String))
-    })
-  })
+        access_token: validToken,
+      };
+      const id = 1;
+      const result = await request(app)
+        .put(`/workers/${id}`)
+        .set(headers)
+        .send(bodyEdit);
+      expect(result.status).toBe(200);
+      expect(result.body).toHaveProperty("message", expect.any(String));
+    });
+  });
 
   describe("Edit profile success", () => {
     it("should get 404 with message Worker Not Found", async () => {
       const bodyEdit = {
-        fullName:"asep",
-        address:"bandung",
-        phoneNumber:"197238971"
-      }
+        fullName: "asep",
+        address: "bandung",
+        phoneNumber: "197238971",
+      };
       const headers = {
-        access_token : validToken
-      }
-      const id = 177
-      const result = await request(app).put(`/workers/${id}`).set(headers).send(bodyEdit)
-      expect(result.status).toBe(200)
-      expect(result.body).toHaveProperty("message", expect.any(String))
-    })
-  })
-})
+        access_token: validToken,
+      };
+      const id = 177;
+      const result = await request(app)
+        .put(`/workers/${id}`)
+        .set(headers)
+        .send(bodyEdit);
+      expect(result.status).toBe(200);
+      expect(result.body).toHaveProperty("message", expect.any(String));
+    });
+  });
+});

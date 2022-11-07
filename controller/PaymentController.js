@@ -42,7 +42,6 @@ class PaymentController {
         res.status(200).json({ transactionToken });
       });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }

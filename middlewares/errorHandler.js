@@ -28,18 +28,15 @@ const errorHandler = (err, req, res, next) => {
     case "PasswordRequired":
       res.status(400).json({ message: "Password is required" });
       break;
-    case "NotFound":
-      res.status(404).json({ message: "Worker not found" });
-      break;
     case "ProjectNotFound":
       res.status(404).json({ message: "Project not found" });
       break;
     case "CategoryNotFound":
       res.status(404).json({ message: "Category not found" });
       break;
-    case "ProjectIsActive":
-      res.status(403).json({ message: "Project is Active!" });
-      break;
+    // case "ProjectIsActive":
+    //   res.status(403).json({ message: "Project is Active!" });
+    //   break;
     default:
       res.status(500).json({ message: "Internal Server Error" });
       break;

@@ -13,13 +13,17 @@ beforeAll(async () => {
     phoneNumber: "98021902",
     address: "jauh banget",
   };
-  const user = await User.create(input);
+  const user = await request(app).post(`/users/register`).send(input);
   const category = await Category.create({ name: "tes" });
+  const categories = await Category.findAll();
+  console.log(categories);
   const login = await request(app).post("/users/login").send({
     email: input.email,
     password: input.password,
   });
   validToken = login.body.access_token;
+  const users = await User.findAll();
+  console.log(users);
   const project = await request(app)
     .post("/users/projects")
     .send({
@@ -32,7 +36,7 @@ beforeAll(async () => {
       UserId: 1,
       long: 1092,
       lat: 29010,
-      CategoryId: 1,
+      CategoryId: 3,
     })
     .set({ access_token: validToken });
 });
