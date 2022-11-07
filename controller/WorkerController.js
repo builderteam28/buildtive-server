@@ -1,4 +1,10 @@
-const { Worker, Category, Project, ProjectWorker } = require("../models");
+const {
+  Worker,
+  Category,
+  Project,
+  ProjectWorker,
+  WorkerCategory,
+} = require("../models");
 const { compare } = require("../helpers/bcrypt");
 const { sign } = require("../helpers/jwt");
 class WorkerController {
@@ -12,6 +18,7 @@ class WorkerController {
         address,
         birthDate,
         idNumber,
+        CategoryId,
       } = req.body;
       const newWorker = await Worker.create({
         email,
@@ -22,6 +29,10 @@ class WorkerController {
         address,
         idNumber,
       });
+      const newWorkerCategory = await WorkerCategory.create({
+        WorkerId: newWorker.id,
+        CategoryId,
+      });
       res.status(201).json({
         message: `Worker account with ${newWorker.email} successfully created`,
       });
@@ -31,7 +42,7 @@ class WorkerController {
   }
   static async login(req, res, next) {
     try {
-      const { email, password } = req.body;
+      const { email, password, DeviceId } = req.body;
       if (!email) throw { name: "EmailRequired" };
       if (!password) throw { name: "PasswordRequired" };
       const foundWorker = await Worker.findOne({
@@ -47,6 +58,13 @@ class WorkerController {
         email: foundWorker.email,
       };
       const token = sign(payload);
+      const updateDeviceId = await Worker.update({
+        DeviceId
+      }, {
+        where:{
+          email:foundWorker.email
+        }
+      });
       res.status(200).json({
         access_token: token,
         id: payload.id,

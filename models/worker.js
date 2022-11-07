@@ -107,7 +107,10 @@ module.exports = (sequelize, DataTypes) => {
             msg : "idNumber is required"
           }
         },
-      } 
+      },
+      DeviceId: {
+        type:DataTypes.STRING,
+      }
     },
     {
       sequelize,
