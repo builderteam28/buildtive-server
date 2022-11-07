@@ -29,17 +29,19 @@ class UserController {
           email,
         },
       });
+      // console.log(user)
       if (!user) throw { name: "Unauthorized" };
       const validatePassword = compare(password, user.password);
+      console.log(validatePassword)
       if (!validatePassword) throw { name: "Invalid email/password" };
       const payload = {
         id: user.id,
         email: user.email,
       };
       const access_token = sign(payload);
-      res.status(200).json({ access_token: access_token, id: user.id });
+      res.status(200).json({ access_token: access_token, id: user.id, fullName: user.fullName });
     } catch (error) {
-      console.log(error)
+      // console.log(error)
       next(error);
     }
   }

@@ -132,6 +132,7 @@ class ProjectController {
   static async declineWorker(req, res, next) {
     try {
       const { projectWorkerId: WorkerId } = req.params;
+      const { ProjectId } = req.body
       const result = await ProjectWorker.destroy({ where: { WorkerId } });
       res.status(200).json({ message: "Decline worker success" });
     } catch (error) {
