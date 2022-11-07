@@ -35,10 +35,54 @@ module.exports = (sequelize, DataTypes) => {
           }
         },
       },
-      password: DataTypes.STRING,
-      fullName: DataTypes.STRING,
-      phoneNumber: DataTypes.STRING,
-      address: DataTypes.STRING,
+      password:{
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: "Password Required",
+          },
+          notNull : {
+            msg : "Password Required"
+          }
+        },
+      },
+      fullName:{
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: "Fullname Required",
+          },
+          notNull : {
+            msg : "Fullname Required"
+          }
+        },
+      },
+      phoneNumber:{
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: "Phonenumber Required",
+          },
+          notNull : {
+            msg : "Phonenumber Required"
+          }
+        },
+      },
+      address: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: "Address Required",
+          },
+          notNull : {
+            msg : "Address Required"
+          }
+        },
+      },
       deviceId: DataTypes.STRING,
     },
     {
