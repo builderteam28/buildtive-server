@@ -50,7 +50,7 @@ class WorkerController {
       res.status(200).json({
         access_token: token,
         id: payload.id,
-        email: payload.email,
+        fullName: payload.fullName,
       });
     } catch (error) {
       next(error);
@@ -60,9 +60,10 @@ class WorkerController {
     try {
       const { id } = req.worker;
       const result = await Worker.findByPk(id);
-      if (!result) throw { name: "NotFound" };
+      if(!result) throw {name : "NotFound"}
       res.status(200).json(result);
     } catch (error) {
+      console.log(error)
       next(error);
     }
   }

@@ -160,16 +160,25 @@ describe("GET /workers/:id By Profile Id", () => {
   })
 
   describe("fail get by id", () => {
-    it("should returning status 404 with message Worker Not Found", async () => {
+    it("should returning status 401 with message Login first", async () => {
       const headers = {
-        access_token: validToken,
+        access_token: inValidToken,
       };
       const id = 177;
       const result = await request(app).get(`/workers/${id}`).set(headers);
-      expect(result.status).toBe(200);
-      expect(result.body).toHaveProperty("id", expect.any(Number));
-      expect(result.body).toHaveProperty("fullName", expect.any(String));
-      expect(result.body).toHaveProperty("email", expect.any(String));
+      expect(result.status).toBe(401);
+      expect(result.body).toHaveProperty("message", expect.any(String));
+    });
+  })
+  describe("fail get by id with using JWT generator have a same id", () => {
+    it("should returning status 401 with message Please login first", async () => {
+      const headers = {
+        access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImVtYWlsIjoiYXNlcEBtYWlsLmNvbSIsImlhdCI6MTY2NzgyODU3NX0.ajidWyEIRhHpGxJT_k8cOjQfwiLK-qTCSZv53Yu0YWI",
+      };
+      const id = 177;
+      const result = await request(app).get(`/workers/${id}`).set(headers);
+      expect(result.status).toBe(401);
+      expect(result.body).toHaveProperty("message", expect.any(String));
     });
   })
 });
@@ -193,18 +202,18 @@ describe("PUT /workers/:id Edit Profile", () => {
   })
 
   describe("Edit profile success", () => {
-    it("should get 404 with message Worker Not Found", async () => {
+    it("should get 401 with message Please login first", async () => {
       const bodyEdit = {
         fullName:"asep",
         address:"bandung",
         phoneNumber:"197238971"
       }
       const headers = {
-        access_token : validToken
+        access_token : inValidToken
       }
       const id = 177
       const result = await request(app).put(`/workers/${id}`).set(headers).send(bodyEdit)
-      expect(result.status).toBe(200)
+      expect(result.status).toBe(401)
       expect(result.body).toHaveProperty("message", expect.any(String))
     })
   })
