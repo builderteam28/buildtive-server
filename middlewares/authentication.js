@@ -7,7 +7,6 @@ const authenticationUser = async (req, res, next) => {
     if (!access_token) throw { name: "Invalid Token" };
     const payload = verify(access_token);
     const user = await User.findByPk(payload.id);
-    // console.log("Ini user", user)
     if (!user) throw { name: "Invalid Token" };
     req.user = {
       id: user.id,
@@ -15,7 +14,6 @@ const authenticationUser = async (req, res, next) => {
     };
     next();
   } catch (error) {
-    // console.log(error)
     next(error);
   }
 };

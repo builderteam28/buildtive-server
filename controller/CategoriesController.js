@@ -16,8 +16,10 @@ class CategoryController {
       const { id } = req.params;
       const category = await Category.findOne({
         where: { id },
-        include: {model : Worker, attributes: ["fullName", "email"]},
+        include: { model: Worker, attributes: ["fullName", "email"] },
       });
+      console.log(category)
+      if(!category) throw { name : "CategoryNotFound"}
       res.status(200).json(category);
     } catch (error) {
       next(error);

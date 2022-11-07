@@ -39,17 +39,17 @@ class UserController {
       const access_token = sign(payload);
       res.status(200).json({ access_token: access_token, id: user.id });
     } catch (error) {
-      // console.log(error)
+      console.log(error)
       next(error);
     }
   }
   static async profile(req, res, next) {
     try {
       const { id } = req.user;
+      if(!id) throw { name : "Unauthorized"}
       const result = await User.findByPk(id);
       res.status(200).json(result);
     } catch (error) {
-      // console.log(error, "<======Error get profile=============")
       next(error);
     }
   }
@@ -57,12 +57,16 @@ class UserController {
     try {
       const { id } = req.user;
       const { fullName, address, phoneNumber } = req.body;
+      if(!fullName) throw {name : "FullNameRequired" }
+      if(!address) throw {name : "AddressRequired" }
+      if(!phoneNumber) throw { name : "PhoneNumberRequired" }
       const update = await User.update(
         { fullName, address, phoneNumber },
         { where: { id } }
       );
       res.status(200).json({ message: "Profile updated" });
     } catch (error) {
+      console.log(error)
       next(error);
     }
   }

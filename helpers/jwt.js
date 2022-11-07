@@ -3,7 +3,6 @@ if (process.env.NODE_ENV !== "production") {
 }
 const jwt = require("jsonwebtoken");
 const secret = process.env.SECRET_KEY;
-console.log(secret)
 function sign(payload) {
   return jwt.sign(payload, secret);
 }

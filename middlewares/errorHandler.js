@@ -1,5 +1,5 @@
 const errorHandler = (err, req, res, next) => {
-  // console.log(err.name)
+  console.log(err.name)
   switch (err.name) {
     case "Unauthorized":
       res.status(401).json({ message: "Invalid email/password" });
@@ -16,6 +16,15 @@ const errorHandler = (err, req, res, next) => {
     case "EmailRequired":
       res.status(400).json({ message: "Email is required" });
       break;
+    case "FullNameRequired":
+      res.status(400).json({ message: "Fullname is required" });
+      break;
+    case "AddressRequired":
+      res.status(400).json({ message: "Address is required" });
+      break;
+    case "PhoneNumberRequired":
+      res.status(400).json({ message: "Phonenumber is required" });
+      break;
     case "PasswordRequired":
       res.status(400).json({ message: "Password is required" });
       break;
@@ -27,6 +36,9 @@ const errorHandler = (err, req, res, next) => {
       break;
     case "ProjectNotFound":
       res.status(404).json({ message: "Project not found" });
+      break;
+    case "CategoryNotFound":
+      res.status(404).json({ message: "Category not found" });
       break;
     case "ProjectIsActive":
       res.status(403).json({ message: "Project is Active!" });
