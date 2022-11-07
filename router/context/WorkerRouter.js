@@ -7,7 +7,6 @@ WorkerRouter.post("/login", WorkerController.login);
 WorkerRouter.post("/register", WorkerController.register);
 WorkerRouter.use(authenticationWorker);
 WorkerRouter.post("/:projectId", WorkerController.applyProject);
-WorkerRouter.delete("/projectWorkerId", WorkerController.cancelApply);
 WorkerRouter.get("/:id", WorkerController.profile);
 WorkerRouter.put("/:id", WorkerController.editProfile);
 

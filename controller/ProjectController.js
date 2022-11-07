@@ -92,7 +92,7 @@ class ProjectController {
       const { id } = req.params;
       const find = await Project.findByPk(id);
       if (!find) throw { name: "ProjectNotFound" };
-      if (find.status == "active") throw { name: "ProjectIsActive" };
+      if (find.status == "Active") throw { name: "ProjectIsActive" };
       await Project.destroy({ where: { id } });
       res.status(200).json({ message: "Deleted Project" });
     } catch (error) {
@@ -103,6 +103,10 @@ class ProjectController {
   static async acceptWorker(req, res, next) {
     try {
       const { workerId: WorkerId } = req.params;
+      const find = await ProjectWorker.findOne({
+        where: { status: "Active", WorkerId },
+      });
+      if (find) throw { name: "AlreadyActive" };
       const result = await ProjectWorker.update(
         {
           status: "Active",

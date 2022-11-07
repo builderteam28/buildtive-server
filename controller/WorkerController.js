@@ -78,6 +78,7 @@ class WorkerController {
     try {
       const { id } = req.worker;
       const result = await Worker.findByPk(id);
+      if (!result) throw { name: "NotFound" };
       res.status(200).json(result);
     } catch (error) {
       next(error);
@@ -87,13 +88,6 @@ class WorkerController {
     try {
       const { id } = req.worker;
       const { fullName, phoneNumber, address } = req.body;
-
-      const updatedWorkerProfile = await Worker.findByPk(id);
-
-      if (!updatedWorkerProfile) {
-        throw { name: "NotFound" };
-      }
-
       await Worker.update(
         {
           fullName,
@@ -104,10 +98,8 @@ class WorkerController {
           where: { id },
         }
       );
-
       res.status(200).json({ message: "Success to update profile" });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
@@ -121,20 +113,15 @@ class WorkerController {
     try {
       const { projectId: ProjectId } = req.params;
       const { id: WorkerId } = req.worker;
+      const find = await ProjectWorker.findOne({
+        where: { status: "Active", WorkerId },
+      });
+      if (find) throw { name: "AlreadyActive" };
       const result = await ProjectWorker.create({
         ProjectId,
         WorkerId,
       });
       res.status(201).json({ message: "Project applied" });
-    } catch (error) {
-      next(error);
-    }
-  }
-  static async cancelApply(req, res, next) {
-    try {
-      const { projectWorkerId: id } = req.params;
-      const result = await ProjectWorker.destroy({ where: { id } });
-      res.status(200).json({ message: "deleted worker from project" });
     } catch (error) {
       next(error);
     }

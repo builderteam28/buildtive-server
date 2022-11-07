@@ -1,5 +1,5 @@
 "use strict";
-const {hash} = require('../helpers/bcrypt')
+const { hash } = require("../helpers/bcrypt");
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Worker extends Model {
@@ -13,17 +13,16 @@ module.exports = (sequelize, DataTypes) => {
       Worker.belongsToMany(models.User, { through: models.Chat });
       Worker.belongsToMany(models.User, { through: models.Rating });
       Worker.belongsToMany(models.Project, { through: models.ProjectWorker });
-      Worker.belongsToMany(models.Project, { through: models.Payment });
       Worker.belongsToMany(models.Category, { through: models.WorkerCategory });
     }
   }
   Worker.init(
     {
-      email:{
+      email: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: {
-          msg : "Email already registered"
+          msg: "Email already registered",
         },
         validate: {
           isEmail: {
@@ -32,9 +31,9 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: {
             msg: "Email Required",
           },
-          notNull : {
-            msg : "Email Required"
-          }
+          notNull: {
+            msg: "Email Required",
+          },
         },
       },
       password: {
