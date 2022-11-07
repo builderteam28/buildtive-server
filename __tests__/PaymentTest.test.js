@@ -36,9 +36,11 @@ beforeAll(async () => {
       UserId: 1,
       long: 1092,
       lat: 29010,
-      CategoryId: 3,
+      CategoryId: 1,
     })
     .set({ access_token: validToken });
+  const projects = await Project.findAll();
+  console.log(projects);
 });
 
 afterAll(async () => {

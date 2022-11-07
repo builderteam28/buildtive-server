@@ -37,6 +37,7 @@ class WorkerController {
         message: `Worker account with ${newWorker.email} successfully created`,
       });
     } catch (error) {
+      console.log(error);
       next(error);
     }
   }
@@ -58,13 +59,16 @@ class WorkerController {
         email: foundWorker.email,
       };
       const token = sign(payload);
-      const updateDeviceId = await Worker.update({
-        DeviceId
-      }, {
-        where:{
-          email:foundWorker.email
+      const updateDeviceId = await Worker.update(
+        {
+          deviceId: DeviceId,
+        },
+        {
+          where: {
+            email: foundWorker.email,
+          },
         }
-      });
+      );
       res.status(200).json({
         access_token: token,
         id: payload.id,

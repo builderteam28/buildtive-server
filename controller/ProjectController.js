@@ -103,6 +103,7 @@ class ProjectController {
   static async acceptWorker(req, res, next) {
     try {
       const { workerId: WorkerId } = req.params;
+      const { ProjectId } = req.body;
       const find = await ProjectWorker.findOne({
         where: { status: "Active", WorkerId },
       });
@@ -113,6 +114,13 @@ class ProjectController {
         },
         { where: { WorkerId } }
       );
+      await ProjectWorker.destroy({
+        where: {
+          ProjectId,
+          WorkerId,
+          status: "Active",
+        },
+      });
       res.status(200).json({ message: "Applied worker into Project" });
     } catch (error) {
       next(error);

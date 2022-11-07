@@ -43,9 +43,9 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: {
             msg: "Password is required",
           },
-          notNull : {
-            msg : "Password is required"
-          }
+          notNull: {
+            msg: "Password is required",
+          },
         },
       },
       fullName: {
@@ -55,62 +55,62 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: {
             msg: "fullName is required",
           },
-          notNull : {
-            msg : "fullName is required"
-          }
+          notNull: {
+            msg: "fullName is required",
+          },
         },
       },
-      phoneNumber:{
-        type:DataTypes.STRING,
+      phoneNumber: {
+        type: DataTypes.STRING,
         allowNull: false,
         validate: {
           notEmpty: {
             msg: "phoneNumber is required",
           },
-          notNull : {
-            msg : "phoneNumber is required"
-          }
+          notNull: {
+            msg: "phoneNumber is required",
+          },
         },
       },
-      address:{
+      address: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
           notEmpty: {
             msg: "address is required",
           },
-          notNull : {
-            msg : "address is required"
-          }
+          notNull: {
+            msg: "address is required",
+          },
         },
       },
-      birthDate:{
+      birthDate: {
         type: DataTypes.DATE,
         allowNull: false,
         validate: {
           notEmpty: {
             msg: "birthDate is required",
           },
-          notNull : {
-            msg : "birthDate is required"
-          }
+          notNull: {
+            msg: "birthDate is required",
+          },
         },
       },
-      idNumber:{
-        type:DataTypes.STRING,
+      idNumber: {
+        type: DataTypes.STRING,
         allowNull: false,
         validate: {
           notEmpty: {
             msg: "idNumber is required",
           },
-          notNull : {
-            msg : "idNumber is required"
-          }
+          notNull: {
+            msg: "idNumber is required",
+          },
         },
       },
-      DeviceId: {
-        type:DataTypes.STRING,
-      }
+      deviceId: {
+        type: DataTypes.STRING,
+      },
     },
     {
       sequelize,
