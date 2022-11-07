@@ -160,16 +160,14 @@ describe("GET /workers/:id By Profile Id", () => {
   })
 
   describe("fail get by id", () => {
-    it("should returning status 404 with message Worker Not Found", async () => {
+    it("should returning status 401 with message Worker Not Found", async () => {
       const headers = {
-        access_token: validToken,
+        access_token: inValidToken,
       };
       const id = 177;
       const result = await request(app).get(`/workers/${id}`).set(headers);
-      expect(result.status).toBe(200);
-      expect(result.body).toHaveProperty("id", expect.any(Number));
-      expect(result.body).toHaveProperty("fullName", expect.any(String));
-      expect(result.body).toHaveProperty("email", expect.any(String));
+      expect(result.status).toBe(401);
+      expect(result.body).toHaveProperty("message", expect.any(String));
     });
   })
 });
