@@ -16,6 +16,18 @@ class ProjectController {
       next(error);
     }
   }
+  static async fetchAllProjectWorker(req, res, next) {
+    try {
+      const result = await Project.findAll({
+        where : {
+          status : "Inactive"
+        }
+      })
+      res.status(200).json(result)
+    } catch (error) {
+      next(error)
+    }
+  }
   static async getOne(req, res, next) {
     try {
       const { id } = req.params;
