@@ -92,7 +92,7 @@ describe("POST /users/login", () => {
     it("it should pass", async () => {
       const payloadLoginPass = {
         email: "RegisterTest@gmail.com",
-      password: "testestes"
+        password: "testestes",
       };
       const result = await request(app)
         .post("/users/login")
@@ -146,6 +146,20 @@ describe("POST /users/login", () => {
         .send(payloadLoginMiss);
       expect(result.status).toBe(400);
       expect(result.body).toHaveProperty("message", "Email is required");
+    });
+  });
+
+  describe("POST /users/login - password empty", () => {
+    it("it should miss", async () => {
+      const payloadLoginMiss = {
+        email: "testestes@mail.com",
+        password: "",
+      };
+      const result = await request(app)
+        .post("/users/login")
+        .send(payloadLoginMiss);
+      expect(result.status).toBe(400);
+      expect(result.body).toHaveProperty("message", "Password is required");
     });
   });
 });

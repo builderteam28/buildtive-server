@@ -20,18 +20,21 @@ beforeAll(async () => {
     password: input.password,
   });
   validToken = login.body.access_token;
-  const project = await Project.create({
-    name: "testing",
-    description: "testing",
-    address: "testing",
-    tenor: 3,
-    totalWorker: 3,
-    cost: 1672902,
-    UserId: 1,
-    long: 1092,
-    lat: 29010,
-    CategoryId: 1,
-  });
+  const project = await request(app)
+    .post("/users/projects")
+    .send({
+      name: "testing",
+      description: "testing",
+      address: "testing",
+      tenor: 3,
+      totalWorker: 3,
+      cost: 1672902,
+      UserId: 1,
+      long: 1092,
+      lat: 29010,
+      CategoryId: 1,
+    })
+    .set({ access_token: validToken });
 });
 
 afterAll(async () => {
