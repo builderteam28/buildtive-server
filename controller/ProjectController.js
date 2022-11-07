@@ -176,7 +176,10 @@ class ProjectController {
       const { id:WorkerId } = req.worker
       const result = await ProjectWorker.findAll({
         where : {
-          WorkerId
+          WorkerId,
+          status : {
+            [Op.not] : "Occupied"
+          }
         }
       })
       res.status(200).json(result)
