@@ -1,6 +1,7 @@
 const { Payment, User, ProjectWorker, sequelize } = require("../models");
 const midtransClient = require("midtrans-client");
 const serverKey = process.env.SERVER_KEY;
+// const serverKey = "SB-Mid-server-DsAOMgZPAeVSe7CwWtHe08Ag"
 
 class PaymentController {
   static async addPayment(req, res, next) {
@@ -10,8 +11,9 @@ class PaymentController {
       const { ProjectId, cost } = req.body;
       const allWorker = await ProjectWorker.findAll({
         where: { ProjectId },
-      });
-      let totalPay;
+      }); 
+      let totalPay = +cost * allWorker.length;
+      if(allWorker.length <= 1) totalPay = +cost
       let temp = [];
       // const [payment, created] = await Payment.findOrCreate({
       //   where: { ProjectId },
@@ -19,13 +21,12 @@ class PaymentController {
       //     ProjectId,
       //     amount: cost,
       //   },
-      // },{transaction: t});
+      // });
       allWorker.forEach((el) => {
-        totalPay += cost;
         temp.push({
           WorkerId: el.WorkerId,
           ProjectId,
-          amount: cost,
+          amount: +cost,
           status: "Paid",
         });
       });
@@ -51,13 +52,13 @@ class PaymentController {
           phone: user.phoneNumber,
         },
       };
-
-      snap.createTransaction(parameter).then((transaction) => {
-        // transaction token
-        res.status(200).json({ transaction });
-      });
+      const transaction = await snap.createTransaction(parameter);
+      let transactionToken = transaction.token;
+      console.log("ini token nya", transactionToken);
+      res.status(200).json({ transactionToken });
       await t.commit();
     } catch (error) {
+      console.log(error);
       await t.rollback();
       next(error);
     }
