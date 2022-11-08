@@ -8,6 +8,7 @@ const {
   ProjectWorker,
   WorkerCategory,
   User,
+  sequelize
 } = require("../models");
 class ProjectController {
   static fetchAll(req, res, next) {
@@ -50,13 +51,16 @@ class ProjectController {
             model: Category,
           },
           {
-            model: Worker,
-            attributes: { exclude: ["password", "createdAt", "updatedAt"] },
+            model: ProjectWorker,
+            where : {
+              status : "Accepted"
+            }
           },
         ],
       });
       res.status(200).json(result);
     } catch (error) {
+      console.log(error)
       next(error);
     }
   }
@@ -202,7 +206,7 @@ class ProjectController {
   static async fetchProjectWorker(req, res, next) {
     try {
       const { id: WorkerId } = req.worker;
-      console.log(WorkerId)
+      console.log(WorkerId);
       const result = await ProjectWorker.findAll({
         where: {
           WorkerId,
@@ -213,16 +217,23 @@ class ProjectController {
         include: [
           {
             model: Project,
-            include : {
-              model : Category,
-              
-            }
+            include: [
+              {
+                model: Category,
+              },
+              {
+                model: ProjectWorker,
+                where : {
+                  status : "Accepted"
+                }
+              }
+            ],
           },
         ],
       });
       res.status(200).json(result);
     } catch (error) {
-      console.log(error)
+      console.log(error);
       next(error);
     }
   }
