@@ -19,13 +19,22 @@ class ProjectController {
   static async fetchAllProjectWorker(req, res, next) {
     try {
       const result = await Project.findAll({
-        where : {
-          status : "Inactive"
-        }
-      })
-      res.status(200).json(result)
+        where: {
+          status: "Inactive",
+        },
+        include: [
+          {
+            model: Category,
+          },
+          {
+            model: Worker,
+            attributes: { exclude: ["password", "createdAt", "updatedAt"] },
+          },
+        ],
+      });
+      res.status(200).json(result);
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
   static async getOne(req, res, next) {
@@ -105,7 +114,9 @@ class ProjectController {
       const { id } = req.params;
       const find = await Project.findByPk(id);
       if (!find) throw { name: "ProjectNotFound" };
-      if (find.status == "Active") throw { name: "ProjectIsActive" };
+      if (find.status == "Active") {
+        throw { name: "ProjectIsActive" };
+      }
       await Project.destroy({ where: { id } });
       res.status(200).json({ message: "Deleted Project" });
     } catch (error) {
@@ -117,6 +128,15 @@ class ProjectController {
     try {
       const { workerId: WorkerId } = req.params;
       const { ProjectId } = req.body;
+      const project = await Project.findByPk(ProjectId);
+      if (project.status === "Active") throw { name: "ProjectIsActive" };
+      const get = await ProjectWorker.findAll({ where: { ProjectId } });
+      if (get.length === project.totalWorker) {
+        await Project.update(
+          { status: "Active" },
+          { where: { id: ProjectId } }
+        );
+      }
       const find = await ProjectWorker.findOne({
         where: { status: "Active", WorkerId },
       });
@@ -144,11 +164,27 @@ class ProjectController {
   static async declineWorker(req, res, next) {
     try {
       const { projectWorkerId: WorkerId } = req.params;
-      const { ProjectId } = req.body
-      const result = await ProjectWorker.destroy({ where: { WorkerId } });
+      const { ProjectId } = req.body;
+      const result = await ProjectWorker.destroy({ where: { WorkerId, ProjectId } });
       res.status(200).json({ message: "Decline worker success" });
     } catch (error) {
       next(error);
+    }
+  }
+  static async fetchProjectWorker( req, res, next) {
+    try {
+      const { id:WorkerId } = req.worker
+      const result = await ProjectWorker.findAll({
+        where : {
+          WorkerId,
+          status : {
+            [Op.not] : "Occupied"
+          }
+        }
+      })
+      res.status(200).json(result)
+    } catch (error) {
+      next(error)
     }
   }
 }

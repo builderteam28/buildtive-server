@@ -14,10 +14,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(router);
 app.use(errorHandler);
 
-app.listen(port, () => {
-  console.log(
-    `Final Project: \nPascal, Chossy, Fahmi\nBagus, Yosia\nOn Port: ${port}`
-  );
-});
+// app.listen(port, () => {
+//   console.log(
+//     `Final Project: \nPascal, Chossy, Fahmi\nBagus, Yosia\nOn Port: ${port}`
+//   );
+// });
 
 module.exports = app;

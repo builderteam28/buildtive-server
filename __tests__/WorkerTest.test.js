@@ -114,6 +114,8 @@ describe("POST /workers/login", () => {
         .send(loginPayloadSuccess);
       expect(result.status).toBe(200);
       expect(result.body).toHaveProperty("access_token", expect.any(String));
+      expect(result.body).toHaveProperty("id", expect.any(Number));
+      expect(result.body).toHaveProperty("fullName", expect.any(String));
     });
   });
   describe("POST Login Failed wrong Password", () => {
