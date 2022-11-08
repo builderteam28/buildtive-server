@@ -114,6 +114,8 @@ describe("POST /workers/login", () => {
         .send(loginPayloadSuccess);
       expect(result.status).toBe(200);
       expect(result.body).toHaveProperty("access_token", expect.any(String));
+      expect(result.body).toHaveProperty("id", expect.any(Number));
+      expect(result.body).toHaveProperty("fullName", expect.any(String));
     });
   });
   describe("POST Login Failed wrong Password", () => {
@@ -201,14 +203,14 @@ describe("PUT /workers/:id Edit Profile", () => {
         phoneNumber: "197238971",
       };
       const headers = {
-        access_token: validToken,
+        access_token: inValidToken,
       };
       const id = 177;
       const result = await request(app)
         .put(`/workers/${id}`)
         .set(headers)
         .send(bodyEdit);
-      expect(result.status).toBe(200);
+      expect(result.status).toBe(401);
       expect(result.body).toHaveProperty("message", expect.any(String));
     });
   });

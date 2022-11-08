@@ -108,7 +108,7 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
-      deviceId: {
+      DeviceId: {
         type: DataTypes.STRING,
       },
     },

@@ -37,7 +37,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      deviceId: Sequelize.STRING,
+      DeviceId: Sequelize.STRING,
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

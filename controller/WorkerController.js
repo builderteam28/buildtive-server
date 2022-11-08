@@ -37,7 +37,6 @@ class WorkerController {
         message: `Worker account with ${newWorker.email} successfully created`,
       });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
@@ -72,7 +71,7 @@ class WorkerController {
       res.status(200).json({
         access_token: token,
         id: payload.id,
-        email: payload.email,
+        fullName: foundWorker.fullName,
       });
     } catch (error) {
       next(error);
@@ -98,12 +97,12 @@ class WorkerController {
       res.status(200).json({ message: "Success to update profile" })
     );
   }
-  static async pushNotification(req, res, next) {
-    try {
-    } catch (error) {
-      next(error);
-    }
-  }
+  // static async pushNotification(req, res, next) {
+  //   try {
+  //   } catch (error) {
+  //     next(error);
+  //   }
+  // }
   static async applyProject(req, res, next) {
     try {
       const { projectId: ProjectId } = req.params;

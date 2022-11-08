@@ -124,7 +124,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
   Project.beforeCreate((project, opt) => {
-    project.status = "inactive";
+    project.status = "Inactive";
   });
   return Project;
 };

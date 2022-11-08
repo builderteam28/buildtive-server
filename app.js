@@ -6,7 +6,7 @@ const app = express();
 const cors = require("cors");
 const router = require("./router/index");
 const errorHandler = require("./middlewares/errorHandler");
-const port = 3000;
+const port = 3001;
 
 app.use(cors());
 app.use(express.json());
