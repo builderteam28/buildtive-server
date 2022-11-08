@@ -14,11 +14,11 @@ UserRouter.use(authenticationUser);
 UserRouter.get("/projects", ProjectController.fetchAll);
 UserRouter.post("/projects", ProjectController.postProject);
 UserRouter.get("/categories/:id", CategoryController.getOne);
-UserRouter.patch("/projects/:ProjectWorkerId", ProjectController.acceptWorker);
-// UserRouter.delete(
-//       "/projects/manageWorker/:projectWorkerId",
-//       ProjectController.declineWorker
-//     );
+UserRouter.patch("/projects/accept/:WorkerId", ProjectController.acceptWorker);
+UserRouter.patch(
+      "/projects/decline/:WorkerId",
+      ProjectController.declineWorker
+    );
 UserRouter.post("/projects/rate", RatingController.rate);
 UserRouter.get("/projects/:id", ProjectController.getOne);
 UserRouter.put("/projects/:id", ProjectController.editProject);

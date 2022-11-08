@@ -152,11 +152,13 @@ class ProjectController {
   }
   static async acceptWorker(req, res, next) {
     try {
-      const { workerId: WorkerId } = req.params;
+      const { WorkerId } = req.params;
       const { ProjectId } = req.body;
       const project = await Project.findByPk(ProjectId);
       if (project.status === "Active") throw { name: "ProjectIsActive" };
-      const get = await ProjectWorker.findAll({ where: { ProjectId } });
+      const get = await ProjectWorker.findAll({
+        where: { ProjectId, status: "Accepted" },
+      });
       if (get.length === project.totalWorker) {
         await Project.update(
           { status: "Active" },
@@ -196,11 +198,14 @@ class ProjectController {
   }
   static async declineWorker(req, res, next) {
     try {
-      const { projectWorkerId: WorkerId } = req.params;
+      const { WorkerId } = req.params;
       const { ProjectId } = req.body;
-      const result = await ProjectWorker.destroy({
-        where: { WorkerId, ProjectId },
-      });
+      const result = await ProjectWorker.update(
+        {
+          status: "Rejected",
+        },
+        { where: { WorkerId, ProjectId } }
+      );
       res.status(200).json({ message: "Decline worker success" });
     } catch (error) {
       next(error);
