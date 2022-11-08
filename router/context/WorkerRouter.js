@@ -11,7 +11,7 @@ WorkerRouter.get("/projects", ProjectController.fetchAllProjectWorker)
 WorkerRouter.get("/projects/:id", ProjectController.getOne)
 WorkerRouter.get("/appliedProject", ProjectController.fetchProjectWorker)
 WorkerRouter.post("/:projectId", WorkerController.applyProject);
-WorkerRouter.get("/:id", WorkerController.profile);
+WorkerRouter.get("/", WorkerController.profile);
 WorkerRouter.put("/:id", WorkerController.editProfile);
 
 module.exports = WorkerRouter;
