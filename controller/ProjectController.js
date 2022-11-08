@@ -3,6 +3,7 @@ const {
   Project,
   Worker,
   Payment,
+  Rating,
   Category,
   ProjectWorker,
   User,
@@ -208,6 +209,19 @@ class ProjectController {
         },
       });
       res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
+  }
+  static async WorkerDetail(req, res, next) {
+    try {
+      const { id } = req.params;
+      const result = await Worker.findOne({
+        where: { id },
+        attributes: { exclude: ["password"] },
+        include : [Category, Rating]
+      });
+      res.status(200).json(result)
     } catch (error) {
       next(error);
     }
