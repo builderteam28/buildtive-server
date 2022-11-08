@@ -440,3 +440,38 @@ describe("POST /users/projects", () => {
     });
   });
 });
+
+describe("UPDATE /users/projects/:id", () => {
+  it("success edit product", async () => {
+    const headers = {
+      access_token: validToken,
+    };
+    const payload = require("../data/db.json").projects[0];
+
+    const result = await request(app)
+      .put(`/users/projects/2`)
+      .set(headers)
+      .send(payload);
+
+    expect(result.status).toBe(200);
+    expect(result.body).toHaveProperty("message", `Project already updated`);
+  });
+  it("fail because project with id in params not found", async () => {
+    const headers = {
+      access_token: validToken,
+    };
+    const payload = require("../data/db.json").projects[0];
+
+    const result = await request(app)
+      .put(`/users/projects/9`)
+      .set(headers)
+      .send(payload);
+
+    expect(result.status).toBe(404);
+    expect(result.body).toHaveProperty("message", `Project not found`);
+  });
+});
+
+describe("GET accept worker", () => {
+  it("success accept worker", async () => {});
+});

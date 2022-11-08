@@ -7,14 +7,11 @@ const {
   ProjectWorker,
 } = require("../models");
 class ProjectController {
-  static async fetchAll(req, res, next) {
-    try {
-      const UserId = req.user.id;
-      const projects = Project.findAll({ where: { UserId } });
-      res.status(200).json(projects);
-    } catch (error) {
-      next(error);
-    }
+  static fetchAll(req, res, next) {
+    const UserId = req.user.id;
+    Project.findAll({ where: { UserId } }).then((projects) =>
+      res.status(200).json(projects)
+    );
   }
   static async fetchAllProjectWorker(req, res, next) {
     try {
@@ -98,6 +95,8 @@ class ProjectController {
     try {
       const { id } = req.params;
       const find = await Project.findByPk(id);
+      const projects = await Project.findAll();
+      console.log(find, projects, `<~~~`);
       if (!find) throw { name: "ProjectNotFound" };
       const { name, tenor, totalWorker, cost, status } = req.body;
       const result = await Project.update(

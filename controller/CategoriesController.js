@@ -1,15 +1,10 @@
 const { Category, Worker } = require("../models");
 class CategoryController {
-  static async fetchAll(req, res, next) {
-    try {
-      const categories = await Category.findAll({
-        order: [["id", "ASC"]],
-        include: [],
-      });
-      res.status(200).json(categories);
-    } catch (error) {
-      next(error);
-    }
+  static fetchAll(req, res, next) {
+    Category.findAll({
+      order: [["id", "ASC"]],
+      include: [],
+    }).then((categories) => res.status(200).json(categories));
   }
   static async getOne(req, res, next) {
     try {
