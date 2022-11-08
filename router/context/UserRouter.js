@@ -8,6 +8,7 @@ const RatingController = require("../../controller/RatingController");
 UserRouter.post("/register", UserController.register);
 UserRouter.post("/login", UserController.login);
 UserRouter.use(authenticationUser);
+UserRouter.get("/projects", ProjectController.fetchAll);
 UserRouter.post("/projects", ProjectController.postProject);
 UserRouter.patch("/projects/accept/:WorkerId", ProjectController.acceptWorker);
 UserRouter.patch(
