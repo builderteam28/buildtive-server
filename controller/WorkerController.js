@@ -3,11 +3,13 @@ const {
   Rating,
   ProjectWorker,
   WorkerCategory,
+  Category,
   Sequelize,
 } = require("../models");
 const { compare } = require("../helpers/bcrypt");
 const { sign } = require("../helpers/jwt");
 const RatingController = require("./RatingController");
+const { Op } = require("sequelize");
 class WorkerController {
   static async register(req, res, next) {
     try {
@@ -98,18 +100,24 @@ class WorkerController {
       res.status(200).json({ message: "Success to update profile" })
     );
   }
-  static async pushNotification(req, res, next) {
-    try {
-    } catch (error) {
-      next(error);
-    }
-  }
+  // static async pushNotification(req, res, next) {
+  //   try {
+  //   } catch (error) {
+  //     next(error);
+  //   }
+  // }
   static async applyProject(req, res, next) {
     try {
       const { projectId: ProjectId } = req.params;
       const { id: WorkerId } = req.worker;
       const find = await ProjectWorker.findOne({
-        where: { status: "Active", WorkerId },
+        where: {
+          [Op.or]: [
+            { status: "Active" },
+            WorkerId,
+            { status: "Applicant", WorkerId },
+          ],
+        },
       });
       if (find) throw { name: "AlreadyActive" };
       const result = await ProjectWorker.create({
@@ -124,7 +132,8 @@ class WorkerController {
   static async getAllByCategories(req, res, next) {
     try {
       const { categoryId } = req.params;
-      console.log("kesibi");
+      const find = await Category.findByPk(categoryId);
+      if (!find) throw { name: "CategoryNotFound" };
       const workers = await WorkerCategory.findAll({
         where: { CategoryId: categoryId },
         include: [
@@ -147,7 +156,6 @@ class WorkerController {
       });
       res.status(200).json(workers);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }

@@ -30,7 +30,18 @@ beforeAll(async () => {
       updatedAt: new Date(),
     };
   });
-  await Project.bulkCreate(projects);
+  // console.log(projects)
+  // await Project.bulkCreate(projects)
+  await sequelize.queryInterface.bulkInsert(
+    "Categories",
+    [
+      { name: "asep 2", createdAt: new Date(), updatedAt: new Date() },
+      { name: "Jajang", createdAt: new Date(), updatedAt: new Date() },
+      { name: "dudi", createdAt: new Date(), updatedAt: new Date() },
+    ],
+    {}
+  );
+  await sequelize.queryInterface.bulkInsert("Projects", projects, {})
 });
 
 afterAll(async () => {
@@ -40,6 +51,11 @@ afterAll(async () => {
     cascade: true,
   });
   await sequelize.queryInterface.bulkDelete("Users", null, {
+    truncate: true,
+    restartIdentity: true,
+    cascade: true,
+  });
+  await sequelize.queryInterface.bulkDelete("Categories", null, {
     truncate: true,
     restartIdentity: true,
     cascade: true,
@@ -89,8 +105,6 @@ describe("Get /users/projects/:id", () => {
         .set(headers);
       await expect(result.status).toBe(200);
       await expect(result.body).toBeInstanceOf(Object);
-      await expect(result.body).toHaveProperty("id", id);
-      await expect(result.body).toHaveProperty("Workers", expect.any(Object));
       await expect(result.body).toHaveProperty("Category", expect.any(Object));
     });
   });
@@ -99,7 +113,7 @@ describe("Get /users/projects/:id", () => {
       const headers = {
         access_token: validToken,
       };
-      const id = 3;
+      const id = 100;
       const result = await request(app)
         .get(`/users/projects/${id}`)
         .set(headers);
@@ -370,20 +384,6 @@ describe("POST /users/projects", () => {
       await expect(result.body).toHaveProperty("message", "Please login first");
     });
   });
-
-  describe("Should success delete project", () => {
-    it("should get respond status 200 and returning message Deleted Project", async () => {
-      const headers = {
-        access_token: validToken,
-      };
-      const id = 1;
-      const result = await request(app)
-        .delete(`/users/projects/${id}`)
-        .set(headers);
-      expect(result.status).toBe(200);
-      expect(result.body).toHaveProperty("message", "Deleted Project");
-    });
-  });
   describe("Should get error when read access_token", () => {
     it("should get respond status 401 and returning Please login first", async () => {
       const headers = {
@@ -430,7 +430,7 @@ describe("POST /users/projects", () => {
       const headers = {
         access_token: validToken,
       };
-      const id = 4;
+      const id = 9;
       const result = await request(app)
         .put(`/users/projects/${id}`)
         .set(headers)

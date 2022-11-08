@@ -37,9 +37,13 @@ class ProjectController {
           },
         },
       ],
-    }).then((projects) => {
-      res.status(200).json(projects);
-    });
+    })
+      .then((projects) => {
+        res.status(200).json(projects);
+      })
+      .catch((error) => {
+        next(error);
+      });
   }
   static async fetchAllProjectWorker(req, res, next) {
     try {
@@ -88,6 +92,7 @@ class ProjectController {
   }
   static async postProject(req, res, next) {
     try {
+      const { id:UserId } = req.user
       const {
         name,
         tenor,
@@ -105,7 +110,7 @@ class ProjectController {
         tenor,
         totalWorker,
         cost,
-        UserId: req.user.id,
+        UserId,
         CategoryId,
         long,
         lat,
@@ -132,20 +137,6 @@ class ProjectController {
         { where: { id } }
       );
       res.status(200).json({ message: "Project already updated" });
-    } catch (error) {
-      next(error);
-    }
-  }
-  static async deleteProject(req, res, next) {
-    try {
-      const { id } = req.params;
-      const find = await Project.findByPk(id);
-      if (!find) throw { name: "ProjectNotFound" };
-      if (find.status == "Active") {
-        throw { name: "ProjectIsActive" };
-      }
-      await Project.destroy({ where: { id } });
-      res.status(200).json({ message: "Deleted Project" });
     } catch (error) {
       next(error);
     }
