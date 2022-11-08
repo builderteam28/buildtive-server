@@ -11,9 +11,9 @@ class PaymentController {
       const { ProjectId, cost } = req.body;
       const allWorker = await ProjectWorker.findAll({
         where: { ProjectId },
-      }); 
+      });
       let totalPay = +cost * allWorker.length;
-      if(allWorker.length <= 1) totalPay = +cost
+      if (allWorker.length <= 1) totalPay = +cost;
       let temp = [];
       // const [payment, created] = await Payment.findOrCreate({
       //   where: { ProjectId },
@@ -53,12 +53,9 @@ class PaymentController {
         },
       };
       const transaction = await snap.createTransaction(parameter);
-      let transactionToken = transaction.token;
-      console.log("ini token nya", transactionToken);
-      res.status(200).json({ transactionToken });
+      res.status(200).json(transaction);
       await t.commit();
     } catch (error) {
-      console.log(error);
       await t.rollback();
       next(error);
     }

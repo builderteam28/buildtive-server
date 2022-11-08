@@ -81,8 +81,27 @@ class WorkerController {
     }
   }
   static async profile(req, res, next) {
-    const { id } = req.worker;
-    Worker.findByPk(id).then((profile) => res.status(200).json(profile));
+    try {
+      const { id } = req.worker;
+      const result = await Worker.findOne({
+        where: {
+          id,
+        },
+        include: {
+          model: Rating,
+          attributes: [
+            [Sequelize.fn("AVG", Sequelize.col("value")), "ratings"],
+          ],
+        },
+        group: [
+          "Ratings.ProjectId",
+          "Ratings.WorkedId"
+        ]
+      });
+      res.status(200).json(result)
+    } catch (error) {
+      next(error);
+    }
   }
   static async editProfile(req, res, next) {
     const { id } = req.worker;
