@@ -173,15 +173,19 @@ class ProjectController {
         },
         { where: { WorkerId } }
       );
-      await ProjectWorker.update({
-        where: {
-          ProjectId: {
-            [Op.not]: ProjectId,
-          },
-          WorkerId,
+      await ProjectWorker.update(
+        {
           status: "Occupied",
         },
-      });
+        {
+          where: {
+            ProjectId: {
+              [Op.not]: ProjectId,
+            },
+            WorkerId,
+          },
+        }
+      );
       res.status(200).json({ message: "Applied worker into Project" });
     } catch (error) {
       next(error);
