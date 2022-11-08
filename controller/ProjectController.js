@@ -255,7 +255,9 @@ class ProjectController {
           "Ratings.WorkerId",
         ],
       });
-      result.Ratings[0].dataValues.ratings = Number(result.Ratings[0].dataValues.ratings)
+      if(result.Ratings.length) {
+        result.Ratings[0].dataValues.ratings = Number(result.Ratings[0].dataValues.ratings)
+      }
       res.status(200).json(result);
     } catch (error) {
       next(error);

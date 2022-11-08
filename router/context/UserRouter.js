@@ -15,15 +15,15 @@ UserRouter.get("/projects", ProjectController.fetchAll);
 UserRouter.post("/projects", ProjectController.postProject);
 UserRouter.get("/categories/:id", CategoryController.getOne);
 UserRouter.patch("/projects/:ProjectWorkerId", ProjectController.acceptWorker);
-UserRouter.get("/workers/:categoryId", WorkerController.getAllByCategories);
 // UserRouter.delete(
 //       "/projects/manageWorker/:projectWorkerId",
 //       ProjectController.declineWorker
 //     );
-UserRouter.post("/projects/rate", RatingController.rate)
+UserRouter.post("/projects/rate", RatingController.rate);
 UserRouter.get("/projects/:id", ProjectController.getOne);
 UserRouter.put("/projects/:id", ProjectController.editProject);
-UserRouter.get("/workers/profile/:id", ProjectController.WorkerDetail)
+UserRouter.get("/workers/:categoryId", WorkerController.getAllByCategories);
+UserRouter.get("/workers/profile/:id", ProjectController.WorkerDetail);
 UserRouter.put("/:id", UserController.editProfile);
 UserRouter.get("/:id", UserController.profile);
 
