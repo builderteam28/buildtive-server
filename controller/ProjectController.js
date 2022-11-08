@@ -52,9 +52,6 @@ class ProjectController {
           },
           {
             model: ProjectWorker,
-            where : {
-              status : "Accepted"
-            }
           },
         ],
       });
@@ -127,7 +124,6 @@ class ProjectController {
       const { id } = req.params;
       const find = await Project.findByPk(id);
       const projects = await Project.findAll();
-      console.log(find, projects, `<~~~`);
       if (!find) throw { name: "ProjectNotFound" };
       const { name, tenor, totalWorker, cost, status } = req.body;
       const result = await Project.update(
@@ -223,9 +219,6 @@ class ProjectController {
               },
               {
                 model: ProjectWorker,
-                where : {
-                  status : "Accepted"
-                }
               }
             ],
           },
