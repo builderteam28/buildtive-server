@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
   ProjectWorker.beforeCreate((app, opt) => {
-    app.status = "applicant";
+    app.status = "Applicant";
   });
   return ProjectWorker;
 };
