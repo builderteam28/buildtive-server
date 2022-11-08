@@ -8,7 +8,7 @@
       "UserId": 1,
       "long": 2901,
       "lat": 291,
-      "categoryId": 1,
+      "CategoryId": 1,
       "description": "lorem ipsum",
       "address": "lorem ipsum",
       "tenor": 3
@@ -21,7 +21,7 @@
       "UserId": 1,
       "long": 2901,
       "lat": 291,
-      "categoryId": 2,
+      "CategoryId": 2,
       "description": "lorem ipsum",
       "address": "lorem ipsum",
       "tenor": 3
@@ -347,6 +347,15 @@
       "address": "1720 Menomonie Drive",
       "idNumber": "397-92-2048",
       "birthDate": "1992-07-01"
+    }
+  ],
+  "users": [
+    {
+      "email": "usertes@mail.com",
+      "password": "usertest",
+      "fullName": "user test",
+      "phoneNumber": "82109293",
+      "address": "04 Dahle Pass"
     }
   ]
 }
