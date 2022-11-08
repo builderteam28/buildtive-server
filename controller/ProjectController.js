@@ -66,11 +66,13 @@ class ProjectController {
         where: { id },
         include: [
           {
-            model: Worker,
-            attributes: { exclude: ["password", "createdAt", "updatedAt"] },
-          },
-          {
             model: Category,
+            include: {
+              model: Worker,
+              attributes: {
+                exclude: ["password"],
+              },
+            },
           },
         ],
       });
@@ -207,6 +209,14 @@ class ProjectController {
             [Op.not]: "Occupied",
           },
         },
+        include: [
+          {
+            model: Project,
+          },
+          {
+            model: Category
+          }
+        ],
       });
       res.status(200).json(result);
     } catch (error) {
@@ -219,9 +229,9 @@ class ProjectController {
       const result = await Worker.findOne({
         where: { id },
         attributes: { exclude: ["password"] },
-        include : [Category, Rating]
+        include: [Category, Rating],
       });
-      res.status(200).json(result)
+      res.status(200).json(result);
     } catch (error) {
       next(error);
     }
