@@ -214,7 +214,8 @@ class ProjectController {
           {
             model: Project,
             include : {
-              model : Category
+              model : Category,
+              
             }
           },
         ],
