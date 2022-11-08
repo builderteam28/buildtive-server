@@ -18,7 +18,6 @@ class CategoryController {
         where: { id },
         include: { model: Worker, attributes: ["fullName", "email"] },
       });
-      console.log(category)
       if(!category) throw { name : "CategoryNotFound"}
       res.status(200).json(category);
     } catch (error) {

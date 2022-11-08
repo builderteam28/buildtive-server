@@ -165,7 +165,7 @@ class ProjectController {
     try {
       const { projectWorkerId: WorkerId } = req.params;
       const { ProjectId } = req.body;
-      const result = await ProjectWorker.destroy({ where: { WorkerId } });
+      const result = await ProjectWorker.destroy({ where: { WorkerId, ProjectId } });
       res.status(200).json({ message: "Decline worker success" });
     } catch (error) {
       next(error);

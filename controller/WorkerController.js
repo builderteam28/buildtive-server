@@ -37,7 +37,6 @@ class WorkerController {
         message: `Worker account with ${newWorker.email} successfully created`,
       });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
@@ -107,12 +106,12 @@ class WorkerController {
       next(error);
     }
   }
-  static async pushNotification(req, res, next) {
-    try {
-    } catch (error) {
-      next(error);
-    }
-  }
+  // static async pushNotification(req, res, next) {
+  //   try {
+  //   } catch (error) {
+  //     next(error);
+  //   }
+  // }
   static async applyProject(req, res, next) {
     try {
       const { projectId: ProjectId } = req.params;
