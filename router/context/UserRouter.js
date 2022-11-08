@@ -4,6 +4,7 @@ const { authenticationUser } = require("../../middlewares/authentication");
 const ProjectController = require("../../controller/ProjectController");
 const CategoryController = require("../../controller/CategoriesController");
 const WorkerController = require("../../controller/WorkerController");
+const RatingController = require("../../controller/RatingController");
 
 UserRouter.post("/register", UserController.register);
 UserRouter.post("/login", UserController.login);
@@ -19,9 +20,10 @@ UserRouter.get("/workers/:categoryId", WorkerController.getAllByCategories);
 //       "/projects/manageWorker/:projectWorkerId",
 //       ProjectController.declineWorker
 //     );
+UserRouter.post("/projects/rate", RatingController.rate)
 UserRouter.get("/projects/:id", ProjectController.getOne);
 UserRouter.put("/projects/:id", ProjectController.editProject);
-UserRouter.get("/workers/:id", ProjectController.WorkerDetail)
+UserRouter.get("/workers/profile/:id", ProjectController.WorkerDetail)
 UserRouter.put("/:id", UserController.editProfile);
 UserRouter.get("/:id", UserController.profile);
 

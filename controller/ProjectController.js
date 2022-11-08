@@ -8,7 +8,8 @@ const {
   ProjectWorker,
   WorkerCategory,
   User,
-  sequelize
+  sequelize,
+  Sequelize,
 } = require("../models");
 class ProjectController {
   static fetchAll(req, res, next) {
@@ -57,7 +58,6 @@ class ProjectController {
       });
       res.status(200).json(result);
     } catch (error) {
-      console.log(error)
       next(error);
     }
   }
@@ -80,7 +80,6 @@ class ProjectController {
       if (!project) throw { name: "ProjectNotFound" };
       res.status(200).json(project);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
@@ -146,7 +145,6 @@ class ProjectController {
       await Project.destroy({ where: { id } });
       res.status(200).json({ message: "Deleted Project" });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
@@ -219,14 +217,13 @@ class ProjectController {
               },
               {
                 model: ProjectWorker,
-              }
+              },
             ],
           },
         ],
       });
       res.status(200).json(result);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
@@ -236,8 +233,29 @@ class ProjectController {
       const result = await Worker.findOne({
         where: { id },
         attributes: { exclude: ["password"] },
-        include: [Category, Rating],
+        include: [
+          {
+            model: WorkerCategory,
+            include: {
+              model: Category,
+            },
+          },
+          {
+            model: Rating,
+            attributes: [
+              [Sequelize.fn("AVG", Sequelize.col("value")), "ratings"],
+            ],
+          },
+        ],
+        group: [
+          "Worker.id",
+          "WorkerCategories.id",
+          "WorkerCategories->Category.id",
+          "Ratings.ProjectId",
+          "Ratings.WorkerId",
+        ],
       });
+      result.Ratings[0].dataValues.ratings = Number(result.Ratings[0].dataValues.ratings)
       res.status(200).json(result);
     } catch (error) {
       next(error);

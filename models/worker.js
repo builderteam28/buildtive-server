@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       Worker.belongsToMany(models.User, { through: models.Chat });
       Worker.belongsToMany(models.User, { through: models.Rating });
       // Worker.belongsToMany(models.Project, { through: models.ProjectWorker });
+      Worker.hasMany(models.Rating, {foreignKey : "WorkerId"})
       Worker.hasMany(models.WorkerCategory);
       Worker.hasMany(models.ProjectWorker);
     }
