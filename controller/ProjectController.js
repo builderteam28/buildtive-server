@@ -164,12 +164,12 @@ class ProjectController {
         );
       }
       const find = await ProjectWorker.findOne({
-        where: { status: "Active", WorkerId },
+        where: { status: "Accepted", WorkerId },
       });
       if (find) throw { name: "AlreadyActive" };
       const result = await ProjectWorker.update(
         {
-          status: "Active",
+          status: "Accepted",
         },
         { where: { WorkerId } }
       );
@@ -181,6 +181,9 @@ class ProjectController {
           where: {
             ProjectId: {
               [Op.not]: ProjectId,
+            },
+            status: {
+              [Op.not]: "Completed",
             },
             WorkerId,
           },
