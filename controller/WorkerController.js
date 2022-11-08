@@ -120,6 +120,22 @@ class WorkerController {
       next(error);
     }
   }
+  static async getAllByCategories(req, res, next) {
+    try {
+      const { categoryId } = req.params;
+      const workers = await WorkerCategory.findAll({
+        where: { CategoryId: categoryId },
+        include: [
+          {
+            model: Worker,
+          },
+        ],
+      });
+      res.status(200).json(workers);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 module.exports = WorkerController;
