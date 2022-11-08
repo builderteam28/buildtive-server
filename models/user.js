@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         unique: {
-          msg : "Email already registered"
+          msg: "Email already registered",
         },
         validate: {
           isEmail: {
@@ -30,45 +30,45 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: {
             msg: "Email Required",
           },
-          notNull : {
-            msg : "Email Required"
-          }
+          notNull: {
+            msg: "Email Required",
+          },
         },
       },
-      password:{
+      password: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
           notEmpty: {
             msg: "Password Required",
           },
-          notNull : {
-            msg : "Password Required"
-          }
+          notNull: {
+            msg: "Password Required",
+          },
         },
       },
-      fullName:{
+      fullName: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
           notEmpty: {
             msg: "Fullname Required",
           },
-          notNull : {
-            msg : "Fullname Required"
-          }
+          notNull: {
+            msg: "Fullname Required",
+          },
         },
       },
-      phoneNumber:{
+      phoneNumber: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
           notEmpty: {
             msg: "Phonenumber Required",
           },
-          notNull : {
-            msg : "Phonenumber Required"
-          }
+          notNull: {
+            msg: "Phonenumber Required",
+          },
         },
       },
       address: {
@@ -78,12 +78,11 @@ module.exports = (sequelize, DataTypes) => {
           notEmpty: {
             msg: "Address Required",
           },
-          notNull : {
-            msg : "Address Required"
-          }
+          notNull: {
+            msg: "Address Required",
+          },
         },
       },
-      deviceId: DataTypes.STRING,
     },
     {
       sequelize,

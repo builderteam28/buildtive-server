@@ -5,13 +5,37 @@ const {
   Payment,
   Category,
   ProjectWorker,
+  User,
 } = require("../models");
 class ProjectController {
   static fetchAll(req, res, next) {
     const UserId = req.user.id;
-    Project.findAll({ where: { UserId } }).then((projects) =>
-      res.status(200).json(projects)
-    );
+    Project.findAll({
+      where: { UserId },
+      include: [
+        {
+          model: User,
+          attributes: ["email", "fullName"],
+        },
+        {
+          model: Payment,
+        },
+        {
+          model: Category,
+          attributes: ["name"],
+        },
+        {
+          model: ProjectWorker,
+          attributes: ["status", "ProjectId", "WorkerId"],
+          include: {
+            model: Worker,
+            attributes: ["fullName"],
+          },
+        },
+      ],
+    }).then((projects) => {
+      res.status(200).json(projects);
+    });
   }
   static async fetchAllProjectWorker(req, res, next) {
     try {
@@ -164,26 +188,28 @@ class ProjectController {
     try {
       const { projectWorkerId: WorkerId } = req.params;
       const { ProjectId } = req.body;
-      const result = await ProjectWorker.destroy({ where: { WorkerId, ProjectId } });
+      const result = await ProjectWorker.destroy({
+        where: { WorkerId, ProjectId },
+      });
       res.status(200).json({ message: "Decline worker success" });
     } catch (error) {
       next(error);
     }
   }
-  static async fetchProjectWorker( req, res, next) {
+  static async fetchProjectWorker(req, res, next) {
     try {
-      const { id:WorkerId } = req.worker
+      const { id: WorkerId } = req.worker;
       const result = await ProjectWorker.findAll({
-        where : {
+        where: {
           WorkerId,
-          status : {
-            [Op.not] : "Occupied"
-          }
-        }
-      })
-      res.status(200).json(result)
+          status: {
+            [Op.not]: "Occupied",
+          },
+        },
+      });
+      res.status(200).json(result);
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
 }

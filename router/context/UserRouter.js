@@ -7,10 +7,11 @@ const CategoryController = require("../../controller/CategoriesController");
 UserRouter.post("/register", UserController.register);
 UserRouter.post("/login", UserController.login);
 UserRouter.get("/categories", CategoryController.fetchAll);
-UserRouter.get("/categories/:id", CategoryController.getOne);
+
 UserRouter.use(authenticationUser);
 UserRouter.get("/projects", ProjectController.fetchAll);
 UserRouter.post("/projects", ProjectController.postProject);
+UserRouter.get("/categories/:id", CategoryController.getOne);
 UserRouter.patch("/projects/:ProjectWorkerId", ProjectController.acceptWorker);
 // UserRouter.delete(
 //   "/projects/manageWorker/:projectWorkerId",
