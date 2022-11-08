@@ -6,14 +6,11 @@ const {
   ProjectWorker,
 } = require("../models");
 class ProjectController {
-  static async fetchAll(req, res, next) {
-    try {
-      const UserId = req.user.id;
-      const projects = Project.findAll({ where: { UserId } });
-      res.status(200).json(projects);
-    } catch (error) {
-      next(error);
-    }
+  static fetchAll(req, res, next) {
+    const UserId = req.user.id;
+    Project.findAll({ where: { UserId } }).then((projects) =>
+      res.status(200).json(projects)
+    );
   }
   static async getOne(req, res, next) {
     try {
@@ -76,6 +73,8 @@ class ProjectController {
     try {
       const { id } = req.params;
       const find = await Project.findByPk(id);
+      const projects = await Project.findAll();
+      console.log(find, projects, `<~~~`);
       if (!find) throw { name: "ProjectNotFound" };
       const { name, tenor, totalWorker, cost, status } = req.body;
       const result = await Project.update(
@@ -87,54 +86,46 @@ class ProjectController {
       next(error);
     }
   }
-  static async deleteProject(req, res, next) {
-    try {
-      const { id } = req.params;
-      const find = await Project.findByPk(id);
-      if (!find) throw { name: "ProjectNotFound" };
-      if (find.status == "Active") throw { name: "ProjectIsActive" };
-      await Project.destroy({ where: { id } });
-      res.status(200).json({ message: "Deleted Project" });
-    } catch (error) {
-      console.log(error);
-      next(error);
-    }
-  }
-  static async acceptWorker(req, res, next) {
-    try {
-      const { workerId: WorkerId } = req.params;
-      const { ProjectId } = req.body;
-      const find = await ProjectWorker.findOne({
-        where: { status: "Active", WorkerId },
-      });
-      if (find) throw { name: "AlreadyActive" };
-      const result = await ProjectWorker.update(
-        {
-          status: "Active",
-        },
-        { where: { WorkerId } }
-      );
-      await ProjectWorker.destroy({
-        where: {
-          ProjectId,
-          WorkerId,
-          status: "Active",
-        },
-      });
-      res.status(200).json({ message: "Applied worker into Project" });
-    } catch (error) {
-      next(error);
-    }
-  }
-  static async declineWorker(req, res, next) {
-    try {
-      const { projectWorkerId: WorkerId } = req.params;
-      const result = await ProjectWorker.destroy({ where: { WorkerId } });
-      res.status(200).json({ message: "Decline worker success" });
-    } catch (error) {
-      next(error);
-    }
-  }
+
+  // static async acceptWorker(req, res, next) {
+  //   try {
+  //     const { ProjectWorkerId } = req.params;
+  //     const find = await ProjectWorker.findByPk(ProjectWorkerId);
+  //     if (find.status == "Applicant") {
+  //       await ProjectWorker.update(
+  //         {
+  //           status: "Active",
+  //         },
+  //         { where: { WorkerId: find.WorkerId } }
+  //       );
+  //       await ProjectWorker.update(
+  //         {
+  //           status: "Occupied",
+  //         },
+  //         {
+  //           where: {
+  //             WorkerId: find.WorkerId,
+  //             status: "Applicant",
+  //           },
+  //         }
+  //       );
+  //       return res.status(200).json({ message: "Applied worker into Project" });
+  //     }
+  //     if (find.status == "Active") throw { name: "AlreadyActive" };
+  //     if (find.status == "Occupied") throw { name: "occupied" };
+  //   } catch (error) {
+  //     next(error);
+  //   }
+  // }
+  // static async declineWorker(req, res, next) {
+  //   try {
+  //     const { projectWorkerId: WorkerId } = req.params;
+  //     const result = await ProjectWorker.destroy({ where: { WorkerId } });
+  //     res.status(200).json({ message: "Decline worker success" });
+  //   } catch (error) {
+  //     next(error);
+  //   }
+  // }
 }
 
 module.exports = ProjectController;

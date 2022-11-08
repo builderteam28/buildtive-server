@@ -26,6 +26,14 @@ describe("GET CATEGORIES BY ID /users/categories/:id - Include Worker", () => {
       cascade: true,
     });
   });
+
+  afterAll(async () => {
+    await sequelize.queryInterface.bulkDelete("Categories", null, {
+      truncate: true,
+      restartIdentity: true,
+      cascade: true,
+    });
+  });
   it("should be send data category include worker by id", async () => {
     const id = 1;
     const result = await request(app).get(`/users/categories/${id}`);

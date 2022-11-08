@@ -79,33 +79,24 @@ class WorkerController {
     }
   }
   static async profile(req, res, next) {
-    try {
-      const { id } = req.worker;
-      const result = await Worker.findByPk(id);
-      if (!result) throw { name: "NotFound" };
-      res.status(200).json(result);
-    } catch (error) {
-      next(error);
-    }
+    const { id } = req.worker;
+    Worker.findByPk(id).then((profile) => res.status(200).json(profile));
   }
   static async editProfile(req, res, next) {
-    try {
-      const { id } = req.worker;
-      const { fullName, phoneNumber, address } = req.body;
-      await Worker.update(
-        {
-          fullName,
-          phoneNumber,
-          address,
-        },
-        {
-          where: { id },
-        }
-      );
-      res.status(200).json({ message: "Success to update profile" });
-    } catch (error) {
-      next(error);
-    }
+    const { id } = req.worker;
+    const { fullName, phoneNumber, address } = req.body;
+    Worker.update(
+      {
+        fullName,
+        phoneNumber,
+        address,
+      },
+      {
+        where: { id },
+      }
+    ).then((message) =>
+      res.status(200).json({ message: "Success to update profile" })
+    );
   }
   static async pushNotification(req, res, next) {
     try {

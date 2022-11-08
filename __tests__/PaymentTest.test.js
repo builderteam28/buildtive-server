@@ -22,8 +22,6 @@ beforeAll(async () => {
     password: input.password,
   });
   validToken = login.body.access_token;
-  const users = await User.findAll();
-  console.log(users);
   const project = await request(app)
     .post("/users/projects")
     .send({
@@ -36,7 +34,7 @@ beforeAll(async () => {
       UserId: 1,
       long: 1092,
       lat: 29010,
-      CategoryId: 1,
+      CategoryId: 3,
     })
     .set({ access_token: validToken });
   const projects = await Project.findAll();

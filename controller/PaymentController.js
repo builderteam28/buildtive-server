@@ -46,18 +46,10 @@ class PaymentController {
     }
   }
   static async editStatusPayment(req, res, next) {
-    try {
-      const { ProjectId } = req.params;
-
-      const edited = await Payment.update(
-        { status: "Paid" },
-        { where: { ProjectId } }
-      );
-
-      res.status(200).json({ message: "payment paid" });
-    } catch (error) {
-      next(error);
-    }
+    const { ProjectId } = req.params;
+    Payment.update({ status: "Paid" }, { where: { ProjectId } }).then(
+      (message) => res.status(200).json({ message: "payment paid" })
+    );
   }
 }
 
