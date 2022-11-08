@@ -6,6 +6,7 @@ const {
   Rating,
   Category,
   ProjectWorker,
+  WorkerCategory,
   User,
 } = require("../models");
 class ProjectController {
@@ -68,10 +69,8 @@ class ProjectController {
           {
             model: Category,
             include: {
-              model: Worker,
-              attributes: {
-                exclude: ["password"],
-              },
+              model: WorkerCategory,
+              include: { model: Worker, attributes: { exclude: ["password"] } },
             },
           },
         ],
@@ -80,6 +79,7 @@ class ProjectController {
       if (!project) throw { name: "ProjectNotFound" };
       res.status(200).json(project);
     } catch (error) {
+      console.log(error);
       next(error);
     }
   }
@@ -202,6 +202,7 @@ class ProjectController {
   static async fetchProjectWorker(req, res, next) {
     try {
       const { id: WorkerId } = req.worker;
+      console.log(WorkerId)
       const result = await ProjectWorker.findAll({
         where: {
           WorkerId,
@@ -212,14 +213,15 @@ class ProjectController {
         include: [
           {
             model: Project,
+            include : {
+              model : Category
+            }
           },
-          {
-            model: Category
-          }
         ],
       });
       res.status(200).json(result);
     } catch (error) {
+      console.log(error)
       next(error);
     }
   }
