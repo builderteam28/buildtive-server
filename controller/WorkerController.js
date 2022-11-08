@@ -106,12 +106,12 @@ class WorkerController {
       next(error);
     }
   }
-  // static async pushNotification(req, res, next) {
-  //   try {
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // }
+  static async pushNotification(req, res, next) {
+    try {
+    } catch (error) {
+      next(error);
+    }
+  }
   static async applyProject(req, res, next) {
     try {
       const { projectId: ProjectId } = req.params;
