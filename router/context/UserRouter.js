@@ -14,11 +14,12 @@ UserRouter.post("/projects", ProjectController.postProject);
 UserRouter.get("/categories/:id", CategoryController.getOne);
 UserRouter.patch("/projects/:ProjectWorkerId", ProjectController.acceptWorker);
 // UserRouter.delete(
-//   "/projects/manageWorker/:projectWorkerId",
-//   ProjectController.declineWorker
-// );
+//       "/projects/manageWorker/:projectWorkerId",
+//       ProjectController.declineWorker
+//     );
 UserRouter.get("/projects/:id", ProjectController.getOne);
 UserRouter.put("/projects/:id", ProjectController.editProject);
+UserRouter.get("/workers/:id", ProjectController.WorkerDetail)
 UserRouter.put("/:id", UserController.editProfile);
 UserRouter.get("/:id", UserController.profile);
 

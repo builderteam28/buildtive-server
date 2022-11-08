@@ -58,9 +58,9 @@ class WorkerController {
         email: foundWorker.email,
       };
       const token = sign(payload);
-      const updateDeviceId = await Worker.update(
+      await Worker.update(
         {
-          deviceId: DeviceId,
+          DeviceId: DeviceId,
         },
         {
           where: {
@@ -92,17 +92,18 @@ class WorkerController {
       },
       {
         where: { id },
+        include: [Rating],
       }
     ).then((message) =>
       res.status(200).json({ message: "Success to update profile" })
     );
   }
-  // static async pushNotification(req, res, next) {
-  //   try {
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // }
+  static async pushNotification(req, res, next) {
+    try {
+    } catch (error) {
+      next(error);
+    }
+  }
   static async applyProject(req, res, next) {
     try {
       const { projectId: ProjectId } = req.params;
