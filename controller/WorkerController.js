@@ -92,7 +92,6 @@ class WorkerController {
       },
       {
         where: { id },
-        include: [Rating],
       }
     ).then((message) =>
       res.status(200).json({ message: "Success to update profile" })
