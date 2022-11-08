@@ -12,8 +12,9 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Worker.belongsToMany(models.User, { through: models.Chat });
       Worker.belongsToMany(models.User, { through: models.Rating });
-      Worker.belongsToMany(models.Project, { through: models.ProjectWorker });
+      // Worker.belongsToMany(models.Project, { through: models.ProjectWorker });
       Worker.belongsToMany(models.Category, { through: models.WorkerCategory });
+      Worker.hasMany(models.ProjectWorker);
     }
   }
   Worker.init(
@@ -108,7 +109,7 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
-      DeviceId: {
+      deviceId: {
         type: DataTypes.STRING,
       },
     },

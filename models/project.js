@@ -11,9 +11,10 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Project.belongsTo(models.Category);
       Project.hasOne(models.Payment);
-      Project.belongsToMany(models.Worker, { through: models.ProjectWorker });
+      // Project.belongsToMany(models.Worker, { through: models.ProjectWorker });
       Project.belongsToMany(models.Worker, { through: models.Rating });
       Project.belongsTo(models.User);
+      Project.hasMany(models.ProjectWorker);
     }
   }
   Project.init(

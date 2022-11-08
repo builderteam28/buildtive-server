@@ -15,6 +15,12 @@ module.exports = (sequelize, DataTypes) => {
   }
   ProjectWorker.init(
     {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: DataTypes.INTEGER,
+      },
       status: DataTypes.STRING,
       ProjectId: DataTypes.INTEGER,
       WorkerId: DataTypes.INTEGER,
@@ -25,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
   ProjectWorker.beforeCreate((app, opt) => {
-    app.status = "applicant"
-  })
+    app.status = "applicant";
+  });
   return ProjectWorker;
 };
