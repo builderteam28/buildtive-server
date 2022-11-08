@@ -1,12 +1,13 @@
 const {
   Worker,
-  Category,
-  Project,
+  Rating,
   ProjectWorker,
   WorkerCategory,
+  Sequelize,
 } = require("../models");
 const { compare } = require("../helpers/bcrypt");
 const { sign } = require("../helpers/jwt");
+const RatingController = require("./RatingController");
 class WorkerController {
   static async register(req, res, next) {
     try {
@@ -123,16 +124,30 @@ class WorkerController {
   static async getAllByCategories(req, res, next) {
     try {
       const { categoryId } = req.params;
+      console.log("kesibi");
       const workers = await WorkerCategory.findAll({
         where: { CategoryId: categoryId },
         include: [
           {
             model: Worker,
+            include: {
+              model: Rating,
+              attributes: [
+                [Sequelize.fn("AVG", Sequelize.col("value")), "ratings"],
+              ],
+            },
           },
+        ],
+        group: [
+          "WorkerCategory.id",
+          "Worker.id",
+          "Worker->Ratings.ProjectId",
+          "Worker->Ratings.WorkerId",
         ],
       });
       res.status(200).json(workers);
     } catch (error) {
+      console.log(error);
       next(error);
     }
   }

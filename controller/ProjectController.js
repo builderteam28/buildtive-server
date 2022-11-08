@@ -69,9 +69,12 @@ class ProjectController {
         include: [
           {
             model: Category,
+          },
+          {
+            model: ProjectWorker,
             include: {
-              model: WorkerCategory,
-              include: { model: Worker, attributes: { exclude: ["password"] } },
+              model: Worker,
+              attributes: { exclude: ["password"] },
             },
           },
         ],
@@ -90,7 +93,6 @@ class ProjectController {
         tenor,
         totalWorker,
         cost,
-        UserId,
         CategoryId,
         long,
         lat,
@@ -103,7 +105,7 @@ class ProjectController {
         tenor,
         totalWorker,
         cost,
-        UserId,
+        UserId: req.user.id,
         CategoryId,
         long,
         lat,
@@ -244,6 +246,7 @@ class ProjectController {
             model: Rating,
             attributes: [
               [Sequelize.fn("AVG", Sequelize.col("value")), "ratings"],
+              [sequelize.fn("COUNT", Sequelize.col("value")), "reviews"],
             ],
           },
         ],
@@ -255,8 +258,13 @@ class ProjectController {
           "Ratings.WorkerId",
         ],
       });
-      if(result.Ratings.length) {
-        result.Ratings[0].dataValues.ratings = Number(result.Ratings[0].dataValues.ratings)
+      if (result.Ratings.length) {
+        result.Ratings[0].dataValues.ratings = Number(
+          result.Ratings[0].dataValues.ratings
+        );
+        result.Ratings[0].dataValues.reviews = Number(
+          result.Ratings[0].dataValues.reviews
+        );
       }
       res.status(200).json(result);
     } catch (error) {
