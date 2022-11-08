@@ -83,23 +83,57 @@ class WorkerController {
   static async profile(req, res, next) {
     try {
       const { id } = req.worker;
-      const result = await Worker.findOne({
+      let result = await Worker.findOne({
         where: {
           id,
         },
-        include: {
-          model: Rating,
-          attributes: [
-            [Sequelize.fn("AVG", Sequelize.col("value")), "ratings"],
-          ],
-        },
+        include: [
+          {
+            model: Rating,
+            attributes: [
+              [Sequelize.fn("AVG", Sequelize.col("value")), "ratings"],
+            ],
+          },
+          {
+            model: WorkerCategory,
+            include: {
+              model: Category,
+              attributes: ["name"],
+            },
+          },
+        ],
         group: [
+          "Worker.id",
           "Ratings.ProjectId",
-          "Ratings.WorkedId"
-        ]
+          "Ratings.WorkerId",
+          "WorkerCategories.id",
+          "WorkerCategories->Category.id",
+        ],
       });
-      res.status(200).json(result)
+      // const asep = {
+      //   ...result,
+      //   WorkerCategories : result.WorkerCategories[0].dataValues.Category.name
+      // }
+      // result.WorkerCategories = result.WorkerCategories[0].dataValues.Category.name
+      // result.WorkerCategories = result.WorkerCategories[0]
+      // console.log(asep)
+      // console.log(result.Ratings);
+      // let temp = 0;
+      // result.Ratings.forEach((el) => {
+      //   temp += Number(el.dataValues.ratings)
+      //   // console.log(temp)
+      // });
+      // const asep = {
+      //   ...result,
+      //   totalRatings: temp
+      // }
+      // let asep = {
+      //   ...result,
+      //   totalRate : temp/result.Ratings.length
+      // }
+      res.status(200).json(result);
     } catch (error) {
+      // console.log(error);
       next(error);
     }
   }
@@ -132,9 +166,8 @@ class WorkerController {
       const find = await ProjectWorker.findOne({
         where: {
           [Op.or]: [
-            { status: "Active" },
-            WorkerId,
-            { status: "Applicant", WorkerId },
+            { status: "Active", WorkerId },
+            { status: "Applicant", WorkerId, ProjectId },
           ],
         },
       });

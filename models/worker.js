@@ -113,6 +113,9 @@ module.exports = (sequelize, DataTypes) => {
       deviceId: {
         type: DataTypes.STRING,
       },
+      balance : {
+        type : DataTypes.INTEGER
+      }
     },
     {
       sequelize,
@@ -121,6 +124,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   Worker.beforeCreate((instance, options) => {
     instance.password = hash(instance.password);
+    instance.balance = 0
   });
   return Worker;
 };
