@@ -38,8 +38,7 @@ class PaymentController {
 
       snap.createTransaction(parameter).then((transaction) => {
         // transaction token
-        let transactionToken = transaction.token;
-        res.status(200).json({ transactionToken });
+        res.status(200).json({ transaction });
       });
     } catch (error) {
       next(error);
