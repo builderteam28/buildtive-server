@@ -150,7 +150,7 @@ class ProjectController {
       const get = await ProjectWorker.findAll({
         where: { ProjectId, status: "Accepted" },
       });
-      if (get.length === project.totalWorker) {
+      if (get.length === project.totalWorker - 1) {
         await Project.update(
           { status: "Active" },
           { where: { id: ProjectId } }

@@ -11,16 +11,17 @@ class RatingController {
         },
       });
       let bulkWorker = [];
-      find.ProjectWorkers.forEach(el => {
+      find.ProjectWorkers.forEach((el) => {
         bulkWorker.push({
           value,
-          WorkerId : el.WorkerId,
-          ProjectId:id,
-          UserId
-        })
+          WorkerId: el.WorkerId,
+          ProjectId: id,
+          UserId,
+        });
       });
-      const result = await Rating.bulkCreate(bulkWorker);
-      res.status(200).json(find)
+      await Rating.bulkCreate(bulkWorker);
+      await Project.update({ status: "Completed" }, { where: { id } });
+      res.status(200).json({message: `Rate has been posted into Workers Profile`});
     } catch (error) {
       next(error);
     }
