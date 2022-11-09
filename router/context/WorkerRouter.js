@@ -12,8 +12,8 @@ WorkerRouter.get("/transaction", PaymentController.fetchAllTransaction);
 WorkerRouter.get("/projects", ProjectController.fetchAllProjectWorker);
 WorkerRouter.get("/projects/:id", ProjectController.getOne);
 WorkerRouter.get("/appliedProject", ProjectController.fetchProjectWorker);
-WorkerRouter.post("/:projectId", WorkerController.applyProject);
 WorkerRouter.get("/", WorkerController.profile);
+WorkerRouter.post("/:projectId", WorkerController.applyProject);
 WorkerRouter.put("/:id", WorkerController.editProfile);
 
 module.exports = WorkerRouter;
