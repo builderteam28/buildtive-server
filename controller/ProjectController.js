@@ -25,6 +25,9 @@ class ProjectController {
           model: Payment,
         },
         {
+          model: Rating
+        },
+        {
           model: Category,
           attributes: ["name"],
         },
