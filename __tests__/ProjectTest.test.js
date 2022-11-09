@@ -586,3 +586,26 @@ describe("PATCH /users/projects/decline/:WorkerId", () => {
     expect(result.status).toBe(500);
   });
 });
+
+describe("GET /users/workers/profile/:id", () => {
+  it("success get worker profile", async () => {
+    const headers = {
+      access_token: validToken,
+    };
+
+    const result = await request(app)
+      .get("/users/workers/profile/1")
+      .set(headers);
+    expect(result.status).toBe(200);
+  });
+
+  it("fail because worker id in params doesn't mach with worker's id in db", async () => {
+    const headers = {
+      access_token: validToken,
+    };
+    const result = await request(app)
+      .get("/users/workers/profile/100")
+      .set(headers);
+    expect(result.status).toBe(404);
+  });
+});

@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       Worker.belongsToMany(models.User, { through: models.Chat });
       Worker.belongsToMany(models.User, { through: models.Rating });
       // Worker.belongsToMany(models.Project, { through: models.ProjectWorker });
-      Worker.hasMany(models.Rating, {foreignKey : "WorkerId"})
+      Worker.hasMany(models.Rating, { foreignKey: "WorkerId" });
       Worker.hasMany(models.WorkerCategory);
       Worker.hasMany(models.ProjectWorker);
     }
@@ -113,9 +113,10 @@ module.exports = (sequelize, DataTypes) => {
       deviceId: {
         type: DataTypes.STRING,
       },
-      balance : {
-        type : DataTypes.INTEGER
-      }
+      balance: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
     },
     {
       sequelize,
@@ -124,7 +125,10 @@ module.exports = (sequelize, DataTypes) => {
   );
   Worker.beforeCreate((instance, options) => {
     instance.password = hash(instance.password);
-    instance.balance = 0
+    instance.balance = 0;
+  });
+  Worker.beforeBulkCreate((app, opt) => {
+    app.balance = 0;
   });
   return Worker;
 };

@@ -96,7 +96,7 @@ class PaymentController {
             ProjectId,
             WorkerId: workersId,
           },
-          transaction: t
+          transaction: t,
         }
       );
       const updateProjectWorkerStatus = await ProjectWorker.update(
@@ -117,7 +117,7 @@ class PaymentController {
           where: {
             id: workersId,
           },
-          transaction: t
+          transaction: t,
         }
       );
 
@@ -129,7 +129,7 @@ class PaymentController {
           where: {
             id: ProjectId,
           },
-          transaction: t
+          transaction: t,
         }
       );
       res.status(200).json({ updateStatus, updateProjectWorkerStatus, increaseBalance, updateProject });
@@ -137,6 +137,19 @@ class PaymentController {
     } catch (error) {
       console.log(error);
       await t.rollback();
+      next(error);
+    }
+  }
+  static async fetchAllTransaction(req, res, next) {
+    try {
+      const { id: WorkerId } = req.worker;
+      const result = await Payment.findAll({
+        where: {
+          WorkerId,
+        },
+      });
+      res.status(200).json(result);
+    } catch (error) {
       next(error);
     }
   }
