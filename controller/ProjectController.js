@@ -11,6 +11,7 @@ const {
   sequelize,
   Sequelize,
 } = require("../models");
+const axios = require("axios");
 class ProjectController {
   static fetchAll(req, res, next) {
     const UserId = req.user.id;
@@ -25,7 +26,7 @@ class ProjectController {
           model: Payment,
         },
         {
-          model: Rating
+          model: Rating,
         },
         {
           model: Category,
