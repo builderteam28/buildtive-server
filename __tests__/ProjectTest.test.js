@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 const { head } = require("../router");
 const { queryInterface } = sequelize;
 
-let validToken;
+let validToken, validTokenWorker;
 const inValidToken = `salahhh`;
 beforeAll(async () => {
   const userObject = {
@@ -19,6 +19,7 @@ beforeAll(async () => {
   const login = await request(app).post("/users/login").send({
     email: userObject.email,
     password: userObject.password,
+    DeviceId: "839217283",
   });
 
   validToken = login.body.access_token;
@@ -30,18 +31,58 @@ beforeAll(async () => {
       updatedAt: new Date(),
     };
   });
-  // console.log(projects)
-  // await Project.bulkCreate(projects)
-  await sequelize.queryInterface.bulkInsert(
-    "Categories",
-    [
-      { name: "asep 2", createdAt: new Date(), updatedAt: new Date() },
-      { name: "Jajang", createdAt: new Date(), updatedAt: new Date() },
-      { name: "dudi", createdAt: new Date(), updatedAt: new Date() },
-    ],
-    {}
-  );
-  await sequelize.queryInterface.bulkInsert("Projects", projects, {})
+  await sequelize.queryInterface.bulkInsert("Categories", [
+    { name: "asep 2", createdAt: new Date(), updatedAt: new Date() },
+    { name: "Jajang", createdAt: new Date(), updatedAt: new Date() },
+    { name: "dudi", createdAt: new Date(), updatedAt: new Date() },
+  ]);
+  const workers = [
+    {
+      email: "workertest1@gmail.com",
+      password: "12345678",
+      fullName: "workers test",
+      phoneNumber: "0812345678",
+      address: "Bandung",
+      birthDate: new Date(),
+      idNumber: "123213212",
+      CategoryId: 1,
+    },
+    {
+      email: "workertest2@gmail.com",
+      password: "12345678",
+      fullName: "workers test2",
+      phoneNumber: "0812345672",
+      address: "Bandung",
+      birthDate: new Date(),
+      idNumber: "123213212",
+      CategoryId: 1,
+    },
+  ];
+  await request(app).post("/workers/register").send(workers[0]);
+  await request(app).post("/workers/register").send(workers[1]);
+  const loginWorker = await request(app).post("/workers/login").send({
+    email: workers[0].email,
+    password: workers[0].password,
+  });
+  validTokenWorker = loginWorker.body.access_token;
+  await sequelize.queryInterface.bulkInsert("Projects", projects, {});
+  const projectWorker = [
+    {
+      status: "Applicant",
+      ProjectId: 1,
+      WorkerId: 1,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      status: "Applicant",
+      ProjectId: 2,
+      WorkerId: 2,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+  ];
+  await sequelize.queryInterface.bulkInsert("ProjectWorkers", projectWorker);
 });
 
 afterAll(async () => {
@@ -56,6 +97,16 @@ afterAll(async () => {
     cascade: true,
   });
   await sequelize.queryInterface.bulkDelete("Categories", null, {
+    truncate: true,
+    restartIdentity: true,
+    cascade: true,
+  });
+  await sequelize.queryInterface.bulkDelete("Workers", null, {
+    truncate: true,
+    restartIdentity: true,
+    cascade: true,
+  });
+  await sequelize.queryInterface.bulkDelete("ProjectWorkers", null, {
     truncate: true,
     restartIdentity: true,
     cascade: true,
@@ -472,6 +523,66 @@ describe("UPDATE /users/projects/:id", () => {
   });
 });
 
-describe("GET accept worker", () => {
-  it("success accept worker", async () => {});
+describe("GET /workers/projects", () => {
+  it("should get projects with status inactive", async () => {
+    const headers = {
+      access_token: validTokenWorker,
+    };
+    const result = await request(app).get("/workers/projects").set(headers);
+    expect(result.status).toBe(200);
+  });
+});
+
+describe("PATCH /users/projects/accept/:WorkerId", () => {
+  it("success accept worker", async () => {
+    const headers = {
+      access_token: validToken,
+    };
+
+    const result = await request(app)
+      .patch("/users/projects/accept/1")
+      .set(headers)
+      .send({ ProjectId: 1 });
+    expect(result.status).toBe(200);
+    expect(result.body).toHaveProperty(
+      "message",
+      "Applied worker into Project"
+    );
+  });
+  it("fail accept worer", async () => {
+    const headers = {
+      access_token: validToken,
+    };
+
+    const result = await request(app)
+      .patch("/users/projects/accept/1")
+      .set(headers);
+
+    expect(result.status).toBe(500);
+  });
+});
+
+describe("PATCH /users/projects/decline/:WorkerId", () => {
+  it("success decline worker", async () => {
+    const headers = {
+      access_token: validToken,
+    };
+
+    const result = await request(app)
+      .patch("/users/projects/decline/2")
+      .set(headers)
+      .send({ ProjectId: 2 });
+    expect(result.status).toBe(200);
+    expect(result.body).toHaveProperty("message", "Decline worker success");
+  });
+
+  it("fail decline worker", async () => {
+    const headers = {
+      access_token: validToken,
+    };
+    const result = await request(app)
+      .patch("/users/projects/decline/2")
+      .set(headers);
+    expect(result.status).toBe(500);
+  });
 });

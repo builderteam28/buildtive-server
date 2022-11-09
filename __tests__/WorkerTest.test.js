@@ -1,12 +1,13 @@
 const request = require("supertest");
 const app = require("../app");
-const { Worker, sequelize } = require("../models");
+const { Worker, Category, sequelize } = require("../models");
 const bcrypt = require("bcryptjs");
 const { queryInterface } = sequelize;
 
 let validToken;
 const inValidToken = `salahhh`;
 beforeAll(async () => {
+  const category = await Category.create({ name: "test" });
   const userObject = {
     email: "workertest1@gmail.com",
     password: "12345678",
@@ -15,6 +16,7 @@ beforeAll(async () => {
     address: "Bandung",
     birthDate: new Date(),
     idNumber: "123213212",
+    CategoryId: 1,
   };
   await request(app).post("/workers/register").send(userObject);
   const login = await request(app).post("/workers/login").send({
@@ -30,18 +32,24 @@ afterAll(async () => {
     restartIdentity: true,
     cascade: true,
   });
+  await sequelize.queryInterface.bulkDelete("Categories", null, {
+    truncate: true,
+    restartIdentity: true,
+    cascade: true,
+  });
 });
 describe("POST /workers/register", () => {
   describe("POST /workers/register - Email and Password Pass", () => {
     it("should respond with status code 201 and returning id and email", async () => {
       const payloadRegisterSuccess = {
-        email: "workertest2@gmail.com",
+        email: "user@mail.com",
         password: "12345678",
         fullName: "workers test",
         phoneNumber: "0812345678",
         address: "Bandung",
         birthDate: new Date(),
         idNumber: "123213212",
+        CategoryId: 1,
       };
       const result = await request(app)
         .post("/workers/register")
@@ -152,8 +160,7 @@ describe("GET /workers/:id By Profile Id", () => {
       const headers = {
         access_token: validToken,
       };
-      const id = 1;
-      const result = await request(app).get(`/workers/${id}`).set(headers);
+      const result = await request(app).get(`/workers/`).set(headers);
       expect(result.status).toBe(200);
       expect(result.body).toHaveProperty("id", expect.any(Number));
       expect(result.body).toHaveProperty("fullName", expect.any(String));

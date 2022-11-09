@@ -23,6 +23,7 @@ class WorkerController {
         idNumber,
         CategoryId,
       } = req.body;
+      console.log(email, `<~email`);
       const newWorker = await Worker.create({
         email,
         password,

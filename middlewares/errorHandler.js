@@ -33,9 +33,6 @@ const errorHandler = (err, req, res, next) => {
     case "CategoryNotFound":
       res.status(404).json({ message: "Category not found" });
       break;
-    case "AlreadyActive":
-      res.status(401).json({ message: "Already registered into this Project" });
-      break;
     default:
       res.status(500).json({ message: "Internal Server Error" });
       break;

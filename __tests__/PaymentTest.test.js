@@ -38,7 +38,6 @@ beforeAll(async () => {
     })
     .set({ access_token: validToken });
   const projects = await Project.findAll();
-  console.log(projects);
 });
 
 afterAll(async () => {
@@ -70,7 +69,20 @@ describe("POST /payments", () => {
       .set(headers)
       .send({ ProjectId: 1, cost: 100000 });
     expect(result.status).toBe(200);
-    expect(result.body).toHaveProperty("transactionToken", expect.any(String));
+    expect(result.body).toHaveProperty("redirect_url", expect.any(String));
+    expect(result.body).toHaveProperty("token", expect.any(String));
+  });
+
+  it("should fail because no ProjectId sent on req.body", async () => {
+    const headers = {
+      access_token: validToken,
+    };
+
+    const result = await request(app)
+      .post("/payments")
+      .set(headers)
+      .send({ cost: 100000 });
+    expect(result.status).toBe(500);
   });
 });
 

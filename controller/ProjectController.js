@@ -37,33 +37,24 @@ class ProjectController {
           },
         },
       ],
-    })
-      .then((projects) => {
-        res.status(200).json(projects);
-      })
-      .catch((error) => {
-        next(error);
-      });
+    }).then((projects) => {
+      res.status(200).json(projects);
+    });
   }
-  static async fetchAllProjectWorker(req, res, next) {
-    try {
-      const result = await Project.findAll({
-        where: {
-          status: "Inactive",
+  static fetchAllProjectWorker(req, res, next) {
+    Project.findAll({
+      where: {
+        status: "Inactive",
+      },
+      include: [
+        {
+          model: Category,
         },
-        include: [
-          {
-            model: Category,
-          },
-          {
-            model: ProjectWorker,
-          },
-        ],
-      });
-      res.status(200).json(result);
-    } catch (error) {
-      next(error);
-    }
+        {
+          model: ProjectWorker,
+        },
+      ],
+    }).then((projects) => res.status(200).json(projects));
   }
   static async getOne(req, res, next) {
     try {
@@ -92,7 +83,7 @@ class ProjectController {
   }
   static async postProject(req, res, next) {
     try {
-      const { id:UserId } = req.user
+      const { id: UserId } = req.user;
       const {
         name,
         tenor,
@@ -205,7 +196,6 @@ class ProjectController {
   static async fetchProjectWorker(req, res, next) {
     try {
       const { id: WorkerId } = req.worker;
-      console.log(WorkerId);
       const result = await ProjectWorker.findAll({
         where: {
           WorkerId,
