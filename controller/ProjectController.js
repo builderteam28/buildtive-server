@@ -251,6 +251,7 @@ class ProjectController {
           "Ratings.WorkerId",
         ],
       });
+      if (!result) throw { name: "WorkerNotFound" };
       if (result.Ratings.length) {
         result.Ratings[0].dataValues.ratings = Number(
           result.Ratings[0].dataValues.ratings

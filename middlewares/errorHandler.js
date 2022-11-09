@@ -33,6 +33,9 @@ const errorHandler = (err, req, res, next) => {
     case "CategoryNotFound":
       res.status(404).json({ message: "Category not found" });
       break;
+    case "WorkerNotFound":
+      res.status(404).json({ message: "Worker not found" });
+      break;
     default:
       res.status(500).json({ message: "Internal Server Error" });
       break;
