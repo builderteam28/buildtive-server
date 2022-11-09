@@ -154,12 +154,6 @@ class WorkerController {
       res.status(200).json({ message: "Success to update profile" })
     );
   }
-  // static async pushNotification(req, res, next) {
-  //   try {
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // }
   static async applyProject(req, res, next) {
     try {
       const { projectId: ProjectId } = req.params;
@@ -167,8 +161,8 @@ class WorkerController {
       const find = await ProjectWorker.findOne({
         where: {
           [Op.or]: [
-            { status: "Active", WorkerId },
-            { status: "Applicant", WorkerId, ProjectId },
+            { status: "Occupied", WorkerId },
+            { status: "Accepted", WorkerId, ProjectId },
           ],
         },
       });

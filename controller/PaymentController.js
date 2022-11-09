@@ -54,6 +54,7 @@ class PaymentController {
     try {
       const { ProjectId } = req.params;
       const { cost } = req.body;
+      if (!cost) throw { name: "invalidcost" };
       const allWorker = await ProjectWorker.findAll({
         where: { ProjectId },
       });
@@ -123,23 +124,19 @@ class PaymentController {
       res.status(200).json({ updateStatus, increaseBalance, updateProject });
       await t.commit();
     } catch (error) {
-      console.log(error);
       await t.rollback();
       next(error);
     }
   }
-  static async fetchAllTransaction(req, res, next) {
-    try {
-      const { id: WorkerId } = req.worker;
-      const result = await Payment.findAll({
-        where: {
-          WorkerId,
-        },
-      });
-      res.status(200).json(result);
-    } catch (error) {
-      next(error);
-    }
+  static fetchAllTransaction(req, res, next) {
+    const { id: WorkerId } = req.worker;
+    Payment.findAll({
+      where: {
+        WorkerId,
+      },
+    }).then((transaction) => {
+      res.status(200).json(transaction);
+    });
   }
 }
 

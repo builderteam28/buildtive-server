@@ -4,7 +4,7 @@ const { User, Project, sequelize, Category } = require("../models");
 const bcrypt = require("bcryptjs");
 const { queryInterface } = sequelize;
 
-let validToken;
+let validToken, validTokenWorker;
 beforeAll(async () => {
   const input = {
     fullName: "asep asd",
@@ -16,7 +16,6 @@ beforeAll(async () => {
   const user = await request(app).post(`/users/register`).send(input);
   const category = await Category.create({ name: "tes" });
   const categories = await Category.findAll();
-  console.log(categories);
   const login = await request(app).post("/users/login").send({
     email: input.email,
     password: input.password,
@@ -34,10 +33,41 @@ beforeAll(async () => {
       UserId: 1,
       long: 1092,
       lat: 29010,
-      CategoryId: 3,
+      CategoryId: 1,
     })
     .set({ access_token: validToken });
   const projects = await Project.findAll();
+
+  const workers = [
+    {
+      email: "workertest1@gmail.com",
+      password: "12345678",
+      fullName: "workers test",
+      phoneNumber: "0812345678",
+      address: "Bandung",
+      birthDate: new Date(),
+      idNumber: "123213212",
+      CategoryId: 1,
+    },
+    {
+      email: "workertest2@gmail.com",
+      password: "12345678",
+      fullName: "workers test2",
+      phoneNumber: "0812345672",
+      address: "Bandung",
+      birthDate: new Date(),
+      idNumber: "123213212",
+      CategoryId: 1,
+    },
+  ];
+  await request(app).post("/workers/register").send(workers[0]);
+  await request(app).post("/workers/register").send(workers[1]);
+  const loginWorker = await request(app).post("/workers/login").send({
+    email: workers[0].email,
+    password: workers[0].password,
+  });
+
+  validTokenWorker = loginWorker.body.access_token;
 });
 
 afterAll(async () => {
@@ -86,6 +116,41 @@ describe("POST /payments", () => {
   });
 });
 
+describe("POST /payments/:ProjectId", () => {
+  it("bulks create payment", async () => {
+    const headers = {
+      access_token: validToken,
+    };
+
+    const result = await request(app)
+      .post("/payments/1")
+      .set(headers)
+      .send({ cost: 40000 });
+    expect(result.status).toBe(200);
+  });
+
+  it("fail because no cost on req body", async () => {
+    const headers = {
+      access_token: validToken,
+    };
+
+    const result = await request(app).post("/payments/2").set(headers);
+
+    expect(result.status).toBe(500);
+  });
+});
+
+describe("get /payment/transaction", () => {
+  it("get all transaction history worker", async () => {
+    const headers = {
+      access_token: validTokenWorker,
+    };
+
+    const result = await request(app).get("/workers/transaction").set(headers);
+    expect(result.status).toBe(200);
+  });
+});
+
 describe("patch /payments/:ProjectId", () => {
   it("should receive message success edit", async () => {
     const headers = {
@@ -93,9 +158,9 @@ describe("patch /payments/:ProjectId", () => {
     };
     const ProjectId = 1;
     const result = await request(app)
-      .patch(`/payments/${ProjectId}`)
-      .set(headers);
+      .put(`/payments/${ProjectId}`)
+      .set(headers)
+      .send({ cost: 100000 });
     expect(result.status).toBe(200);
-    expect(result.body).toHaveProperty("message", "payment paid");
   });
 });

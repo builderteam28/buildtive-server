@@ -194,33 +194,28 @@ class ProjectController {
     }
   }
   static async fetchProjectWorker(req, res, next) {
-    try {
-      const { id: WorkerId } = req.worker;
-      const result = await ProjectWorker.findAll({
-        where: {
-          WorkerId,
-          status: {
-            [Op.not]: "Occupied",
-          },
+    const { id: WorkerId } = req.worker;
+    ProjectWorker.findAll({
+      where: {
+        WorkerId,
+        status: {
+          [Op.not]: "Occupied",
         },
-        include: [
-          {
-            model: Project,
-            include: [
-              {
-                model: Category,
-              },
-              {
-                model: ProjectWorker,
-              },
-            ],
-          },
-        ],
-      });
-      res.status(200).json(result);
-    } catch (error) {
-      next(error);
-    }
+      },
+      include: [
+        {
+          model: Project,
+          include: [
+            {
+              model: Category,
+            },
+            {
+              model: ProjectWorker,
+            },
+          ],
+        },
+      ],
+    }).then((projectWorkers) => res.status(200).json(projectWorkers));
   }
   static async WorkerDetail(req, res, next) {
     try {
