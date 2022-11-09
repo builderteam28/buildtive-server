@@ -20,6 +20,7 @@ module.exports = {
         birthDate: el.birthDate,
         idNumber: el.idNumber,
         fullName: el.first_name + ` ` + el.last_name,
+        balance: 0,
         password: hash(el.password),
         createdAt: new Date(),
         updatedAt: new Date(),

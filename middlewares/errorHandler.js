@@ -36,6 +36,9 @@ const errorHandler = (err, req, res, next) => {
     case "WorkerNotFound":
       res.status(404).json({ message: "Worker not found" });
       break;
+    case "AlreadyActive":
+      res.status(404).json({ message: "Already applied to project" });
+      break;
     default:
       res.status(500).json({ message: "Internal Server Error" });
       break;

@@ -609,3 +609,29 @@ describe("GET /users/workers/profile/:id", () => {
     expect(result.status).toBe(404);
   });
 });
+
+describe("GET /workers/appliedProject", () => {
+  it("get all worker applied in a project", async () => {
+    const headers = {
+      access_token: validTokenWorker,
+    };
+    const result = await request(app)
+      .get("/workers/appliedProject")
+      .set(headers);
+    expect(result.status).toBe(200);
+  });
+});
+
+describe("POST /users/projects/rate", () => {
+  it("rate workers after job finished", async () => {
+    const headers = {
+      access_token: validToken,
+    };
+
+    const result = await request(app)
+      .post("/users/projects/rate")
+      .set(headers)
+      .send({ value: 20000, ProjectId: 1 });
+    expect(result.status).toBe(200);
+  });
+});

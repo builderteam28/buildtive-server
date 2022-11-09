@@ -8,6 +8,7 @@ module.exports = {
       el.fullName = el.first_name + ` ` + el.last_name;
       el.createdAt = new Date();
       el.updatedAt = new Date();
+      el.balance = 0;
       delete el.first_name;
       delete el.last_name;
     });
