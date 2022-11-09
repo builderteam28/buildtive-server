@@ -100,6 +100,18 @@ class PaymentController {
           transaction: t,
         }
       );
+      const updateProjectWorkerStatus = await ProjectWorker.update(
+        {
+          status: "Completed",
+        },
+        {
+          where: {
+            ProjectId,
+            WorkerId: workersId,
+          },
+          transaction: t
+        }
+      )
       const increaseBalance = await Worker.increment(
         { balance: cost },
         {
@@ -121,7 +133,7 @@ class PaymentController {
           transaction: t,
         }
       );
-      res.status(200).json({ updateStatus, increaseBalance, updateProject });
+      res.status(200).json({ updateStatus, updateProjectWorkerStatus, increaseBalance, updateProject });
       await t.commit();
     } catch (error) {
       await t.rollback();

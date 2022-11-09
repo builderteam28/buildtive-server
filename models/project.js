@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       Project.belongsToMany(models.Worker, { through: models.Rating });
       Project.belongsTo(models.User);
       Project.hasMany(models.ProjectWorker);
+      Project.hasMany(models.Rating)
     }
   }
   Project.init(
