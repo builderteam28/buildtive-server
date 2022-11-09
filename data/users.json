@@ -1,0 +1,37 @@
+[
+  {
+    "email": "user1@mail.com",
+    "password": "12345",
+    "fullName": "Buckie Hollindale",
+    "phoneNumber": "1861344263",
+    "address": "7127 Loeprich Hill"
+  },
+  {
+    "email": "dwenger1@photobucket.com",
+    "password": "sEXNlfStqnQ",
+    "fullName": "Dela Wenger",
+    "phoneNumber": "6075055982",
+    "address": "95 Macpherson Drive"
+  },
+  {
+    "email": "cspeenden2@washingtonpost.com",
+    "password": "jwpCrGma",
+    "fullName": "Cathe Speenden",
+    "phoneNumber": "2649720386",
+    "address": "0 Corry Road"
+  },
+  {
+    "email": "mwaddoups3@wordpress.org",
+    "password": "cmbkl3YdNotD",
+    "fullName": "Marquita Waddoups",
+    "phoneNumber": "7169467877",
+    "address": "0119 Everett Road"
+  },
+  {
+    "email": "adaice4@booking.com",
+    "password": "rZvKJA",
+    "fullName": "Alejandrina Daice",
+    "phoneNumber": "6992603120",
+    "address": "393 Schurz Street"
+  }
+]

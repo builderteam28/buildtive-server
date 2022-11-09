@@ -1,0 +1,14 @@
+[
+  {
+    "value": 5,
+    "UserId": 1,
+    "WorkerId": 6,
+    "ProjectId": 3
+  },
+  {
+    "value": 5,
+    "UserId": 1,
+    "WorkerId": 9,
+    "ProjectId": 3
+  }
+]

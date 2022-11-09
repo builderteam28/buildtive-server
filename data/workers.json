@@ -1,0 +1,202 @@
+[
+  {
+    "email": "worker1@mail.com",
+    "password": "12345",
+    "first_name": "Kevin",
+    "last_name": "Gronous",
+    "phoneNumber": "2185731393",
+    "address": "73 Artisan Parkway",
+    "idNumber": "498-973-9809",
+    "birthDate": "1986-08-18"
+  },
+  {
+    "email": "worker2@mail.com",
+    "password": "12345",
+    "first_name": "Aleksandr",
+    "last_name": "Eubank",
+    "phoneNumber": "2621496580",
+    "address": "6 Dennis Crossing",
+    "idNumber": "969-880-1284",
+    "birthDate": "1981-08-09"
+  },
+  {
+    "email": "tfiler2@noaa.gov",
+    "password": "KuovOr3",
+    "first_name": "Tybie",
+    "last_name": "Filer",
+    "phoneNumber": "8189236037",
+    "address": "4956 Towne Trail",
+    "idNumber": "642-179-2762",
+    "birthDate": "1982-07-24"
+  },
+  {
+    "email": "rcolrein3@gnu.org",
+    "password": "4KntW7Y",
+    "first_name": "Raye",
+    "last_name": "Colrein",
+    "phoneNumber": "5006275923",
+    "address": "58 Erie Plaza",
+    "idNumber": "471-545-1887",
+    "birthDate": "1988-07-24"
+  },
+  {
+    "email": "jstapele4@drupal.org",
+    "password": "Nmf8xQXAzC",
+    "first_name": "Joyce",
+    "last_name": "Stapele",
+    "phoneNumber": "8439812033",
+    "address": "0 Jana Road",
+    "idNumber": "248-526-3530",
+    "birthDate": "1986-12-16"
+  },
+  {
+    "email": "cneighbour5@1688.com",
+    "password": "5cNOkaYR",
+    "first_name": "Candida",
+    "last_name": "Neighbour",
+    "phoneNumber": "6044405194",
+    "address": "769 Buhler Avenue",
+    "idNumber": "722-712-3609",
+    "birthDate": "1991-04-22"
+  },
+  {
+    "email": "btomaszewicz6@intel.com",
+    "password": "MlcJmBKtrLLZ",
+    "first_name": "Betta",
+    "last_name": "Tomaszewicz",
+    "phoneNumber": "3073573586",
+    "address": "3467 Columbus Point",
+    "idNumber": "860-532-2536",
+    "birthDate": "1989-02-02"
+  },
+  {
+    "email": "chodjetts7@umn.edu",
+    "password": "CUflszh26lp6",
+    "first_name": "Charo",
+    "last_name": "Hodjetts",
+    "phoneNumber": "4498185085",
+    "address": "143 Armistice Court",
+    "idNumber": "174-139-7088",
+    "birthDate": "1981-04-02"
+  },
+  {
+    "email": "jobruen8@dailymotion.com",
+    "password": "O6ump7zh3VoV",
+    "first_name": "Jo ann",
+    "last_name": "O'Bruen",
+    "phoneNumber": "7335792659",
+    "address": "9183 Kropf Way",
+    "idNumber": "522-453-6914",
+    "birthDate": "1993-10-26"
+  },
+  {
+    "email": "lgranleese9@trellian.com",
+    "password": "26CMSQMhG",
+    "first_name": "Lyn",
+    "last_name": "Granleese",
+    "phoneNumber": "3579359634",
+    "address": "638 Sutherland Plaza",
+    "idNumber": "497-124-7241",
+    "birthDate": "1995-09-24"
+  },
+  {
+    "email": "dbarkwortha@washington.edu",
+    "password": "6Wu1AGoF",
+    "first_name": "Deb",
+    "last_name": "Barkworth",
+    "phoneNumber": "7373611828",
+    "address": "9742 Sommers Trail",
+    "idNumber": "565-843-6606",
+    "birthDate": "1995-03-19"
+  },
+  {
+    "email": "stackerb@google.de",
+    "password": "uOPyvur3",
+    "first_name": "Sallee",
+    "last_name": "Tacker",
+    "phoneNumber": "2114510068",
+    "address": "4405 Sloan Road",
+    "idNumber": "988-955-2630",
+    "birthDate": "1980-04-17"
+  },
+  {
+    "email": "ajennawayc@domainmarket.com",
+    "password": "DQDf3Z0",
+    "first_name": "Arie",
+    "last_name": "Jennaway",
+    "phoneNumber": "3411554746",
+    "address": "5 Village Green Center",
+    "idNumber": "751-970-1041",
+    "birthDate": "1982-06-11"
+  },
+  {
+    "email": "htruslerd@oracle.com",
+    "password": "ooM3mDe8yKmu",
+    "first_name": "Humphrey",
+    "last_name": "Trusler",
+    "phoneNumber": "8796845184",
+    "address": "81219 Sutherland Pass",
+    "idNumber": "885-864-2051",
+    "birthDate": "1992-04-15"
+  },
+  {
+    "email": "hgiacominie@intel.com",
+    "password": "BUc8efQ",
+    "first_name": "Hestia",
+    "last_name": "Giacomini",
+    "phoneNumber": "5527759495",
+    "address": "9512 Oriole Parkway",
+    "idNumber": "192-806-5763",
+    "birthDate": "1984-05-16"
+  },
+  {
+    "email": "umounceyf@digg.com",
+    "password": "1H3umH",
+    "first_name": "Udall",
+    "last_name": "Mouncey",
+    "phoneNumber": "4396110335",
+    "address": "718 Scott Street",
+    "idNumber": "650-393-4565",
+    "birthDate": "1981-03-30"
+  },
+  {
+    "email": "fgreastyg@discuz.net",
+    "password": "1ldHczdr3",
+    "first_name": "Feliks",
+    "last_name": "Greasty",
+    "phoneNumber": "8336011316",
+    "address": "82 Tennyson Terrace",
+    "idNumber": "125-474-6384",
+    "birthDate": "1982-06-17"
+  },
+  {
+    "email": "bgladmanh@nydailynews.com",
+    "password": "xZyTD1RO",
+    "first_name": "Brigitte",
+    "last_name": "Gladman",
+    "phoneNumber": "8033534526",
+    "address": "8 Green Ridge Trail",
+    "idNumber": "471-479-8654",
+    "birthDate": "1991-05-16"
+  },
+  {
+    "email": "rsharki@archive.org",
+    "password": "9xfuFFww0U",
+    "first_name": "Rance",
+    "last_name": "Shark",
+    "phoneNumber": "6961070773",
+    "address": "750 Artisan Point",
+    "idNumber": "738-584-4295",
+    "birthDate": "1988-10-04"
+  },
+  {
+    "email": "tstreatfeildj@discuz.net",
+    "password": "RUD2x3MBGFzr",
+    "first_name": "Torrey",
+    "last_name": "Streatfeild",
+    "phoneNumber": "3537086617",
+    "address": "0769 Holmberg Trail",
+    "idNumber": "939-683-0576",
+    "birthDate": "1985-12-18"
+  }
+]

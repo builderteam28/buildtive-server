@@ -4,6 +4,7 @@ const { authenticationUser } = require("../../middlewares/authentication");
 
 PaymentRouter.use(authenticationUser);
 PaymentRouter.post("/", PaymentController.addPayment);
-PaymentRouter.patch("/:ProjectId", PaymentController.editStatusPayment);
+PaymentRouter.post("/:ProjectId", PaymentController.createPayment);
+PaymentRouter.put("/:ProjectId", PaymentController.updatePayment);
 
 module.exports = PaymentRouter;
