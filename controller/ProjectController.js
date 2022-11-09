@@ -133,9 +133,9 @@ class ProjectController {
       async function sendPushNotification(expoPushToken) {
         const message = {
           to: expoPushToken,
-          sound: "Default",
-          tittle: `Projects ${name} now exists`,
-          body: `just only need ${totalWorker} workers lets go to work!`,
+          sound: "default",
+          title: "Projects " + name + " now exists",
+          body: "Just only need " + totalWorker + " workers lets go to work!",
         };
         await axios("https://exp.host/--/api/v2/push/send", {
           method: "POST",
