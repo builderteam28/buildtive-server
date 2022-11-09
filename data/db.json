@@ -1,0 +1,400 @@
+{
+  "projects": [
+    {
+      "name": "gas",
+      "totalWorker": 5,
+      "cost": 1000000,
+      "status": "Inactive",
+      "UserId": 1,
+      "long": 2901,
+      "lat": 291,
+      "CategoryId": 1,
+      "description": "lorem ipsum",
+      "address": "lorem ipsum",
+      "tenor": 3
+    },
+    {
+      "name": "gas hayam",
+      "totalWorker": 5,
+      "cost": 1000000,
+      "status": "Inactive",
+      "UserId": 1,
+      "long": 2901,
+      "lat": 291,
+      "CategoryId": 1,
+      "description": "lorem ipsum",
+      "address": "lorem ipsum",
+      "tenor": 3
+    },
+    {
+      "name": "gas ikan",
+      "totalWorker": 5,
+      "cost": 1000000,
+      "status": "Inactive",
+      "UserId": 1,
+      "long": 2901,
+      "lat": 291,
+      "CategoryId": 1,
+      "description": "lorem ipsum",
+      "address": "lorem ipsum",
+      "tenor": 3
+    },
+    {
+      "name": "paus adlaah ikan",
+      "totalWorker": 5,
+      "cost": 1000000,
+      "status": "Inactive",
+      "UserId": 1,
+      "long": 2901,
+      "lat": 291,
+      "CategoryId": 1,
+      "description": "lorem ipsum",
+      "address": "lorem ipsum",
+      "tenor": 3
+    },
+    {
+      "name": "gas 2",
+      "totalWorker": 5,
+      "cost": 1000000,
+      "status": "Active",
+      "UserId": 1,
+      "long": 2901,
+      "lat": 291,
+      "CategoryId": 2,
+      "description": "lorem ipsum",
+      "address": "lorem ipsum",
+      "tenor": 3
+    }
+  ],
+  "categories": [
+    {
+      "name": "build home"
+    },
+    {
+      "name": "electricity"
+    },
+    {
+      "name": "toilet"
+    },
+    {
+      "name": "repair"
+    },
+    {
+      "name": "painting"
+    },
+    {
+      "name": "plumbing"
+    }
+  ],
+  "workers": [
+    {
+      "first_name": "Garrik",
+      "last_name": "Stellman",
+      "email": "gstellman0@narod.ru",
+      "password": "ijXJE7Hmet9p",
+      "phoneNumber": "7688236677",
+      "address": "5 Bayside Drive",
+      "idNumber": "520-66-2483",
+      "birthDate": "1994-12-19"
+    },
+    {
+      "first_name": "Cyrille",
+      "last_name": "Revett",
+      "email": "crevett1@fastcompany.com",
+      "password": "jMwTpfHD",
+      "phoneNumber": "6301356845",
+      "address": "7108 Welch Plaza",
+      "idNumber": "124-15-5959",
+      "birthDate": "1998-11-12"
+    },
+    {
+      "first_name": "Sigismundo",
+      "last_name": "Channing",
+      "email": "schanning2@icio.us",
+      "password": "OZMdpS",
+      "phoneNumber": "6352273810",
+      "address": "394 Orin Hill",
+      "idNumber": "349-84-1107",
+      "birthDate": "1994-10-18"
+    },
+    {
+      "first_name": "Normand",
+      "last_name": "Tullis",
+      "email": "ntullis3@ycombinator.com",
+      "password": "MzugeTRUT8UQ",
+      "phoneNumber": "8979289015",
+      "address": "95942 Rieder Court",
+      "idNumber": "514-20-0826",
+      "birthDate": "1996-06-16"
+    },
+    {
+      "first_name": "Rickie",
+      "last_name": "Abrashkov",
+      "email": "rabrashkov4@shareasale.com",
+      "password": "9iV8K24",
+      "phoneNumber": "5789548252",
+      "address": "492 Merchant Junction",
+      "idNumber": "613-39-7752",
+      "birthDate": "1996-10-23"
+    },
+    {
+      "first_name": "Benedetta",
+      "last_name": "Novakovic",
+      "email": "bnovakovic5@nhs.uk",
+      "password": "H8Oqt3XxYhMA",
+      "phoneNumber": "2973337495",
+      "address": "796 Maple Wood Center",
+      "idNumber": "197-82-6232",
+      "birthDate": "1998-06-21"
+    },
+    {
+      "first_name": "Adoree",
+      "last_name": "Boylin",
+      "email": "aboylin6@woothemes.com",
+      "password": "9OmhkVG",
+      "phoneNumber": "5353615382",
+      "address": "3 Blaine Avenue",
+      "idNumber": "266-70-6125",
+      "birthDate": "1993-10-17"
+    },
+    {
+      "first_name": "Paddie",
+      "last_name": "Aizik",
+      "email": "paizik7@digg.com",
+      "password": "2ZodG6l",
+      "phoneNumber": "6399065064",
+      "address": "13692 Declaration Trail",
+      "idNumber": "134-86-9343",
+      "birthDate": "1991-09-28"
+    },
+    {
+      "first_name": "Clarette",
+      "last_name": "Salliss",
+      "email": "csalliss8@list-manage.com",
+      "password": "AYXmFSwh",
+      "phoneNumber": "1808343252",
+      "address": "7761 Artisan Way",
+      "idNumber": "440-73-6640",
+      "birthDate": "1999-09-12"
+    },
+    {
+      "first_name": "Consalve",
+      "last_name": "Chiese",
+      "email": "cchiese9@mac.com",
+      "password": "baxjCS",
+      "phoneNumber": "2071368385",
+      "address": "84350 Lawn Circle",
+      "idNumber": "668-34-0086",
+      "birthDate": "2000-06-23"
+    },
+    {
+      "first_name": "Shirlene",
+      "last_name": "Viall",
+      "email": "svialla@yahoo.co.jp",
+      "password": "JqVAUfet",
+      "phoneNumber": "9896617537",
+      "address": "0617 Sundown Place",
+      "idNumber": "537-63-5764",
+      "birthDate": "1997-01-10"
+    },
+    {
+      "first_name": "Pincus",
+      "last_name": "Cloke",
+      "email": "pclokeb@theguardian.com",
+      "password": "PQIWrWj8Ulc",
+      "phoneNumber": "7677426754",
+      "address": "3 Sunnyside Point",
+      "idNumber": "575-47-8047",
+      "birthDate": "1994-12-09"
+    },
+    {
+      "first_name": "Michal",
+      "last_name": "Teffrey",
+      "email": "mteffreyc@independent.co.uk",
+      "password": "NtbLArT",
+      "phoneNumber": "8864488954",
+      "address": "6 Bowman Alley",
+      "idNumber": "219-48-9084",
+      "birthDate": "1999-11-30"
+    },
+    {
+      "first_name": "Loralee",
+      "last_name": "Harken",
+      "email": "lharkend@umn.edu",
+      "password": "qRqceCGAFoF",
+      "phoneNumber": "9277970862",
+      "address": "704 Norway Maple Junction",
+      "idNumber": "669-04-1364",
+      "birthDate": "1994-04-26"
+    },
+    {
+      "first_name": "Warren",
+      "last_name": "Airlie",
+      "email": "wairliee@constantcontact.com",
+      "password": "PMy6c0",
+      "phoneNumber": "7666921464",
+      "address": "6 Vermont Terrace",
+      "idNumber": "825-78-6795",
+      "birthDate": "1997-05-24"
+    },
+    {
+      "first_name": "Bertram",
+      "last_name": "Martins",
+      "email": "bmartinsf@samsung.com",
+      "password": "b0PyLSAf3xrs",
+      "phoneNumber": "6474434472",
+      "address": "25 Northview Way",
+      "idNumber": "860-76-3438",
+      "birthDate": "1993-12-12"
+    },
+    {
+      "first_name": "Dory",
+      "last_name": "Thurling",
+      "email": "dthurlingg@ustream.tv",
+      "password": "oEC8iwLS5",
+      "phoneNumber": "1709561929",
+      "address": "5 Russell Circle",
+      "idNumber": "779-52-1554",
+      "birthDate": "1994-06-05"
+    },
+    {
+      "first_name": "Wolfie",
+      "last_name": "Maypother",
+      "email": "wmaypotherh@hud.gov",
+      "password": "T9emNQ",
+      "phoneNumber": "1459650000",
+      "address": "9 Mosinee Street",
+      "idNumber": "246-84-6204",
+      "birthDate": "1999-01-07"
+    },
+    {
+      "first_name": "Calhoun",
+      "last_name": "Ballay",
+      "email": "cballayi@narod.ru",
+      "password": "77tya1NMJX7",
+      "phoneNumber": "8631806100",
+      "address": "9671 Eggendart Pass",
+      "idNumber": "458-86-0816",
+      "birthDate": "2000-03-21"
+    },
+    {
+      "first_name": "Thorndike",
+      "last_name": "Shortt",
+      "email": "tshorttj@reverbnation.com",
+      "password": "UhMp960bNdSo",
+      "phoneNumber": "9892261400",
+      "address": "04 Dahle Pass",
+      "idNumber": "543-45-1713",
+      "birthDate": "2000-06-02"
+    },
+    {
+      "first_name": "Cristy",
+      "last_name": "MacAlroy",
+      "email": "cmacalroyk@sitemeter.com",
+      "password": "xNB9TAcN",
+      "phoneNumber": "3713116899",
+      "address": "647 Montana Avenue",
+      "idNumber": "481-41-4877",
+      "birthDate": "1991-10-11"
+    },
+    {
+      "first_name": "Fawnia",
+      "last_name": "Mazzeo",
+      "email": "fmazzeol@uol.com.br",
+      "password": "KeqUY4MSoMm",
+      "phoneNumber": "2689486616",
+      "address": "76395 Golf View Trail",
+      "idNumber": "776-94-4312",
+      "birthDate": "1990-11-17"
+    },
+    {
+      "first_name": "Dulci",
+      "last_name": "Glencros",
+      "email": "dglencrosm@seesaa.net",
+      "password": "DBEBDw",
+      "phoneNumber": "6891921565",
+      "address": "22885 Longview Terrace",
+      "idNumber": "759-36-7301",
+      "birthDate": "2000-05-24"
+    },
+    {
+      "first_name": "Jessy",
+      "last_name": "Balaison",
+      "email": "jbalaisonn@feedburner.com",
+      "password": "cqT589LBiggO",
+      "phoneNumber": "6493948243",
+      "address": "1367 Almo Junction",
+      "idNumber": "638-89-0966",
+      "birthDate": "1990-12-25"
+    },
+    {
+      "first_name": "Hildy",
+      "last_name": "Ballham",
+      "email": "hballhamo@creativecommons.org",
+      "password": "c4Ue94h0nc",
+      "phoneNumber": "8599693618",
+      "address": "8 Maywood Center",
+      "idNumber": "371-32-0640",
+      "birthDate": "1991-05-31"
+    },
+    {
+      "first_name": "Silvana",
+      "last_name": "Howells",
+      "email": "showellsp@wired.com",
+      "password": "yxKlOi8n",
+      "phoneNumber": "5225861314",
+      "address": "0 Spohn Court",
+      "idNumber": "163-94-0962",
+      "birthDate": "1997-10-28"
+    },
+    {
+      "first_name": "Ivett",
+      "last_name": "Millin",
+      "email": "imillinq@upenn.edu",
+      "password": "gSX9t1tDE06",
+      "phoneNumber": "5242512420",
+      "address": "855 Lakewood Gardens Plaza",
+      "idNumber": "132-51-7969",
+      "birthDate": "1996-07-28"
+    },
+    {
+      "first_name": "Kizzie",
+      "last_name": "Jewell",
+      "email": "kjewellr@theglobeandmail.com",
+      "password": "0aGI2QRfsGm",
+      "phoneNumber": "5778746999",
+      "address": "120 Dapin Way",
+      "idNumber": "548-93-4000",
+      "birthDate": "1995-12-09"
+    },
+    {
+      "first_name": "Cinnamon",
+      "last_name": "Bilborough",
+      "email": "cbilboroughs@google.com.au",
+      "password": "QlBJbK10rLy",
+      "phoneNumber": "5201549447",
+      "address": "69 Lillian Court",
+      "idNumber": "278-03-8470",
+      "birthDate": "2000-04-13"
+    },
+    {
+      "first_name": "Hilde",
+      "last_name": "Gillbee",
+      "email": "hgillbeet@accuweather.com",
+      "password": "ox8dpkFg",
+      "phoneNumber": "1859789851",
+      "address": "1720 Menomonie Drive",
+      "idNumber": "397-92-2048",
+      "birthDate": "1992-07-01"
+    }
+  ],
+  "users": [
+    {
+      "email": "usertes@mail.com",
+      "password": "usertest",
+      "fullName": "user test",
+      "phoneNumber": "82109293",
+      "address": "04 Dahle Pass"
+    }
+  ]
+}

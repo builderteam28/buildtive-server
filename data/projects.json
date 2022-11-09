@@ -1,0 +1,41 @@
+[
+  {
+    "name": "Fixing fence",
+    "description": "Fixing broken fence",
+    "totalWorker": 2,
+    "cost": 500000,
+    "status": "Inactive",
+    "lat": -6.260789283248326, 
+    "long": 106.78154296009484,
+    "address": "Hacktiv 8 Campus",
+    "UserId": 1,
+    "CategoryId": 4,
+    "tenor": 1
+  },
+  {
+    "name": "Toilet Mampet",
+    "description": "Membenarkan saluran air mampet",
+    "totalWorker": 4,
+    "cost": 1000000,
+    "status": "Active",
+    "lat": -6.256821942887577,
+    "long": 106.81482412677235,
+    "address": "McDonald Kemang",
+    "UserId": 1,
+    "CategoryId": 6,
+    "tenor": 2
+  },
+  {
+    "name": "Bangunan selalu mati lampu",
+    "description": "Hampir setiap hari bangunan ini mati lampu",
+    "totalWorker": 2,
+    "cost": 2000000,
+    "status": "Complete",
+    "lat": -6.92315191558702, 
+    "long": 107.5632128840595,
+    "address": "Mie Setan Cijerah",
+    "UserId": 1,
+    "CategoryId": 2,
+    "tenor": 1
+  }
+]

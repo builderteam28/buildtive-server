@@ -1,0 +1,82 @@
+[
+  {
+    "WorkerId": 1,
+    "CategoryId": 1
+  },
+  {
+    "WorkerId": 2,
+    "CategoryId": 4
+  },
+  {
+    "WorkerId": 3,
+    "CategoryId": 1
+  },
+  {
+    "WorkerId": 4,
+    "CategoryId": 4
+  },
+  {
+    "WorkerId": 5,
+    "CategoryId": 6
+  },
+  {
+    "WorkerId": 6,
+    "CategoryId": 2
+  },
+  {
+    "WorkerId": 7,
+    "CategoryId": 4
+  },
+  {
+    "WorkerId": 8,
+    "CategoryId": 6
+  },
+  {
+    "WorkerId": 9,
+    "CategoryId": 5
+  },
+  {
+    "WorkerId": 10,
+    "CategoryId": 2
+  },
+  {
+    "WorkerId": 11,
+    "CategoryId": 2
+  },
+  {
+    "WorkerId": 12,
+    "CategoryId": 3
+  },
+  {
+    "WorkerId": 13,
+    "CategoryId": 5
+  },
+  {
+    "WorkerId": 14,
+    "CategoryId": 1
+  },
+  {
+    "WorkerId": 15,
+    "CategoryId": 3
+  },
+  {
+    "WorkerId": 16,
+    "CategoryId": 3
+  },
+  {
+    "WorkerId": 17,
+    "CategoryId": 5
+  },
+  {
+    "WorkerId": 18,
+    "CategoryId": 1
+  },
+  {
+    "WorkerId": 19,
+    "CategoryId": 3
+  },
+  {
+    "WorkerId": 20,
+    "CategoryId": 6
+  }
+]
