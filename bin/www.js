@@ -1,6 +1,6 @@
 const test = require("../app");
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 test.listen(port, () => {
-  console.log("asep");
+  console.log(`running on ${port}`);
 });
