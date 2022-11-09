@@ -64,7 +64,7 @@ class WorkerController {
       const token = sign(payload);
       await Worker.update(
         {
-          DeviceId: DeviceId,
+          deviceId: DeviceId,
         },
         {
           where: {
