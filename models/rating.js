@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Rating.belongsTo(models.User);
       Rating.belongsTo(models.Worker, { foreignKey : "WorkerId"});
+      Rating.belongsTo(models.Project, {foreignKey: "ProjectId"});
     }
   }
   Rating.init(
