@@ -95,7 +95,6 @@ class ProjectController {
         address,
         description,
       } = req.body;
-
       const createdProject = await Project.create({
         name,
         tenor,
@@ -108,7 +107,57 @@ class ProjectController {
         address,
         description,
       });
+      const category = await Category.findOne({
+        where: { id: CategoryId },
+        include: [
+          {
+            model: WorkerCategory,
+            include: [
+              {
+                model: Worker,
+                attributes: ["id", "email", "fullName", "deviceId"],
+              },
+            ],
+          },
+        ],
+      });
 
+      let expoTokens = category.WorkerCategories.filter((el) => {
+        return el.Worker.deviceId != null;
+      }).map((el) => el.Worker.deviceId);
+
+      async function sendPushNotification(expoPushToken) {
+        const message = {
+          to: expoPushToken,
+          sound: "Default",
+          tittle: `Projects ${name} now exists`,
+          body: `just only need ${totalWorker} workers lets go to work!`,
+        };
+        await axios("https://exp.host/--/api/v2/push/send", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Accept-encoding": "gzip, deflate",
+            "Content-Type": "application/json",
+          },
+          data: message,
+        });
+        return "Success";
+      }
+      const bulkSendMessage = async () => {
+        try {
+          const response = await Promise.all(
+            expoTokens.map(async (token) => {
+              return await sendPushNotification(token);
+            })
+          );
+          console.log(response);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
+      bulkSendMessage();
       res
         .status(201)
         .json({ message: `success add project ${createdProject.name}` });
