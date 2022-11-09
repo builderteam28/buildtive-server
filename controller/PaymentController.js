@@ -96,6 +96,7 @@ class PaymentController {
             ProjectId,
             WorkerId: workersId,
           },
+          transaction: t
         }
       );
       const increaseBalance = await Worker.increment(
@@ -104,6 +105,7 @@ class PaymentController {
           where: {
             id: workersId,
           },
+          transaction: t
         }
       );
 
@@ -115,6 +117,7 @@ class PaymentController {
           where: {
             id: ProjectId,
           },
+          transaction: t
         }
       );
       res.status(200).json({ updateStatus, increaseBalance, updateProject });
