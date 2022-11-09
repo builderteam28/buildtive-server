@@ -1,0 +1,42 @@
+[
+  {
+    "status": "Applicant",
+    "ProjectId": 1,
+    "WorkerId": 2
+  },
+  {
+    "status": "Accepted",
+    "ProjectId": 1,
+    "WorkerId": 4
+  },
+  {
+    "status": "Applicant",
+    "ProjectId": 2,
+    "WorkerId": 5
+  },
+  {
+    "status": "Accepted",
+    "ProjectId": 2,
+    "WorkerId": 8
+  },
+  {
+    "status": "Rejected",
+    "ProjectId": 2,
+    "WorkerId": 20
+  },
+  {
+    "status": "Occupied",
+    "ProjectId": 2,
+    "WorkerId": 1
+  },
+  {
+    "status": "Completed",
+    "ProjectId": 3,
+    "WorkerId": 6
+  },
+  {
+    "status": "Completed",
+    "ProjectId": 3,
+    "WorkerId": 9
+  }
+]
