@@ -1,19 +1,19 @@
 [
   {
-    "email": "worker1@mail.com",
+    "email": "bobthebuilder@mail.com",
     "password": "12345",
-    "first_name": "Kevin",
-    "last_name": "Gronous",
+    "first_name": "Bob",
+    "last_name": "The Builder",
     "phoneNumber": "2185731393",
     "address": "73 Artisan Parkway",
     "idNumber": "498-973-9809",
     "birthDate": "1986-08-18"
   },
   {
-    "email": "worker2@mail.com",
+    "email": "markthebuilder@mail.com",
     "password": "12345",
-    "first_name": "Aleksandr",
-    "last_name": "Eubank",
+    "first_name": "Mark",
+    "last_name": "The Zuckerberg",
     "phoneNumber": "2621496580",
     "address": "6 Dennis Crossing",
     "idNumber": "969-880-1284",

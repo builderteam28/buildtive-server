@@ -1,11 +1,11 @@
 [
   {
-    "name": "Fixing fence",
-    "description": "Fixing broken fence",
+    "name": "Perbaikan gerbang",
+    "description": "Gerbang di halaman Hacktiv8 sulit dibuka, dikarenakan karat di roller dan pegangan. Perlu pertolongan tukang yang bisa memperbaikinya.",
     "totalWorker": 2,
     "cost": 500000,
     "status": "Inactive",
-    "lat": -6.260789283248326, 
+    "lat": -6.260789283248326,
     "long": 106.78154296009484,
     "address": "Hacktiv 8 Campus",
     "UserId": 1,
@@ -14,7 +14,7 @@
   },
   {
     "name": "Toilet Mampet",
-    "description": "Membenarkan saluran air mampet",
+    "description": "Saluran air di gedung kami sering mampet, dikarenakan customer yang kemungkinan membuang sesuatu ke dalam toilet kami. Dimohon untuk membantu memperbaikinya.",
     "totalWorker": 4,
     "cost": 1000000,
     "status": "Active",
@@ -26,12 +26,12 @@
     "tenor": 2
   },
   {
-    "name": "Bangunan selalu mati lampu",
-    "description": "Hampir setiap hari bangunan ini mati lampu",
+    "name": "Kerusakan listrik",
+    "description": "Hampir setiap hari di bangunan kami aliran listriknya terkadang mengalami korslet, dan lampu yang tiba tiba mati tapi kami tidak tau penyebabnya. Mohon bantuannya.",
     "totalWorker": 2,
     "cost": 2000000,
-    "status": "Complete",
-    "lat": -6.92315191558702, 
+    "status": "Completed",
+    "lat": -6.92315191558702,
     "long": 107.5632128840595,
     "address": "Mie Setan Cijerah",
     "UserId": 1,
